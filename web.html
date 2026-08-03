@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Paramount BD Web</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#fff;color:#1e1f22;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;overflow:hidden}
+  #bar{position:absolute;top:0;left:0;right:0;padding:14px 18px;z-index:2}
+  h1{font-size:15px;font-weight:700;letter-spacing:.02em}
+  .sub{font-size:12px;color:#8a8a86;margin-top:2px}
+  svg{width:100vw;height:100vh;display:block;cursor:grab}
+  svg:active{cursor:grabbing}
+  .link{stroke:#c9c6bd;stroke-opacity:.7}
+  .divlabel{font-size:12px;font-weight:700;fill:#1e1f22;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+  .plabel{font-size:10px;fill:#3a3a38;pointer-events:none;opacity:0;paint-order:stroke;stroke:#fff;stroke-width:3.5px;stroke-linejoin:round}
+  .node.show .plabel{opacity:1}
+  .dim{opacity:.12}
+  #legend{position:absolute;bottom:14px;left:18px;font-size:11px;color:#6b6b70;background:rgba(255,255,255,.85);padding:8px 12px;border:1px solid #e6e4dd;border-radius:8px}
+  .lr{display:flex;align-items:center;gap:8px;margin:3px 0}
+  .d{width:11px;height:11px;border-radius:50%}
+  .hint{position:absolute;bottom:14px;right:18px;font-size:11px;color:#a8a49a}
+</style></head>
+<body>
+<div id="bar"><h1>Paramount — who does the work</h1>
+<div class="sub">Each hub is a division. Each dot is an agency/vendor, linked to the divisions it works for. Hover to read names, drag to rearrange.</div></div>
+<svg></svg>
+<div id="legend"></div>
+<div class="hint">scroll to zoom · drag a node · hover for names</div>
+<script>
+const DIVCOL={
+ "Paramount Pictures":"#e0564a","Paramount+ / DTC":"#4a9fe0","MTV / Brand Studio":"#c05ad0",
+ "Pluto TV":"#e0a24a","Paramount Advertising":"#33b58f","BET":"#8a6bd0","Paramount Sports":"#33bcbc",
+ "CBS":"#7d8fe0","Nickelodeon":"#cbb52f","Other":"#9aa0aa"};
+const DIVCOUNT={"Paramount Pictures":10,"Paramount+ / DTC":7,"MTV / Brand Studio":5,"Pluto TV":3,
+ "Paramount Advertising":3,"BET":3,"Paramount Sports":3,"CBS":2,"Nickelodeon":2,"Other":1};
+// vendor -> divisions it works for
+const PLAYERS={
+ "Versus":["Paramount+ / DTC","Pluto TV","Nickelodeon"],
+ "Droga5":["Paramount+ / DTC"],"Arcade Edit":["Paramount+ / DTC"],"O Positive":["Paramount+ / DTC","Pluto TV"],
+ "Stink Films / Traktor":["Paramount+ / DTC"],"Titmouse":["Paramount+ / DTC"],"Human":["Paramount+ / DTC"],
+ "Parliament":["Paramount+ / DTC"],"Heard City":["Paramount+ / DTC"],"Rare Medium":["Paramount+ / DTC"],
+ "TCO London":["Paramount+ / DTC"],"Fairmont Austin":["Paramount+ / DTC"],
+ "Workshop Creative":["Paramount Pictures"],"Midnight Oil":["Paramount Pictures"],"ESPN":["Paramount Pictures"],
+ "Liquid Death":["Paramount Pictures"],"Spark Foundry / Publicis":["Paramount Pictures"],"Reddit":["Paramount Pictures"],
+ "Once Upon a Time LA":["Paramount Pictures"],"Those Beyond":["Paramount Pictures"],"Flighthouse Media":["Paramount Pictures"],
+ "Discord":["Paramount Pictures"],"Burger King":["Paramount Pictures","MTV / Brand Studio"],
+ "Gravy Films":["MTV / Brand Studio"],"Bark Bark":["MTV / Brand Studio"],"Dunkin":["MTV / Brand Studio"],
+ "Bacardi":["MTV / Brand Studio"],"Red Bull":["MTV / Brand Studio"],
+ "AllCreativeMedia":["Paramount Advertising"],"New Path Digital":["Paramount Advertising"],
+ "Taboola":["Paramount Advertising"],"Omnicom Media":["Paramount Advertising"],
+ "P&G":["BET"],"Gilead":["BET"],"Jesse Collins Ent.":["BET"],
+ "AutoCamp":["CBS"],"Hilton Honors":["CBS"],"New Children's Museum":["Nickelodeon"],
+ "72andSunny":["Paramount Sports"],"Smuggler":["Paramount Sports"],"Trafik":["Paramount Sports"],
+ "Iconic":["Paramount Sports"],"Barking Owl":["Paramount Sports"],"Soundtree":["Paramount Sports"],
+ "ITV America":["Paramount Sports"],"Kim Kardashian Prod.":["Paramount Sports"]
+};
+// build nodes + links
+const nodes=[],links=[],byId={};
+Object.keys(DIVCOL).forEach(d=>{const n={id:"div:"+d,label:d,type:"div",r:11+DIVCOUNT[d]*1.7,color:DIVCOL[d]};nodes.push(n);byId[n.id]=n;});
+Object.entries(PLAYERS).forEach(([p,divs])=>{
+  const bridge=divs.length>1;const n={id:"p:"+p,label:p,type:"player",r:bridge?7:5,color:p==="Versus"?"#f2b705":(bridge?"#e08a3c":"#5aa0a0"),bridge};
+  nodes.push(n);byId[n.id]=n;
+  divs.forEach(d=>links.push({source:"p:"+p,target:"div:"+d}));
+});
+const W=innerWidth,H=innerHeight;
+const svg=d3.select("svg").attr("viewBox",[0,0,W,H]);
+const root=svg.append("g");
+svg.call(d3.zoom().scaleExtent([0.3,4]).on("zoom",e=>root.attr("transform",e.transform)));
+const link=root.append("g").selectAll("line").data(links).join("line").attr("class","link");
+const node=root.append("g").selectAll("g").data(nodes).join("g").attr("class","node");
+node.append("circle").attr("r",d=>d.r).attr("fill",d=>d.color)
+  .attr("stroke",d=>d.type==="div"?"#fff":"#fff").attr("stroke-width",d=>d.type==="div"?2:1);
+node.filter(d=>d.type==="div").append("text").attr("class","divlabel").attr("text-anchor","middle")
+  .attr("dy",d=>d.r+13).text(d=>d.label);
+node.filter(d=>d.type==="player").append("text").attr("class","plabel").attr("text-anchor","middle")
+  .attr("dy",d=>d.r+11).text(d=>d.label);
+node.append("title").text(d=>d.type==="div"?d.label+" — "+DIVCOUNT[d.label]+" projects":d.label+" → "+PLAYERS[d.label.slice(0)].join(", "));
+// neighbor map
+const nbr={};nodes.forEach(n=>nbr[n.id]=new Set([n.id]));
+links.forEach(l=>{nbr[l.source].add(l.target);nbr[l.target].add(l.source);});
+node.on("mouseenter",(e,d)=>{
+  const s=nbr[d.id];
+  node.classed("dim",n=>!s.has(n.id)).classed("show",n=>s.has(n.id)&&n.type==="player");
+  link.classed("dim",l=>!(s.has(l.source.id)&&s.has(l.target.id)));
+}).on("mouseleave",()=>{node.classed("dim",false).classed("show",false);link.classed("dim",false);});
+const sim=d3.forceSimulation(nodes)
+  .force("link",d3.forceLink(links).id(d=>d.id).distance(d=>d.target.type==="div"?70:70).strength(.5))
+  .force("charge",d3.forceManyBody().strength(d=>d.type==="div"?-600:-120))
+  .force("center",d3.forceCenter(W/2,H/2))
+  .force("collide",d3.forceCollide().radius(d=>d.r+8))
+  .on("tick",()=>{
+    link.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+    node.attr("transform",d=>`translate(${d.x},${d.y})`);
+  });
+node.call(d3.drag()
+  .on("start",(e,d)=>{if(!e.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;})
+  .on("drag",(e,d)=>{d.fx=e.x;d.fy=e.y;})
+  .on("end",(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+document.getElementById("legend").innerHTML=
+  `<div class="lr"><span class="d" style="background:#5aa0a0"></span>Vendor (one division)</div>`+
+  `<div class="lr"><span class="d" style="background:#e08a3c"></span>Vendor across divisions (bridge)</div>`+
+  `<div class="lr"><span class="d" style="background:#f2b705"></span>Versus (us)</div>`;
+</script></body></html>

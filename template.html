@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BD Landscape Universe</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<style>
+  :root{
+    --bg:#ffffff;--ink:#1e1f22;--dim:#8a8a86;--line:#e6e4dd;--card:#ffffff;
+    --panel:#fafaf8;--gold:#c98a00;--edge:#cfccc4;--hub:#2b2b2b;--haloOp:.13;
+  }
+  body.night{
+    --bg:#000000;--ink:#ededed;--dim:#808080;--line:#232323;--card:#0d0d0d;
+    --panel:#080808;--gold:#f2b705;--edge:#3b3b3b;--hub:#ededed;--haloOp:.22;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;overflow:hidden;transition:background .25s}
+  #app{display:flex;flex-direction:column;height:100vh}
+  header{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line);
+    background:var(--bg);z-index:5;flex-wrap:wrap}
+  h1{font-size:12.5px;letter-spacing:.2em;font-weight:700;text-transform:uppercase;white-space:nowrap}
+  h1 span{color:var(--gold)}
+  .grow{flex:1}
+  .btn{font-size:11.5px;padding:7px 13px;border:1px solid var(--line);background:var(--card);color:var(--ink);
+    border-radius:7px;cursor:pointer;transition:.15s;white-space:nowrap}
+  .btn:hover{border-color:var(--gold)}
+  .btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
+  input,select{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:6px;
+    padding:7px 10px;font-size:12px;outline:none}
+  input:focus,select:focus{border-color:var(--gold)}
+  #bodywrap{flex:1;display:flex;position:relative;overflow:hidden}
+  /* left panel */
+  #side{width:224px;flex:none;border-right:1px solid var(--line);background:var(--panel);
+    padding:14px 12px;overflow-y:auto;font-size:12px}
+  #side h4{font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);
+    margin:16px 4px 8px;font-weight:700}
+  #side h4:first-child{margin-top:2px}
+  .trow{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:6px;cursor:pointer;transition:.1s}
+  .trow:hover{background:var(--card);outline:1px solid var(--line)}
+  .trow.active{background:var(--ink);color:var(--bg)}
+  .trow.active .ct{color:var(--bg);opacity:.85}
+  .trow.company{font-weight:700}
+  .trow.child{margin-left:12px}
+  .trow.allrow{font-weight:600}
+  .tdot{width:11px;height:11px;border-radius:50%;flex:none}
+  .trow .nm{flex:1;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .trow .ct{color:var(--dim);font-size:11px;font-variant-numeric:tabular-nums}
+  .chk{display:flex;align-items:center;gap:8px;padding:5px 4px;font-size:12.5px;cursor:pointer}
+  .chk input{width:15px;height:15px;accent-color:var(--gold)}
+  details{margin:6px 2px}details summary{cursor:pointer;font-size:11px;color:var(--dim);
+    text-transform:uppercase;letter-spacing:.08em;padding:4px;font-weight:700}
+  .frow{margin:8px 4px}.frow label.lab{display:block;font-size:10px;color:var(--dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+  .frow select,.frow input[type=range]{width:100%}
+  #scoreval{float:right;color:var(--ink);font-weight:600}
+  .keyrow{display:flex;align-items:center;gap:9px;margin:6px 4px;color:var(--ink);font-size:11.5px}
+  .km{width:14px;height:14px;flex:none;border-radius:50%}
+  .km.hub{background:var(--hub)}.km.proj{background:#c0563f}
+  .km.ring{background:#4f9d9d}.km.person{background:#e07a52}.km.gold{background:var(--gold)}
+  .cf{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+  /* graph */
+  #main{flex:1;position:relative;overflow:hidden}
+  svg{width:100%;height:100%;display:block;cursor:grab}
+  svg:active{cursor:grabbing}
+  .link{fill:none;stroke:var(--edge);stroke-opacity:.5;stroke-width:1}
+  .link.worked-with{stroke-dasharray:2 4}
+  .node{cursor:pointer}
+  .node circle{stroke:var(--bg);stroke-width:1}
+  .node.n-comp circle{fill:var(--hub)}
+  .node.n-div circle{fill:var(--hub)}
+  .node.n-versus circle{fill:var(--gold)}
+  .node .hubnum{fill:var(--bg);font-size:11px;font-weight:800;pointer-events:none}
+  .node text.lbl{display:none;font-size:11px;fill:var(--ink);pointer-events:none;paint-order:stroke;
+    stroke:var(--bg);stroke-width:3.5px;stroke-linejoin:round;font-weight:600}
+  .node.lblon text.lbl,.node.hoverlbl text.lbl{display:block}
+  .faded{opacity:.1}
+  .numbadge{display:inline-flex;width:17px;height:17px;border-radius:50%;background:var(--hub);color:var(--bg);
+    font-size:9.5px;font-weight:800;align-items:center;justify-content:center;flex:none}
+  /* breadcrumb + stats */
+  #crumb{position:absolute;left:16px;top:12px;font-size:13px;color:var(--ink);display:flex;align-items:center;gap:6px}
+  #crumb .home{cursor:pointer;font-weight:700}
+  #crumb .sep{color:var(--dim)}
+  #crumb .cur{color:var(--gold);font-weight:700}
+  #crumb .x{cursor:pointer;color:var(--dim);border:1px solid var(--line);border-radius:50%;
+    width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-left:2px}
+  #stats{position:absolute;left:16px;top:38px;font-size:11px;color:var(--dim)}
+  .hint{position:absolute;left:50%;transform:translateX(-50%);bottom:14px;font-size:11px;color:var(--dim);opacity:.85;text-align:center}
+  #toast{position:absolute;left:50%;bottom:44px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:8px;font-size:12px;opacity:0;
+    transition:.25s;pointer-events:none;z-index:9}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  /* detail */
+  #detail{position:absolute;right:0;top:0;height:100%;width:322px;background:var(--card);
+    border-left:1px solid var(--line);padding:22px;overflow-y:auto;transform:translateX(100%);
+    transition:transform .25s;z-index:6;box-shadow:-8px 0 26px rgba(0,0,0,.06)}
+  #detail.open{transform:translateX(0)}
+  #detail .kind{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  #detail h2{font-size:18px;margin:6px 0 14px;line-height:1.25}
+  #detail .field{margin:11px 0;font-size:12.5px;line-height:1.45}
+  #detail .field b{display:block;color:var(--dim);font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;font-weight:700}
+  #detail .tag{display:inline-block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:2px 9px;font-size:10.5px;margin:2px 3px 2px 0}
+  #detail .open-btn{margin-top:6px}
+  #detail .close{position:absolute;right:16px;top:14px;background:none;border:none;color:var(--dim);font-size:22px;cursor:pointer;line-height:1}
+  .chip{display:inline-block;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:700}
+  .c-High{background:#dcefe0;color:#2f7d4e}.c-Medium{background:#f3ead0;color:#9a7d1e}.c-Low{background:#f3dcdc;color:#b04141}
+  body.night .c-High{background:#12331f;color:#5fce87}body.night .c-Medium{background:#332c12;color:#e0c15e}body.night .c-Low{background:#331414;color:#e06b6b}
+  #goalsModal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:20}
+  #goalsModal.open{display:flex}
+  .gcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 28px;max-width:560px;width:90%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+  .gclose{position:absolute;right:16px;top:12px;background:none;border:none;color:var(--dim);font-size:24px;cursor:pointer}
+  .gcard .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .gitem{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:11px 12px;font-size:12px;line-height:1.4}
+  .gitem b{display:block;color:var(--gold);font-size:11.5px;margin-bottom:3px}
+</style></head>
+<body><div id="app">
+<header>
+  <h1>BD Landscape <span>Universe</span></h1>
+  <div class="grow"></div>
+  <input id="search" placeholder="Search anything&hellip;" size="18"/>
+  <button class="btn primary" id="homeBtn">&#8962; Home</button>
+  <button class="btn" id="uploadBtn">&#8593; Upload</button>
+  <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" style="display:none"/>
+  <button class="btn" id="tmplBtn">Template</button>
+  <button class="btn" id="goalsBtn">&#9432; Goals</button>
+  <button class="btn" id="nightBtn">&#9789; Night</button>
+</header>
+<div id="goalsModal"><div class="gcard">
+  <button class="gclose">&times;</button>
+  <div class="kind" style="color:var(--gold);font-weight:700;letter-spacing:.15em;font-size:10px;text-transform:uppercase">Rob's brief — the 6 goals</div>
+  <h2 style="margin:6px 0 4px;font-size:18px">What this map is built to answer</h2>
+  <p style="color:var(--dim);font-size:12px;margin-bottom:14px">Where entertainment work is happening and who is doing it — so Versus can pursue it.</p>
+  <div class="grid">
+    <div class="gitem"><b>1 · Where work goes</b>Each division is a cluster; open one to see its projects.</div>
+    <div class="gitem"><b>2 · How much work</b>Division circle size = number of projects. Bigger = more work.</div>
+    <div class="gitem"><b>3 · Size of projects</b>Shown per project when known. Budgets aren't public — flagged as a data gap.</div>
+    <div class="gitem"><b>4 · A color per player</b>Recurring agencies get a signature color; Versus is always gold.</div>
+    <div class="gitem"><b>5 · The decision-makers</b>People carry titles, opportunity scores and access routes — click any person.</div>
+    <div class="gitem"><b>6 · Trends</b>Filter by work type, confidence, or vendor to spot patterns and whitespace.</div>
+  </div>
+  <p style="color:var(--dim);font-size:11.5px;margin-top:14px">Scalable by design: upload another company's sheet and shared vendors/people become bridges into one universe.</p>
+</div></div>
+<div id="bodywrap">
+  <aside id="side">
+    <h4>Company</h4>
+    <div id="tree"></div>
+    <h4>Show inside a cluster</h4>
+    <label class="chk"><input type="checkbox" id="tProject" checked/> Projects</label>
+    <label class="chk"><input type="checkbox" id="tPlayer" checked/> Players / vendors</label>
+    <label class="chk"><input type="checkbox" id="tPerson" checked/> People</label>
+    <details>
+      <summary>More filters</summary>
+      <div class="frow"><label class="lab">Confidence</label>
+        <select id="fconf"><option value="">Any</option><option>High</option><option>Medium</option><option>Low</option></select></div>
+      <div class="frow"><label class="lab">Work type</label><select id="ftag"><option value="">Any</option></select></div>
+      <div class="frow"><label class="lab">Player / vendor type</label><select id="fptype"><option value="">Any</option></select></div>
+      <div class="frow"><label class="chk"><input type="checkbox" id="frepeat"/> Repeat players only</label></div>
+      <div class="frow"><label class="chk"><input type="checkbox" id="fversus"/> Versus-connected only</label></div>
+      <div class="frow"><label class="lab">Min opportunity score <span id="scoreval">0</span></label>
+        <input type="range" id="fscore" min="0" max="100" value="0" step="1"/></div>
+    </details>
+    <h4>Key</h4>
+    <div class="keyrow"><span class="km hub"></span>Company / division</div>
+    <div class="keyrow"><span class="km proj"></span>Project</div>
+    <div class="keyrow"><span class="km ring"></span>Player / vendor</div>
+    <div class="keyrow"><span class="km person"></span>Person</div>
+    <div class="keyrow"><span class="km gold"></span>Versus (us)</div>
+    <div class="keyrow" style="margin-top:8px"><span class="cf" style="background:#4fae74"></span>High
+      <span class="cf" style="background:#d6b24e;margin-left:6px"></span>Med
+      <span class="cf" style="background:#cf6060;margin-left:6px"></span>Low</div>
+    <div style="font-size:10.5px;color:var(--dim);margin:10px 4px 2px">Circle size = number of projects.</div>
+  </aside>
+  <div id="main">
+    <svg></svg>
+    <div id="crumb"></div>
+    <div id="stats"></div>
+    <div class="hint" id="hint">Click a division to open it &middot; click empty space to go back</div>
+    <div id="toast"></div>
+    <div id="detail"><button class="close">&times;</button><div id="dbody"></div></div>
+  </div>
+</div></div>
+<script>
+const RAW = __RAW__;
+const PALETTE=["#e0564a","#4a9fe0","#c05ad0","#e0a24a","#5ad0a8","#7d8fe0","#e0d24a","#8a6bd0","#5ad0d0","#8a8f9a",
+  "#e07ab0","#6bd06b","#d0a0ff","#ff9d4a","#60c0e0","#c0d060","#e06b8a","#70b0a0"];
+
+let records=RAW.projects.map(r=>({...r}));
+let playerMeta={...RAW.playerMeta}, people={...RAW.people}, divColors={...RAW.divColors}, paletteIdx=0;
+
+// state
+let focusDiv=null;          // division node id, or null = overview
+let searchTerm="";
+const show={project:true,player:true,person:true};
+const filters={conf:"",tag:"",ptype:"",repeat:false,versus:false,minScore:0};
+
+const svg=d3.select("svg"),main=document.getElementById("main");
+let W=main.clientWidth,H=main.clientHeight;
+svg.attr("viewBox",[0,0,W,H]);
+const defs=svg.append("defs");
+defs.append("filter").attr("id","soft").attr("x","-60%").attr("y","-60%").attr("width","220%").attr("height","220%")
+  .append("feGaussianBlur").attr("stdDeviation",22);
+const root=svg.append("g");
+const zoom=d3.zoom().scaleExtent([0.15,4]).on("zoom",e=>root.attr("transform",e.transform));
+svg.call(zoom);
+svg.on("click",e=>{ if(e.target.tagName==="svg"){ if(focusDiv||searchTerm) home(); else {selected=null;detail.classList.remove("open");applyView();} } });
+
+const nid=(k,n)=>k+"::"+n, divIdOf=(c,d)=>"division::"+c+"|"+d, projIdOf=(c,n)=>"project::"+c+"|"+n;
+
+// ================= BUILD GRAPH =================
+let graph={nodes:[],links:[],byId:new Map()};
+function colorFor(div){ if(!divColors[div]){divColors[div]=PALETTE[paletteIdx++%PALETTE.length];} return divColors[div]; }
+function buildGraph(){
+  const nodes=[],links=[],byId=new Map(),lk=new Set();
+  const add=n=>{ if(!byId.has(n.id)){byId.set(n.id,n);nodes.push(n);} return byId.get(n.id); };
+  const link=(s,t,rel)=>{ const k=rel+"|"+s+"|"+t; if(lk.has(k))return; lk.add(k); links.push({source:s,target:t,rel}); };
+  const companies=[...new Set(records.map(r=>r.company))];
+  companies.forEach(c=>add({id:nid("company",c),label:c,type:"company",company:c}));
+  const pd={}, pcount={};
+  records.forEach(r=>{ if(!r.name)return;
+    const c=r.company||"Company", dv=r.division||"Unspecified";
+    const dId=divIdOf(c,dv);
+    add({id:dId,label:dv,type:"division",company:c,color:colorFor(dv)});
+    link(nid("company",c),dId,"hierarchy");
+    pcount[dId]=(pcount[dId]||0)+1;
+    add({id:projIdOf(c,r.name),label:r.name,type:"project",company:c,division:dv,tags:r.tags||[],confidence:r.confidence||"Medium"});
+    link(dId,projIdOf(c,r.name),"commissions");
+    (r.players||[]).forEach(pl=>{ pl=(pl||"").trim(); if(!pl)return;
+      const m=playerMeta[pl]||{ptype:"Partner",repeat:false,sig:null};
+      add({id:nid("player",pl),label:pl,type:"player",ptype:m.ptype,repeat:!!m.repeat,sig:m.sig,divisions:[]});
+      link(projIdOf(c,r.name),nid("player",pl),"made-by"); (pd[pl]=pd[pl]||new Set()).add(dv);
+    });
+    (r.contacts||[]).forEach(pc=>{ pc=(pc||"").trim(); if(!pc)return;
+      const m=people[pc]||{division:dv,title:"",role:"Credited stakeholder",confidence:r.confidence||"Medium",route:"Public project credit",score:null};
+      add({id:nid("person",pc),label:pc,type:"person",company:c,division:m.division||dv,title:m.title,role:m.role,confidence:m.confidence,route:m.route,score:m.score});
+      link(projIdOf(c,r.name),nid("person",pc),"credited");
+    });
+  });
+  Object.keys(pd).forEach(pl=>{ const pn=byId.get(nid("player",pl)); if(!pn)return; pn.divisions=[...pd[pl]];
+    nodes.filter(n=>n.type==="division"&&pd[pl].has(n.label)).forEach(dn=>link(nid("player",pl),dn.id,"worked-with")); });
+  Object.entries(people).forEach(([pn,m])=>{ add({id:nid("person",pn),label:pn,type:"person",company:RAW.company,division:m.division,title:m.title,role:m.role,confidence:m.confidence,route:m.route,score:m.score});
+    const dn=byId.get(divIdOf(RAW.company,m.division)); if(dn)link(dn.id,nid("person",pn),"decision-maker"); else link(nid("company",RAW.company),nid("person",pn),"decision-maker"); });
+  let dn=0; nodes.forEach(n=>{ if(n.type==="division"){n.pcount=pcount[n.id]||0;n.num=++dn;} });
+  const resolved=links.map(l=>({...l,source:byId.get(l.source),target:byId.get(l.target)})).filter(l=>l.source&&l.target);
+  graph={nodes,links:resolved,byId};
+}
+
+// ================= DRAW =================
+let sim=null,haloSel,linkSel,nodeSel,pendingFit=false;
+function radius(n){
+  if(n.type==="company")return 20;
+  if(n.type==="division")return 12+Math.sqrt(n.pcount||1)*3.4;    // size = project count
+  if(n.type==="player")return 5;
+  if(n.type==="person")return n.score?4.5+(n.score-60)/12:5;
+  return 5.2; // project
+}
+function dataFill(n){
+  if(n.type==="project")return divColors[n.division]||"#b7b2a6";
+  if(n.type==="player")return n.sig||(n.repeat?"#3f9d80":"#4f9d9d");
+  if(n.type==="person"){ if(n.score==null)return "#b6a99c";
+    return d3.interpolateRgb("#e9c9a0","#d95f33")(Math.max(0,Math.min(1,(n.score-65)/31))); }
+  return null;
+}
+function strokeNode(n){
+  if(n.type==="division")return divColors[n.label]||"#888";
+  if(n.label==="Versus")return "#a37500";
+  return null;   // dots use the CSS bg-colored separator
+}
+function strokeW(n){ if(n.type==="division")return 3; if(n.label==="Versus")return 1.5; return null; }
+function cls(n){ let c="node"; if(n.label==="Versus")c+=" n-versus"; else if(n.type==="company")c+=" n-comp"; else if(n.type==="division")c+=" n-div"; return c; }
+// clustering: divisions on a ring per company; children pulled into their division cloud
+function layoutAnchors(){
+  const comps=[...new Set(graph.nodes.filter(n=>n.type==="company").map(n=>n.company))];
+  const divs=graph.nodes.filter(n=>n.type==="division");
+  const total=divs.length||1,gap=.16,cx=W/2,cy=H/2,R=Math.min(W,H)*.36;
+  let ang=-Math.PI/2;
+  comps.forEach(c=>{ const ds=divs.filter(d=>d.company===c);
+    const span=(2*Math.PI-comps.length*gap)*(ds.length/total);
+    ds.forEach((d,i)=>{const a=ang+span*((i+.5)/Math.max(ds.length,1));d.ax=cx+R*Math.cos(a);d.ay=cy+R*Math.sin(a);});
+    const mid=ang+span/2,comp=graph.nodes.find(n=>n.type==="company"&&n.company===c);
+    if(comp){comp.ax=cx+R*.4*Math.cos(mid);comp.ay=cy+R*.4*Math.sin(mid);}
+    ang+=span+gap; });
+}
+function anchorFor(n){
+  if(n.type==="project"||n.type==="person")return graph.byId.get(divIdOf(n.company,n.division));
+  if(n.type==="player"){const ds=(n.divisions||[]).map(dv=>graph.nodes.find(x=>x.type==="division"&&x.label===dv)).filter(Boolean);
+    if(!ds.length)return null;return {x:d3.mean(ds,d=>d.x||W/2),y:d3.mean(ds,d=>d.y||H/2)};}
+  return null;
+}
+function clusterForce(alpha){
+  const k=alpha*.45;
+  for(const n of graph.nodes){
+    if(n.type==="company"||n.type==="division"){n.vx+=((n.ax??W/2)-n.x)*k;n.vy+=((n.ay??H/2)-n.y)*k;continue;}
+    const a=anchorFor(n);if(a){n.vx+=(a.x-n.x)*k*1.7;n.vy+=(a.y-n.y)*k*1.7;}
+  }
+}
+function draw(){
+  if(sim)sim.stop();
+  root.selectAll("*").remove();
+  const N=graph.nodes,L=graph.links;
+  const haloG=root.append("g"),linkG=root.append("g"),nodeG=root.append("g");
+  haloSel=haloG.selectAll("circle").data(N.filter(n=>n.type==="division")).join("circle")
+    .attr("fill",d=>divColors[d.label]).attr("filter","url(#soft)").attr("r",0).attr("display","none");
+  linkSel=linkG.selectAll("path").data(L).join("path").attr("class",d=>"link "+d.rel);
+  nodeSel=nodeG.selectAll("g").data(N).join("g").attr("class",cls);
+  nodeSel.append("circle").attr("r",radius).attr("fill",dataFill).attr("stroke",strokeNode).attr("stroke-width",strokeW);
+  nodeSel.filter(d=>d.type==="division").append("text").attr("class","hubnum")
+    .attr("text-anchor","middle").attr("dy",4).text(d=>d.num);
+  nodeSel.append("text").attr("class","lbl").attr("text-anchor","middle").attr("dy",d=>radius(d)+13).text(d=>d.label);
+  nodeSel.call(d3.drag()
+    .on("start",(e,d)=>{if(!e.active)sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y;})
+    .on("drag",(e,d)=>{d.fx=e.x;d.fy=e.y;})
+    .on("end",(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+  const nbr=new Map(N.map(n=>[n.id,new Set([n.id])]));
+  L.forEach(l=>{nbr.get(l.source.id).add(l.target.id);nbr.get(l.target.id).add(l.source.id);});
+  nodeSel.on("mouseenter",(e,d)=>hlHover(d,nbr)).on("mouseleave",()=>{if(!selected)clearHover();})
+    .on("click",(e,d)=>{ e.stopPropagation();
+      if(d.type==="division"){ setFocus(focusDiv===d.id?null:d.id); }
+      else if(d.type==="company"){ home(); }
+      else { selected=d; showDetail(d); hlHover(d,nbr); } });
+  layoutAnchors();
+  sim=d3.forceSimulation(N)
+    .force("link",d3.forceLink(L).id(d=>d.id).distance(l=>l.rel==="made-by"?32:l.rel==="worked-with"?48:38).strength(.15))
+    .force("charge",d3.forceManyBody().strength(-72))
+    .force("collide",d3.forceCollide().radius(d=>radius(d)+2.5).iterations(2))   // tight bursts around hubs
+    .force("cluster",clusterForce)
+    .on("tick",ticked).on("end",()=>{ if(pendingFit){pendingFit=false;fitToVisible();} });
+  applyView();
+}
+function curve(d){ const dx=d.target.x-d.source.x,dy=d.target.y-d.source.y,mx=(d.source.x+d.target.x)/2,my=(d.source.y+d.target.y)/2;
+  return `M${d.source.x},${d.source.y}Q${mx-dy*.08},${my+dx*.08} ${d.target.x},${d.target.y}`; }
+function ticked(){
+  linkSel.attr("d",curve);
+  nodeSel.attr("transform",d=>`translate(${d.x},${d.y})`);
+  const op=getComputedStyle(document.body).getPropertyValue("--haloOp");
+  haloSel.each(function(dv){
+    const m=graph.nodes.filter(n=>n._v&&(n.id===dv.id||(n.company===dv.company&&n.division===dv.label)));
+    if(m.length<2){d3.select(this).attr("r",0);return;}
+    const mx=d3.mean(m,n=>n.x),my=d3.mean(m,n=>n.y);let r=44;
+    m.forEach(n=>{r=Math.max(r,Math.hypot(n.x-mx,n.y-my)+36);});
+    d3.select(this).attr("cx",mx).attr("cy",my).attr("r",Math.min(r,230)).attr("opacity",op);
+  });
+}
+
+// ================= VIEW / VISIBILITY =================
+let selected=null;
+function focusNode(){ return focusDiv?graph.byId.get(focusDiv):null; }
+function isFocusProject(n){ const f=focusNode(); return f&&n.type==="project"&&n.company===f.company&&n.division===f.label; }
+function searchSet(){
+  const term=searchTerm; const match=new Set(), keep=new Set();
+  graph.nodes.forEach(n=>{ const hay=(n.label+" "+(n.title||"")+" "+(n.ptype||"")+" "+(n.tags||[]).join(" ")+" "+(n.division||"")).toLowerCase();
+    if(hay.includes(term))match.add(n.id); });
+  match.forEach(id=>{ keep.add(id);
+    graph.links.forEach(l=>{ if(l.source.id===id)keep.add(l.target.id); if(l.target.id===id)keep.add(l.source.id); }); });
+  graph.nodes.filter(n=>n.type==="company").forEach(n=>keep.add(n.id));
+  return keep;
+}
+function passFilt(n){
+  if(n.type==="project"){ if(filters.conf&&n.confidence!==filters.conf)return false; if(filters.tag&&!(n.tags||[]).includes(filters.tag))return false; }
+  if(n.type==="player"){ if(filters.ptype&&n.ptype!==filters.ptype)return false; if(filters.repeat&&!n.repeat)return false; }
+  if(n.type==="person"){ if(filters.conf&&n.confidence!==filters.conf)return false; if(filters.minScore>0&&!(n.score>=filters.minScore))return false; }
+  return true;
+}
+function visible(n){
+  if(searchTerm) return n.type==="company"? false : n._keep;
+  if(n.type==="company") return false;               // company hidden — hubs are the divisions
+  if(n.type==="division") return focusDiv? n.id===focusDiv : true;
+  if(!show[n.type]) return false;
+  if(!passFilt(n)) return false;
+  if(focusDiv){
+    const f=focusNode();
+    if(n.type==="project") return n.company===f.company&&n.division===f.label;
+    if(n.type==="player")  return graph.links.some(l=>l.rel==="made-by"&&l.target.id===n.id&&isFocusProject(l.source));
+    if(n.type==="person")  return graph.links.some(l=>l.rel==="credited"&&l.target.id===n.id&&isFocusProject(l.source))
+                              || graph.links.some(l=>l.rel==="decision-maker"&&l.target.id===n.id&&l.source.id===focusDiv);
+    return false;
+  }
+  return true;   // FULL VIEW — show everything (respecting the field filters above)
+}
+function versusConnected(){
+  const s=new Set(),v=nid("player","Versus"); if(!graph.byId.get(v))return s; s.add(v);
+  graph.links.forEach(l=>{ if(l.source.id===v)s.add(l.target.id); if(l.target.id===v)s.add(l.source.id); });
+  return s;
+}
+function applyView(){
+  if(searchTerm){ const keep=searchSet(); graph.nodes.forEach(n=>n._keep=keep.has(n.id)); }
+  graph.nodes.forEach(n=>n._v=visible(n));
+  if(filters.versus){ const vs=versusConnected(); graph.nodes.forEach(n=>{ if(n._v&&n.type!=="company"&&n.type!=="division"&&!vs.has(n.id))n._v=false; }); }
+  const vis=new Set(graph.nodes.filter(n=>n._v).map(n=>n.id));
+  nodeSel.style("display",n=>n._v?null:"none");
+  const fullView=!focusDiv&&!searchTerm;
+  linkSel.style("display",l=>{ if(!(vis.has(l.source.id)&&vis.has(l.target.id)))return "none";
+    if(fullView)return l.rel==="made-by"?null:"none";   // full view: only the vendor web lines
+    return l.rel==="worked-with"?"none":null; });
+  const showAllLabels=!!(focusDiv||searchTerm);
+  nodeSel.classed("lblon",n=> n._v && showAllLabels);   // full view: hubs show numbers, names on hover
+  clearHover();
+  updateCrumb();
+  const c={division:0,project:0,player:0,person:0};
+  graph.nodes.forEach(n=>{if(n._v&&c[n.type]!=null)c[n.type]++;});
+  document.getElementById("stats").innerHTML= focusDiv?
+    `${c.project} projects &middot; ${c.player} players &middot; ${c.person} people`:
+    (searchTerm?`${graph.nodes.filter(n=>n._v).length} results`
+      :`${c.division} divisions &middot; ${c.project} projects &middot; ${c.player} players &middot; ${c.person} people`);
+  const hint=document.getElementById("hint");
+  hint.style.display=focusDiv?"none":"block";
+  hint.textContent=searchTerm?"":"Hover a dot for its name · click a division to open just it · click empty space to reset";
+  if(sim)sim.alpha(.5).restart();
+}
+function setFocus(id){ focusDiv=id; selected=null; detail.classList.remove("open");
+  pendingFit=!!id; applyView(); markTree(); if(!id)resetZoom(); }
+function home(){ focusDiv=null; searchTerm=""; document.getElementById("search").value="";
+  filters.conf="";filters.tag="";filters.ptype="";filters.repeat=false;filters.versus=false;filters.minScore=0;
+  show.project=show.player=show.person=true;
+  ["tProject","tPlayer","tPerson"].forEach(i=>document.getElementById(i).checked=true);
+  document.getElementById("fconf").value="";document.getElementById("ftag").value="";document.getElementById("fptype").value="";
+  document.getElementById("frepeat").checked=false;document.getElementById("fversus").checked=false;
+  document.getElementById("fscore").value=0;document.getElementById("scoreval").textContent="0";
+  selected=null;detail.classList.remove("open"); applyView(); markTree(); resetZoom(); }
+function resetZoom(){ svg.transition().duration(450).call(zoom.transform,d3.zoomIdentity); }
+function fitToVisible(pad=90){
+  const vis=graph.nodes.filter(n=>n._v&&isFinite(n.x));
+  if(vis.length<2)return;
+  const xs=vis.map(n=>n.x),ys=vis.map(n=>n.y);
+  const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+  const w=(maxX-minX)||1,h=(maxY-minY)||1;
+  const scale=Math.max(.3,Math.min(2.2,Math.min((W-2*pad)/w,(H-2*pad)/h)));
+  const tx=W/2-scale*(minX+maxX)/2, ty=H/2-scale*(minY+maxY)/2;
+  svg.transition().duration(550).call(zoom.transform,d3.zoomIdentity.translate(tx,ty).scale(scale));
+}
+function hlHover(d,nbr){ const s=nbr.get(d.id);
+  nodeSel.classed("faded",n=>n._v&&!s.has(n.id)).classed("hoverlbl",n=>n._v&&s.has(n.id));
+  linkSel.classed("faded",l=>l.source&&!(s.has(l.source.id)&&s.has(l.target.id))); }
+function clearHover(){ nodeSel.classed("faded",false).classed("hoverlbl",false); linkSel.classed("faded",false); }
+function updateCrumb(){
+  const cr=document.getElementById("crumb");
+  if(searchTerm){ cr.innerHTML=`<span class="home">&#8962; Home</span><span class="sep">&rsaquo;</span><span class="cur">Search: "${searchTerm}"</span><span class="x">&times;</span>`;
+    cr.querySelector(".home").onclick=home; cr.querySelector(".x").onclick=home; return; }
+  if(focusDiv){ const f=focusNode();
+    cr.innerHTML=`<span class="home">${f.company}</span><span class="sep">&rsaquo;</span><span class="cur">${f.label}</span><span class="x">&times;</span>`;
+    cr.querySelector(".home").onclick=home; cr.querySelector(".x").onclick=()=>setFocus(null); return; }
+  cr.innerHTML=`<span class="home" style="color:var(--gold)">${[...new Set(records.map(r=>r.company))].join(" · ")}</span>`;
+}
+
+// ================= LEFT TREE =================
+function projCount(company,div){return records.filter(r=>r.company===company&&(r.division||"Unspecified")===div).length;}
+function buildTree(){
+  const tree=document.getElementById("tree");tree.innerHTML="";
+  const comps=[...new Set(records.map(r=>r.company))];
+  comps.forEach(c=>{
+    const wrap=document.createElement("div");
+    const crow=row(c,"",null,"company");crow.dataset.key="C:"+c;
+    crow.onclick=()=>{ home(); }; wrap.appendChild(crow);
+    const arow=row("All","",null,"child allrow");arow.dataset.key="ALL:"+c;
+    arow.onclick=()=>{ setFocus(null); resetZoom(); }; wrap.appendChild(arow);
+    [...new Set(records.filter(r=>r.company===c).map(r=>r.division||"Unspecified"))].forEach(d=>{
+      const num=(graph.byId.get(divIdOf(c,d))||{}).num||"";
+      const el=document.createElement("div");el.className="trow child";el.dataset.key="D:"+divIdOf(c,d);
+      el.innerHTML=`<span class="numbadge">${num}</span><span class="tdot" style="background:${divColors[d]||colorFor(d)}"></span><span class="nm">${d}</span><span class="ct">${projCount(c,d)}</span>`;
+      el.onclick=()=>setFocus(divIdOf(c,d)); wrap.appendChild(el);
+    });
+    tree.appendChild(wrap);
+  });
+  markTree();
+}
+function row(name,count,color,extra){
+  const el=document.createElement("div");el.className="trow "+(extra||"");
+  el.innerHTML=`<span class="tdot" style="background:${color||'transparent'}"></span><span class="nm">${name}</span>`+
+    (count!==""&&count!=null?`<span class="ct">${count}</span>`:"");
+  return el;
+}
+function markTree(){
+  const key=focusDiv?("D:"+focusDiv):("ALL:"+[...new Set(records.map(r=>r.company))][0]);
+  document.querySelectorAll(".trow").forEach(r=>r.classList.toggle("active",r.dataset.key===key));
+}
+
+// ================= FILTER CONTROLS =================
+function buildFilterOptions(){
+  const tags=[...new Set(records.flatMap(r=>r.tags||[]))].sort();
+  document.getElementById("ftag").innerHTML='<option value="">Any</option>'+tags.map(t=>`<option>${t}</option>`).join("");
+  const pts=[...new Set(Object.values(playerMeta).map(m=>m.ptype))].sort();
+  document.getElementById("fptype").innerHTML='<option value="">Any</option>'+pts.map(t=>`<option>${t}</option>`).join("");
+}
+
+// ================= UPLOAD =================
+function norm(s){return (s||"").toString().trim().toLowerCase().replace(/[^a-z0-9]+/g,"");}
+function pick(row,cands){ const keys=Object.keys(row);
+  for(const c of cands){const nc=norm(c);for(const k of keys)if(norm(k)===nc)return row[k];}
+  for(const c of cands){const nc=norm(c);for(const k of keys)if(norm(k).includes(nc))return row[k];} return ""; }
+function splitList(v){return (v||"").toString().split(/[;\n]+/).map(s=>s.trim()).filter(Boolean);}
+function normConf(v){const s=norm(v);if(s.startsWith("high"))return "High";if(s.startsWith("med"))return "Medium";if(s.startsWith("low"))return "Low";return "Medium";}
+function ingestRows(rows){
+  let added=0;
+  rows.forEach(row=>{ const name=pick(row,["campaign name","project name","campaign","project","name","title"]); if(!name)return;
+    const company=(pick(row,["client","company","brand owner"])||"Company").toString().trim();
+    const division=(pick(row,["division group","division / brand","division","brand","network","platform"])||"Unspecified").toString().trim();
+    const tags=splitList(pick(row,["type tags","project type","work type","type","category"])).flatMap(t=>t.split(/[,/]+/).map(s=>s.trim())).filter(Boolean);
+    const conf=normConf(pick(row,["confidence"]));
+    const contacts=splitList(pick(row,["key contacts / decision-makers","key contacts","decision makers","contacts","decision-makers"]));
+    const players=[...splitList(pick(row,["related agencies / vendors","related agencies","agencies","players","vendors","partners"])),
+                   ...splitList(pick(row,["related production / post houses","production / post houses","production","post houses","post"]))];
+    records.push({company,division,name:name.toString().trim(),tags,confidence:conf,contacts,players}); added++; });
+  if(!added){toast("No valid rows found — check your column headers.");return;}
+  buildGraph();buildTree();buildFilterOptions();draw();home();
+  toast(`Added ${added} project${added>1?"s":""}. Open the new company from the left.`);
+}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),3400);}
+document.getElementById("uploadBtn").onclick=()=>document.getElementById("fileInput").click();
+document.getElementById("fileInput").onchange=e=>{ const f=e.target.files[0];if(!f)return; const nm=f.name.toLowerCase();
+  if(nm.endsWith(".csv"))Papa.parse(f,{header:true,skipEmptyLines:true,complete:res=>ingestRows(res.data)});
+  else{const rd=new FileReader();rd.onload=ev=>{const wb=XLSX.read(ev.target.result,{type:"array"});ingestRows(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:""}));};rd.readAsArrayBuffer(f);}
+  e.target.value=""; };
+document.getElementById("tmplBtn").onclick=()=>{
+  const header=["Client","Division Group","Campaign Name","Project Type","Confidence","Key Contacts / Decision-Makers","Related Agencies / Vendors"];
+  const ex=[["Netflix","Netflix / Series","Wednesday S3 launch","Key Art; Trailer; Social","High","Jane Doe","Some Agency; Some Post House"],
+            ["Netflix","Netflix / Film","Big Film 360 campaign","360 / Integrated; Experiential","Medium","John Roe","Another Agency"]];
+  const csv=[header,...ex].map(r=>r.map(c=>`"${(c||"").replace(/"/g,'""')}"`).join(",")).join("\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="landscape_upload_template.csv";a.click(); };
+
+// ================= HEADER CONTROLS =================
+document.getElementById("homeBtn").onclick=home;
+const gm=document.getElementById("goalsModal");
+document.getElementById("goalsBtn").onclick=()=>gm.classList.add("open");
+document.querySelector(".gclose").onclick=()=>gm.classList.remove("open");
+gm.onclick=e=>{if(e.target===gm)gm.classList.remove("open");};
+document.getElementById("search").oninput=e=>{ searchTerm=e.target.value.trim().toLowerCase(); selected=null; applyView(); if(searchTerm){pendingFit=false;} };
+document.getElementById("tProject").onchange=e=>{show.project=e.target.checked;applyView();};
+document.getElementById("tPlayer").onchange=e=>{show.player=e.target.checked;applyView();};
+document.getElementById("tPerson").onchange=e=>{show.person=e.target.checked;applyView();};
+document.getElementById("fconf").onchange=e=>{filters.conf=e.target.value;applyView();};
+document.getElementById("ftag").onchange=e=>{filters.tag=e.target.value;applyView();};
+document.getElementById("fptype").onchange=e=>{filters.ptype=e.target.value;applyView();};
+document.getElementById("frepeat").onchange=e=>{filters.repeat=e.target.checked;applyView();};
+document.getElementById("fversus").onchange=e=>{filters.versus=e.target.checked;applyView();};
+document.getElementById("fscore").oninput=e=>{filters.minScore=+e.target.value;document.getElementById("scoreval").textContent=e.target.value;applyView();};
+document.getElementById("nightBtn").onclick=()=>{ document.body.classList.toggle("night");
+  const on=document.body.classList.contains("night"); document.getElementById("nightBtn").innerHTML=on?"&#9728; Day":"&#9789; Night";
+  if(sim)sim.alpha(.1).restart(); };
+
+// ================= DETAIL =================
+const detail=document.getElementById("detail"),dbody=document.getElementById("dbody");
+document.querySelector("#detail .close").onclick=()=>{detail.classList.remove("open");selected=null;clearHover();};
+function neigh(d,t){return graph.links.filter(l=>l.source.id===d.id||l.target.id===d.id).map(l=>l.source.id===d.id?l.target:l.source).filter(n=>!t||n.type===t);}
+function esc(s){return (s||"").toString().replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function chip(c){return c?`<span class="chip c-${c}">${c}</span>`:"";}
+function tagsHtml(a){return (a||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join("")||'<i style="color:var(--dim)">none disclosed</i>';}
+function showDetail(d){
+  let h=`<div class="kind">${d.type}</div><h2>${esc(d.label)}</h2>`;
+  if(d.type==="division"){
+    const pj=neigh(d,"project"),pl=neigh(d,"player"),pe=neigh(d,"person");
+    h+=`<div class="field"><b>Company</b>${esc(d.company)}</div><div class="field"><b>Projects (${d.pcount})</b>${tagsHtml(pj.map(n=>n.label))}</div>`;
+    h+=`<div class="field"><b>Players / vendors (${pl.length})</b>${tagsHtml(pl.map(n=>n.label))}</div>`;
+    h+=`<div class="field"><b>Decision-makers (${pe.length})</b>${tagsHtml(pe.map(n=>n.label))}</div>`;
+    h+=`<button class="btn open-btn" onclick="setFocus('${d.id}')">Open this cluster</button>`; }
+  else if(d.type==="project"){
+    if(d.notes)h+=`<div class="field" style="font-size:13px">${esc(d.notes)}</div>`;
+    h+=`<div class="field"><b>Division / brand</b>${esc(d.division)}${d.brand&&d.brand!==d.division?" &middot; "+esc(d.brand):""}</div>`;
+    if(d.ip)h+=`<div class="field"><b>IP / franchise</b>${esc(d.ip)}</div>`;
+    if(d.team)h+=`<div class="field"><b>Paramount team</b>${esc(d.team)}</div>`;
+    h+=`<div class="field"><b>Confidence &nbsp; ${chip(d.confidence)}</b></div>`;
+    h+=`<div class="field"><b>Project size / cost</b>${(!d.cost||d.cost==="—")?'<i style="color:var(--dim)">not public (data gap)</i>':esc(d.cost)}</div>`;
+    h+=`<div class="field"><b>Work type</b>${tagsHtml(d.tags)}</div>`;
+    h+=`<div class="field"><b>Players / vendors</b>${tagsHtml(neigh(d,"player").map(n=>n.label))}</div>`;
+    h+=`<div class="field"><b>Credited contacts</b>${tagsHtml(neigh(d,"person").map(n=>n.label))}</div>`;
+    if(d.sources&&d.sources.length)h+=`<div class="field"><b>Sources</b>${tagsHtml(d.sources)}</div>`; }
+  else if(d.type==="player"){ h+=`<div class="field"><b>Type</b>${esc(d.ptype)}</div><div class="field"><b>Repeat relationship</b>${d.repeat?'<span class="chip c-High">Yes</span>':'<span style="color:var(--dim)">not established</span>'}</div>`;
+    h+=`<div class="field"><b>Divisions worked with</b>${tagsHtml(d.divisions)}</div><div class="field"><b>Projects</b>${tagsHtml(neigh(d,"project").map(n=>n.label))}</div>`;
+    if(d.label==="Versus")h+=`<div class="field" style="color:var(--gold)"><b style="color:var(--gold)">Home team</b>This is us.</div>`; }
+  else if(d.type==="person"){ h+=`<div class="field"><b>Title</b>${esc(d.title)}</div><div class="field"><b>Division</b>${esc(d.division)}</div>`;
+    h+=`<div class="field"><b>Role / attribution</b>${esc(d.role)}</div><div class="field"><b>Confidence</b>${chip(d.confidence)}</div>`;
+    if(d.score)h+=`<div class="field"><b>Opportunity score</b><span style="font-size:22px;color:var(--gold);font-weight:700">${d.score}</span></div>`;
+    h+=`<div class="field"><b>Route / access</b>${esc(d.route)}</div>`;
+    if(neigh(d,"project").length)h+=`<div class="field"><b>Credited on</b>${tagsHtml(neigh(d,"project").map(n=>n.label))}</div>`; }
+  dbody.innerHTML=h;detail.classList.add("open");
+}
+window.setFocus=setFocus;
+
+// ================= INIT =================
+buildGraph();buildTree();buildFilterOptions();draw();
+window.addEventListener("resize",()=>{W=main.clientWidth;H=main.clientHeight;svg.attr("viewBox",[0,0,W,H]);
+  if(sim){sim.force("center",d3.forceCenter(W/2,H/2)).alpha(.3).restart();}});
+</script></body></html>

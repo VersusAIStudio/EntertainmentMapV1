@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Paramount Landscape — three views</title>
+<style>
+ *{box-sizing:border-box}
+ body{margin:0;background:#efece4;font-family:Georgia,'Times New Roman',serif;color:#2a2a2a}
+ #page{max-width:1360px;margin:0 auto;padding:22px 20px 60px}
+ h1{font-size:20px;margin:0 0 2px}
+ .lede{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12.5px;color:#8a8a86;margin-bottom:14px}
+ #tabs{display:flex;gap:6px;margin-bottom:8px;font-family:-apple-system,sans-serif;flex-wrap:wrap}
+ #tabs button{font-size:12.5px;padding:8px 15px;border:1px solid #e0ddd2;background:#fff;color:#555;border-radius:22px;cursor:pointer;font-weight:600}
+ #tabs button.on{background:#2a2a2a;color:#fff;border-color:#2a2a2a}
+ #vsub{font-family:-apple-system,sans-serif;font-size:12px;color:#8a8a86;align-self:center;margin-left:6px}
+ svg{width:100%;height:auto;background:#f6f4ef;border-radius:12px;border:1px solid #e4e0d5;display:block}
+ #stage{position:relative}
+ #oinfo{position:absolute;top:12px;right:12px;width:250px;background:#fff;border:1px solid #e4e2db;border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,.18);padding:15px 17px;transform:translateX(120%);transition:transform .32s cubic-bezier(.4,0,.2,1);font-family:-apple-system,sans-serif}
+ #oinfo.open{transform:translateX(0)}
+ #oinfo .ik{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#b08a00;font-weight:700}
+ #oinfo .iname{font-size:16px;font-weight:700;margin:2px 0;font-family:Georgia,serif}
+ #oinfo .ix{font-size:11.5px;color:#777;margin-bottom:8px}
+ #oinfo p{font-size:12.5px;line-height:1.5;color:#333;margin:0}
+ #oclose{position:absolute;right:12px;top:8px;border:none;background:none;font-size:20px;color:#aaa;cursor:pointer;line-height:1}
+ #okey{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);border:1px solid #e4e2db;border-radius:10px;padding:10px 12px;font-family:-apple-system,sans-serif;font-size:11px;max-width:210px}
+ #okey h4{margin:0 0 6px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#999}
+ #okey .kr{display:flex;align-items:center;gap:8px;margin:4px 0;color:#444}
+ #okey .kd{width:12px;height:12px;border-radius:50%;flex:none}
+ #okey .tip{margin-top:7px;padding-top:7px;border-top:1px solid #eee;color:#777;font-style:italic}
+</style></head>
+<body><div id="page">
+<h1>Paramount — the marketing landscape</h1>
+<div class="lede">Who does Paramount's marketing work: 10 divisions · 39 projects · 50 vendors · decision-makers ranked by opportunity score. Switch views below.</div>
+<div id="tabs">
+ <button data-v="orbits" class="on">&#9678; Orbits</button>
+ <button data-v="flow">&#10142; Flow / chain</button>
+ <button data-v="board">&#9677; Decision-maker board</button>
+ <button data-v="overlap">&#8734; Overlap / shared vendors</button>
+ <span id="vsub"></span>
+</div>
+<div id="stage">
+<svg id="v" viewBox="0 0 1120 1000"></svg>
+<div id="okey"></div>
+<div id="oinfo"></div>
+</div>
+</div>
+<script>
+(function(){
+ const DIV=[["Paramount Pictures","#b3564e"],["MTV / Brand Studio","#8f6aa6"],["Paramount+ / DTC","#5566a8"],["Pluto TV","#c69a5f"],["Nickelodeon","#b9ac68"],["BET","#7a6db2"],["Paramount Sports","#7fb8b3"],["CBS","#6d80ad"],["Paramount Advertising","#69a98f"],["Other","#a6a6a6"]];
+ const COL={};DIV.forEach(d=>COL[d[0]]=d[1]);
+ const PROJ={"Paramount Pictures":[["Naked Gun AV","H",["Workshop Creative"]],["Naked Gun OOH","H",["Midnight Oil"]],["Naked Gun x ESPN","M",["ESPN"]],["Running Man x Liquid Death","H",["Liquid Death"]],["Running Man Reddit","H",["Spark Foundry","Reddit"]],["SpongeBob intl","H",["Once Upon a Time LA"]],["SpongeBob x BK","M",["Burger King"]],["Scream 7 Discord","H",["Spark Foundry","Those Beyond","Discord"]],["Scream 7 Flighthouse","M",["Flighthouse"]],["Scream 7 Big Game","M",["MOCEAN*"]]],
+  "MTV / Brand Studio":[["VMAs platform","H",["multiple"]],["Dunkin x VMAs","H",["Gravy Films","Artists Equity"]],["Bacardi x VMAs","H",["Bacardi"]],["Burger King x VMAs","H",["Bark Bark","Burger King"]],["Red Bull x VMAs","M",["Red Bull"]]],
+  "Paramount+ / DTC":[["UFC opener","H",["Versus"]],["Mountain 3D","H",["Versus","Droga5"]],["Find Your Mountain","H",["Droga5","Stink/Traktor","Arcade Edit"]],["Mountain extended","H",["Droga5","O Positive","Arcade Edit","Human","Parliament","Titmouse","Heard City","Rare Medium","AGENC"]],["Yellowjackets FYC","H",["TCO London"]],["Star Trek","H",["internal"]],["Dutton SXSW","H",["Fairmont Austin"]]],
+  "Pluto TV":[["Pluto fall","H",["Versus"]],["Monsta Times Sq","H",["Versus"]],["Feel the Free","M",["O Positive"]]],
+  "Nickelodeon":[["On the Sphere","H",["Versus"]],["Fun-ergy Factory","H",["New Children's Museum"]]],
+  "BET":[["BET Media House","H",["P&G"]],["Black + Iconic Soiree","H",["Gilead","P&G"]],["BET Awards 2026","H",["Jesse Collins Ent."]]],
+  "Paramount Sports":[["Count on Sundays","H",["Known"]],["Nobody Watches Like U.S.","H",["72andSunny","Smuggler","Trafik","Iconic","Barking Owl","Soundtree"]],["Team Moms","M",["ITV America","Kim Kardashian Prod."]]],
+  "CBS":[["Tracker stays","H",["AutoCamp","Hilton Honors"]],["NCIS Tuesdays of Honor","H",["internal"]]],
+  "Paramount Advertising":[["Ads Manager Partners","H",["AllCreativeMedia","New Path Digital"]],["Taboola Multiplier","H",["Taboola"]],["Omnicom units","H",["Omnicom Media"]]],
+  "Other":[["Killer Classics","H",["internal"]]]};
+ const PPL={"Paramount Pictures":[["Josh Goldstine",69]],"MTV / Brand Studio":[["Matthew Newcomb",81],["Dario Spina",76]],"Paramount+ / DTC":[["Matt Hernandez",93],["Emmanuelle Leboeuf",91],["Laura Kane",91],["Eve Seiter",85],["Dara Driscoll",85],["Ariana Ringstrom",85],["Shawn Silverman",81],["Becca Schader",81],["Michelle Garcia",81],["Domenic DiMeglio",74]],"Pluto TV":[["Katherine Kelly",96]],"Nickelodeon":[["Sabrina Caluori",86]],"BET":[["Tiyale Hayes",75],["Connie Orlando",60]],"Paramount Sports":[["Kelly Dunne",81],["Jesse Sisgold",73]],"CBS":[["Michael Benson",76],["George Cheeks",60]],"Paramount Advertising":[["Jay Askinasi",60]],"Other":[["Josh Silverman",67]]};
+ const svg=document.getElementById("v"),GOLD="#e0a800";
+ function mix(hex,t){const n=parseInt(hex.slice(1),16);let r=n>>16&255,g=n>>8&255,b=n&255;return `rgb(${Math.round(r+(255-r)*t)},${Math.round(g+(255-g)*t)},${Math.round(b+(255-b)*t)})`;}
+ function shade(hex,f){const n=parseInt(hex.slice(1),16);return `rgb(${Math.round((n>>16&255)*f)},${Math.round((n>>8&255)*f)},${Math.round((n&255)*f)})`;}
+ const gid={};let gdefs="";[...DIV.map(d=>d[1]),GOLD,"#242424"].forEach((c,i)=>{gid[c]="gr"+i;gdefs+=`<radialGradient id="gr${i}" cx="0.35" cy="0.3" r="0.85"><stop offset="0%" stop-color="${mix(c,0.55)}"/><stop offset="55%" stop-color="${c}"/><stop offset="100%" stop-color="${shade(c,0.8)}"/></radialGradient>`;});
+ const DEFS=`<defs>${gdefs}<pattern id="gp" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#ded9cd"/></pattern><filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="3" stdDeviation="3.4" flood-color="#000" flood-opacity="0.22"/></filter></defs>`;
+ function ball(x,y,r,c,op,attrs,title){return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="url(#${gid[c]})" fill-opacity="${op==null?1:op}" filter="url(#soft)" ${attrs||''}>${title?`<title>${title}</title>`:''}</circle>`;}
+ function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
+ function tlab(x,y,t,s,f,anc,it){return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anc||'middle'}" font-size="${s}" ${it?'font-style="italic" ':''}fill="${f}" paint-order="stroke" stroke="#f6f4ef" stroke-width="2.8" stroke-linejoin="round">${t}</text>`;}
+ const P=(cx,cy,r,a)=>[cx+r*Math.cos(a),cy+r*Math.sin(a)];
+ // ---------- ORBITS ----------
+ function orbits(){const cx=560,cy=500,r1=118,r2=205,r3=305,r4=402;let s=`<rect width="1120" height="1000" fill="url(#gp)"/>`;
+  [r1,r2,r3,r4].forEach(r=>s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e2ded1" stroke-dasharray="2 4"/>`);
+  const W=2*Math.PI/DIV.length;let L="",N="",LAB="";
+  DIV.forEach((d,i)=>{const nm=d[0],c=d[1],ac=-Math.PI/2+i*W;const[dx,dy]=P(cx,cy,r2,ac);
+   L+=`<line x1="${cx}" y1="${cy}" x2="${dx}" y2="${dy}" stroke="${c}" stroke-opacity=".4"/>`;
+   (PPL[nm]||[]).forEach((pp,j,arr)=>{const a=ac-W*0.34+W*0.68*(arr.length>1?j/(arr.length-1):0.5);const[x,y]=P(cx,cy,r1,a);N+=ball(x,y,4+(pp[1]-60)/8,GOLD,.92,`data-k="person" data-n="${esc(pp[0])}" data-x="opportunity score ${pp[1]} · ${esc(nm)}"`,`${pp[0]} — score ${pp[1]}`);});
+   const pr=PROJ[nm],np=pr.length;
+   pr.forEach((p,j)=>{const a=ac-W*0.42+W*0.84*(np>1?j/(np-1):0.5);const[px,py]=P(cx,cy,r3,a);L+=`<line x1="${dx}" y1="${dy}" x2="${px}" y2="${py}" stroke="${c}" stroke-opacity=".22"/>`;
+    N+=ball(px,py,6,c,p[1]==='H'?.9:.5,`data-k="project" data-n="${esc(p[0])}" data-x="${p[1]==='H'?'High':'Medium'} confidence · ${esc(nm)} · vendors: ${esc(p[2].join(', ')||'n/a')}"`,`${p[0]}`);
+    p[2].forEach((v,k)=>{const va=a-0.05+0.1*(p[2].length>1?k/(p[2].length-1):0.5);const[vx,vy]=P(cx,cy,r4+(k%2)*16,va);L+=`<line x1="${px}" y1="${py}" x2="${vx}" y2="${vy}" stroke="${c}" stroke-opacity=".15"/>`;N+=ball(vx,vy,5,c,.65,`data-k="vendor" data-n="${esc(v)}" data-x="worked on ${esc(p[0])} (${esc(nm)})"`,`${v}`);});});
+   N+=ball(dx,dy,10+np*1.6,c,.9,`data-k="division" data-n="${esc(nm)}" data-x="${np} projects this year"`,`${nm} — ${np} projects`);LAB+=`<text x="${dx}" y="${dy+3}" text-anchor="middle" font-size="9.5" fill="#fff" font-weight="700" pointer-events="none">${np}</text>`;
+   const[lx,ly]=P(cx,cy,r4+34,ac);LAB+=tlab(lx,ly,nm.replace(' / ',' '),11,shade(c,.7),Math.cos(ac)<-.2?'end':(Math.cos(ac)>.2?'start':'middle'));});
+  s+=L+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB;
+  s+=`<g font-family="-apple-system,sans-serif" font-size="9" fill="#b0aa9a" text-anchor="middle" pointer-events="none"><text x="${cx}" y="${cy-r1+11}">decision-makers</text><text x="${cx}" y="${cy-r2+11}">divisions</text><text x="${cx}" y="${cy-r3+11}">projects</text><text x="${cx}" y="${cy-r4+11}">vendors</text></g>`;
+  s+=ball(cx,cy,36,"#242424",1,`data-k="center" data-n="Paramount" data-x="39 projects mapped"`)+`<text x="${cx}" y="${cy+1}" text-anchor="middle" font-size="11" fill="#fff" font-weight="700" pointer-events="none">Paramount</text>`;
+  return[s,"0 0 1120 1000","click any bubble to learn what it is · gold = decision-makers (size = opportunity score)"];}
+ // ---------- OVERLAP (shared vendors across divisions) ----------
+ function overlap(){const cx=560,cy=470,R=300;
+  const vDiv={};DIV.forEach(d=>PROJ[d[0]].forEach(p=>p[2].forEach(v=>{if(['internal','multiple'].includes(v))return;(vDiv[v]=vDiv[v]||new Set()).add(d[0]);})));
+  const shared=Object.keys(vDiv).filter(v=>vDiv[v].size>1).map(v=>({v,divs:[...vDiv[v]]}));
+  const hub={};DIV.forEach((d,i)=>{const a=-Math.PI/2+i/DIV.length*2*Math.PI;hub[d[0]]={a,x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)};});
+  let s=`<rect width="1120" height="960" fill="url(#gp)"/>`,L="",N="",LAB="";
+  DIV.forEach(d=>{const c=d[1],np=PROJ[d[0]].length,h=hub[d[0]];N+=ball(h.x,h.y,13+np*2,c,.88,`data-k="division" data-n="${esc(d[0])}" data-x="${np} projects"`,`${d[0]}`);
+   LAB+=`<text x="${h.x}" y="${h.y+3}" text-anchor="middle" font-size="10" fill="#fff" font-weight="700" pointer-events="none">${np}</text>`+tlab(h.x,h.y-16-np*2,d[0].replace(' / ',' '),11,shade(c,.65),'middle');});
+  shared.forEach(sh=>{const angs=sh.divs.map(d=>hub[d].a);const ma=Math.atan2(angs.reduce((a,x)=>a+Math.sin(x),0),angs.reduce((a,x)=>a+Math.cos(x),0));
+   const rr=110+sh.divs.length*8;const bx=cx+rr*Math.cos(ma),by=cy+rr*Math.sin(ma);
+   sh.divs.forEach(d=>{L+=`<path d="M${bx},${by} Q${(bx+hub[d].x)/2-(hub[d].y-by)*0.12},${(by+hub[d].y)/2+(hub[d].x-bx)*0.12} ${hub[d].x},${hub[d].y}" fill="none" stroke="${COL[d]}" stroke-opacity=".7" stroke-width="2.2"/>`;});
+   // blended bubble: overlap the divisions' colours
+   sh.divs.forEach((d,i)=>{const off=(i-(sh.divs.length-1)/2)*10;N+=ball(bx+off,by,13,COL[d],.72,`data-k="overlap" data-n="${esc(sh.v)}" data-x="works across ${sh.divs.length} divisions: ${esc(sh.divs.map(x=>x.replace(' / ',' ')).join(', '))}"`,`${sh.v} — ${sh.divs.join(', ')}`);});
+   LAB+=`<line x1="${bx}" y1="${by-14}" x2="${bx}" y2="${by-24}" stroke="#999"/>`+tlab(bx,by-28,sh.v,12,"#2a2a2a")+tlab(bx,by-17,"shared vendor · "+sh.divs.length+" divisions",8.5,"#9a8a55","middle",true);});
+  s+=L+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB;
+  s+=`<g font-family="-apple-system,sans-serif"><text x="30" y="44" font-size="13" font-weight="700" fill="#444">Vendors that work across more than one division</text><text x="30" y="62" font-size="11.5" fill="#888">Every other vendor is exclusive to a single division — these ${shared.length} are the bridges (where the overlap is).</text></g>`;
+  return[s,"0 0 1120 960","only vendors shared by 2+ divisions · the split bubble shows which divisions overlap · everyone else is siloed"];}
+ // ---------- FLOW ----------
+ function flow(){const projList=[];DIV.forEach(d=>PROJ[d[0]].forEach(p=>projList.push({div:d[0],n:p[0],c:p[1],v:p[2]})));
+  const vSeen={},vList=[];projList.forEach(p=>p.v.forEach(v=>{if(!vSeen[v]){vSeen[v]={div:p.div};vList.push(v);}}));
+  const peopleFlat=[];DIV.forEach(d=>(PPL[d[0]]||[]).forEach(pp=>peopleFlat.push({n:pp[0],s:pp[1],div:d[0]})));peopleFlat.sort((a,b)=>b.s-a.s);
+  const xD=170,xP=560,xV=940,top=70,pgap=1180/projList.length,vgap=1180/vList.length;
+  const py={};projList.forEach((p,i)=>py[p.n]=top+i*pgap+pgap/2);const vy={};vList.forEach((v,i)=>vy[v]=top+i*vgap+vgap/2);
+  const dy={};DIV.forEach(d=>{const ys=projList.filter(p=>p.div===d[0]).map(p=>py[p.n]);dy[d[0]]=ys.reduce((a,b)=>a+b,0)/ys.length;});
+  const arc=(x1,y1,x2,y2)=>{const mx=(x1+x2)/2;return `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;};
+  let L="",N="",LAB="";
+  projList.forEach(p=>{const c=COL[p.div];L+=`<path d="${arc(xD+10,dy[p.div],xP-8,py[p.n])}" fill="none" stroke="${c}" stroke-opacity=".3"/>`;p.v.forEach(v=>{if(vy[v]!=null)L+=`<path d="${arc(xP+8,py[p.n],xV-6,vy[v])}" fill="none" stroke="${c}" stroke-opacity=".2"/>`;});});
+  DIV.forEach(d=>{const c=d[1],n=PROJ[d[0]].length;N+=ball(xD,dy[d[0]],7+n*1.5,c,.9);LAB+=tlab(xD-16,dy[d[0]]+3,d[0].replace(' / ',' '),11,shade(c,.7),'end')+`<text x="${xD}" y="${dy[d[0]]+3}" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">${n}</text>`;});
+  projList.forEach(p=>{const c=COL[p.div];N+=ball(xP,py[p.n],6.5,c,p.c==='H'?.9:.5);LAB+=tlab(xP+12,py[p.n]+3,p.n,9,"#3a3a3a",'start');});
+  vList.forEach(v=>{const c=COL[vSeen[v].div];N+=ball(xV,vy[v],5.5,c,.72);LAB+=tlab(xV+10,vy[v]+3,v,9,"#555",'start');});
+  const xE=1130;let ey=70;peopleFlat.forEach(pp=>{const rr=4.5+(pp.s-60)/7;N+=ball(xE,ey,rr,GOLD,.9)+`<title>${pp.n} — ${pp.s}</title>`;LAB+=tlab(xE+rr+5,ey-2,pp.n,9,"#333",'start')+tlab(xE+rr+5,ey+8,pp.s+" · "+pp.div.replace(' / ',' '),8,"#9a8a55",'start',true);ey+=34;});
+  const heads=`<g font-family="-apple-system,sans-serif" font-weight="700" fill="#999" font-size="11"><text x="${xD}" y="40" text-anchor="middle">DIVISION</text><text x="${xP}" y="40" text-anchor="middle">PROJECT</text><text x="${xV}" y="40" text-anchor="middle">VENDOR</text><text x="${xE}" y="40" text-anchor="middle">DECISION-MAKERS</text></g>`;
+  return[`<rect width="1320" height="1320" fill="#f6f4ef"/>`+heads+L+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB,"0 0 1320 1320","who commissioned each project (left) and who built it (right) · gold column = decision-makers by score"];}
+ // ---------- BOARD (people fanned wide) ----------
+ function board(){const cols=5,cw=326,ch=680,padX=24,padY=76;const Wd=cols*cw+padX*2,Ht=2*ch+padY;let s=`<rect width="${Wd}" height="${Ht}" fill="url(#gp)"/>`;let N="",LAB="";
+  DIV.forEach((d,i)=>{const nm=d[0],c=d[1],col=i%cols,row=Math.floor(i/cols);const cx=padX+col*cw+cw/2,cy=padY+row*ch+150;const np=PROJ[nm].length;const dr=20+np*1.4;
+   N+=ball(cx,cy,dr,c,.9);LAB+=`<text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">${np}</text>`;
+   LAB+=tlab(cx,cy-dr-9,nm.replace(' / ',' '),12.5,shade(c,.6),'middle')+tlab(cx,cy-dr+4,np+" projects",9,"#9a9a92",'middle',true);
+   const ppl=(PPL[nm]||[]).slice().sort((a,b)=>b[1]-a[1]);const n=ppl.length;
+   const span=Math.min(2*Math.PI*0.92, 0.7+n*0.34);        // wider fan as count grows
+   ppl.forEach((pp,j)=>{const frac=n===1?0.5:j/(n-1);const ang=Math.PI/2 - span/2 + span*frac;const ring=j%2;const rad=118+ring*44;
+    const[px,py]=P(cx,cy+14,rad,ang);const rr=6.5+(pp[1]-60)/6;
+    N+=ball(px,py,rr,GOLD,.92)+`<title>${pp[0]} — score ${pp[1]}</title>`;
+    LAB+=`<text x="${px}" y="${py+2.6}" text-anchor="middle" font-size="8" fill="#5a4600" font-weight="700">${pp[1]}</text>`;
+    LAB+=tlab(px,py+rr+9,pp[0],8.6,"#4a4a4a",'middle');});});
+  const leg=`<g font-family="-apple-system,sans-serif"><circle cx="${padX+14}" cy="30" r="8" fill="url(#${gid[GOLD]})"/><text x="${padX+30}" y="34" font-size="12.5" fill="#555">gold bubble = a Paramount decision-maker &nbsp;·&nbsp; size &amp; number = opportunity score (who to call first)</text></g>`;
+  return[s+leg+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB,`0 0 ${Wd} ${Ht}`,"each division with its decision-makers fanned out as gold bubbles — bigger = higher opportunity score"];}
+ const VIEWS={orbits,flow,board,overlap};
+ const KIND={
+  center:{t:"The company",d:"Paramount, the parent. Every division links back to it. The number is the total projects mapped this year (39)."},
+  division:{t:"Division",d:"A part of Paramount — a network, studio or platform (BET, Pluto, Pictures…). The number inside is how many marketing projects it ran. Bigger bubble = more work."},
+  project:{t:"Project",d:"One marketing campaign. Its colour tells you which division owns it. A solid bubble = High confidence in the research; a faded one = Medium confidence."},
+  vendor:{t:"Vendor / agency",d:"An outside company that actually made the work — an agency, production house, post house, platform or sponsor — coloured to match the division it served."},
+  person:{t:"Decision-maker",d:"A Paramount executive who approves or commissions the work, shown in gold. Its size and number are the opportunity score: how high a priority this person is for Versus to contact first."},
+  overlap:{t:"Shared vendor (bridge)",d:"A vendor used by more than one division. The split colours show which divisions overlap. These are the strategic bridges — a way into two clients at once."}
+ };
+ const oinfo=document.getElementById("oinfo"),okey=document.getElementById("okey");
+ okey.innerHTML=`<h4>What the bubbles mean</h4>
+  <div class="kr"><span class="kd" style="background:#242424"></span>Paramount (centre)</div>
+  <div class="kr"><span class="kd" style="background:#5566a8"></span>Division · number = # projects</div>
+  <div class="kr"><span class="kd" style="background:#8f6aa6;opacity:.55"></span>Project (faded = Medium confidence)</div>
+  <div class="kr"><span class="kd" style="background:#7fb8b3;opacity:.7"></span>Vendor / agency</div>
+  <div class="kr"><span class="kd" style="background:#e0a800"></span>Decision-maker (size = score)</div>
+  <div class="tip">Click any bubble to learn what it is.</div>`;
+ function showInfo(el){const k=el.getAttribute("data-k"),n=el.getAttribute("data-n"),x=el.getAttribute("data-x")||"",info=KIND[k];if(!info)return;
+  oinfo.innerHTML=`<button id="oclose">&times;</button><div class="ik">${info.t}</div><div class="iname">${n}</div>${x?`<div class="ix">${x}</div>`:""}<p>${info.d}</p>`;
+  oinfo.classList.add("open");document.getElementById("oclose").onclick=()=>oinfo.classList.remove("open");}
+ function wireInfo(v){okey.style.display=(v==="orbits")?"block":"none";oinfo.classList.remove("open");
+  svg.querySelectorAll("[data-k]").forEach(el=>{el.style.cursor="pointer";el.addEventListener("click",e=>{e.stopPropagation();showInfo(el);});});}
+ svg.addEventListener("click",e=>{if(e.target.tagName==="svg"||e.target.tagName==="rect")oinfo.classList.remove("open");});
+ function show(v){const[inner,vb,sub]=VIEWS[v]();svg.setAttribute("viewBox",vb);svg.innerHTML=DEFS+inner;document.getElementById("vsub").textContent=sub;document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));wireInfo(v);}
+ document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>show(b.dataset.v));
+ show("orbits");
+})();
+</script></body></html>

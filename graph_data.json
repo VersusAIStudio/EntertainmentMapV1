@@ -1,0 +1,2609 @@
+{
+ "company": "Paramount",
+ "divisions": {
+  "Paramount Pictures": "#e0564a",
+  "Paramount+ / DTC": "#4a9fe0",
+  "MTV / Brand Studio": "#c05ad0",
+  "Pluto TV": "#e0a24a",
+  "Paramount Advertising": "#5ad0a8",
+  "CBS": "#7d8fe0",
+  "Nickelodeon": "#e0d24a",
+  "BET": "#8a6bd0",
+  "Paramount Sports": "#5ad0d0",
+  "Other": "#8a8f9a"
+ },
+ "nodes": [
+  {
+   "id": "company::Paramount",
+   "label": "Paramount",
+   "type": "company",
+   "company": "Paramount"
+  },
+  {
+   "id": "division::Paramount Pictures",
+   "label": "Paramount Pictures",
+   "type": "division",
+   "company": "Paramount",
+   "color": "#e0564a"
+  },
+  {
+   "id": "division::Paramount+ / DTC",
+   "label": "Paramount+ / DTC",
+   "type": "division",
+   "company": "Paramount",
+   "color": "#4a9fe0"
+  },
+  {
+   "id": "division::MTV / Brand Studio",
+   "label": "MTV / Brand Studio",
+   "type": "division",
+   "company": "Paramount",
+   "color": "#c05ad0"
+  },
+  {
+   "id": "division::Pluto TV",
+   "label": "Pluto TV",
+   "type": "division",
+   "company": "Paramount",
+   "color": "#e0a24a"
+  },
+  {
+   "id": "division::Paramount Advertising",
+   "label": "Paramount Advertising",
+   "type": "division",
+   "company": "Paramount",
+   "color": "#5ad0a8"
+  },
+  {
+   "id": "division::CBS",
+   "label": "CBS",
+   "type": "division",
+   "company": "Paramount",
+   "color": "#7d8fe0"
+  },
+  {
+   "id": "division::Nickelodeon",
+   "label": "Nickelodeon",
+   "type": "division",
+   "company": "Paramount",
+   "color": "#e0d24a"
+  },
+  {
+   "id": "division::BET",
+   "label": "BET",
+   "type": "division",
+   "company": "Paramount",
+   "color": "#8a6bd0"
+  },
+  {
+   "id": "division::Paramount Sports",
+   "label": "Paramount Sports",
+   "type": "division",
+   "company": "Paramount",
+   "color": "#5ad0d0"
+  },
+  {
+   "id": "division::Other",
+   "label": "Other",
+   "type": "division",
+   "company": "Paramount",
+   "color": "#8a8f9a"
+  },
+  {
+   "id": "project::Pluto TV fall brand campaign",
+   "label": "Pluto TV fall brand campaign",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Pluto TV",
+   "tags": [
+    "Brand Campaign",
+    "Creative Development",
+    "Production"
+   ],
+   "confidence": "High",
+   "color": "#e0a24a"
+  },
+  {
+   "id": "project::Paramount+ UFC opener",
+   "label": "Paramount+ UFC opener",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "tags": [
+    "Title & Launch",
+    "Motion & VFX",
+    "Trailer & Spot"
+   ],
+   "confidence": "High",
+   "color": "#4a9fe0"
+  },
+  {
+   "id": "project::Mountain of Entertainment \u2013 rich 3D environment",
+   "label": "Mountain of Entertainment \u2013 rich 3D environment",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "tags": [
+    "Design & Identity",
+    "Motion & VFX",
+    "Digital & UX"
+   ],
+   "confidence": "High",
+   "color": "#4a9fe0"
+  },
+  {
+   "id": "project::Monsta \u2013 Times Square",
+   "label": "Monsta \u2013 Times Square",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Pluto TV",
+   "tags": [
+    "OOH & Print",
+    "Motion & VFX",
+    "Design & Identity"
+   ],
+   "confidence": "High",
+   "color": "#e0a24a"
+  },
+  {
+   "id": "project::SpongeBob on the Sphere \u2013 Super Bowl LVIII",
+   "label": "SpongeBob on the Sphere \u2013 Super Bowl LVIII",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Nickelodeon",
+   "tags": [
+    "Experiential & Events",
+    "Motion & VFX",
+    "Social & Creator"
+   ],
+   "confidence": "High",
+   "color": "#e0d24a"
+  },
+  {
+   "id": "project::You Can Count on Sundays",
+   "label": "You Can Count on Sundays",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Sports",
+   "tags": [
+    "360 / Integrated",
+    "Sports",
+    "Film & Branded Content"
+   ],
+   "confidence": "High",
+   "color": "#5ad0d0"
+  },
+  {
+   "id": "project::The Naked Gun \u2013 AV & digital campaign",
+   "label": "The Naked Gun \u2013 AV & digital campaign",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "tags": [
+    "Trailer & Spot",
+    "Social & Creator"
+   ],
+   "confidence": "High",
+   "color": "#e0564a"
+  },
+  {
+   "id": "project::The Naked Gun \u2013 OOH",
+   "label": "The Naked Gun \u2013 OOH",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "tags": [
+    "OOH & Print",
+    "Design & Identity"
+   ],
+   "confidence": "High",
+   "color": "#e0564a"
+  },
+  {
+   "id": "project::The Naked Gun x ESPN",
+   "label": "The Naked Gun x ESPN",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "tags": [
+    "Media & Sponsorship",
+    "Film & Branded Content",
+    "Sports"
+   ],
+   "confidence": "Medium",
+   "color": "#e0564a"
+  },
+  {
+   "id": "project::The Running Man x Liquid Death",
+   "label": "The Running Man x Liquid Death",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "tags": [
+    "Brand Integration",
+    "Social & Creator"
+   ],
+   "confidence": "High",
+   "color": "#e0564a"
+  },
+  {
+   "id": "project::The Running Man \u2013 Reddit interactive pilot",
+   "label": "The Running Man \u2013 Reddit interactive pilot",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "tags": [
+    "Interactive & Gaming"
+   ],
+   "confidence": "High",
+   "color": "#e0564a"
+  },
+  {
+   "id": "project::SpongeBob Movie: Search for SquarePants \u2013 intl social",
+   "label": "SpongeBob Movie: Search for SquarePants \u2013 intl social",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "tags": [
+    "Social & Creator",
+    "Design & Identity",
+    "Motion & VFX"
+   ],
+   "confidence": "High",
+   "color": "#e0564a"
+  },
+  {
+   "id": "project::SpongeBob Movie x Burger King",
+   "label": "SpongeBob Movie x Burger King",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "tags": [
+    "Consumer & Retail"
+   ],
+   "confidence": "Medium",
+   "color": "#e0564a"
+  },
+  {
+   "id": "project::Scream 7 \u2013 Discord playable experience",
+   "label": "Scream 7 \u2013 Discord playable experience",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "tags": [
+    "Interactive & Gaming",
+    "Performance & Commerce"
+   ],
+   "confidence": "High",
+   "color": "#e0564a"
+  },
+  {
+   "id": "project::Scream 7 \u2013 Flighthouse social",
+   "label": "Scream 7 \u2013 Flighthouse social",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "tags": [
+    "Social & Creator"
+   ],
+   "confidence": "Medium",
+   "color": "#e0564a"
+  },
+  {
+   "id": "project::Scream 7 \u2013 Big Game spot",
+   "label": "Scream 7 \u2013 Big Game spot",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "tags": [
+    "Trailer & Spot",
+    "Media & Sponsorship"
+   ],
+   "confidence": "Medium",
+   "color": "#e0564a"
+  },
+  {
+   "id": "project::Tracker stays \u2013 AutoCamp & Hilton Honors",
+   "label": "Tracker stays \u2013 AutoCamp & Hilton Honors",
+   "type": "project",
+   "company": "Paramount",
+   "division": "CBS",
+   "tags": [
+    "Experiential & Events",
+    "Media & Sponsorship"
+   ],
+   "confidence": "High",
+   "color": "#7d8fe0"
+  },
+  {
+   "id": "project::NCIS Tuesdays of Honor: A Salute to Service",
+   "label": "NCIS Tuesdays of Honor: A Salute to Service",
+   "type": "project",
+   "company": "Paramount",
+   "division": "CBS",
+   "tags": [
+    "Brand Campaign",
+    "Title & Launch"
+   ],
+   "confidence": "High",
+   "color": "#7d8fe0"
+  },
+  {
+   "id": "project::BET Media House",
+   "label": "BET Media House",
+   "type": "project",
+   "company": "Paramount",
+   "division": "BET",
+   "tags": [
+    "Film & Branded Content",
+    "Live & Tentpole"
+   ],
+   "confidence": "High",
+   "color": "#8a6bd0"
+  },
+  {
+   "id": "project::Black + Iconic Soiree",
+   "label": "Black + Iconic Soiree",
+   "type": "project",
+   "company": "Paramount",
+   "division": "BET",
+   "tags": [
+    "Experiential & Events",
+    "Film & Branded Content"
+   ],
+   "confidence": "High",
+   "color": "#8a6bd0"
+  },
+  {
+   "id": "project::BET Awards 2026",
+   "label": "BET Awards 2026",
+   "type": "project",
+   "company": "Paramount",
+   "division": "BET",
+   "tags": [
+    "Live & Tentpole",
+    "Brand Integration",
+    "Trailer & Spot"
+   ],
+   "confidence": "High",
+   "color": "#8a6bd0"
+  },
+  {
+   "id": "project::Nickelodeon Fun-ergy Factory \u2013 Comic-Con",
+   "label": "Nickelodeon Fun-ergy Factory \u2013 Comic-Con",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Nickelodeon",
+   "tags": [
+    "Experiential & Events",
+    "Interactive & Gaming",
+    "Social & Creator"
+   ],
+   "confidence": "High",
+   "color": "#e0d24a"
+  },
+  {
+   "id": "project::2025 MTV VMAs \u2013 partner platform",
+   "label": "2025 MTV VMAs \u2013 partner platform",
+   "type": "project",
+   "company": "Paramount",
+   "division": "MTV / Brand Studio",
+   "tags": [
+    "Live & Tentpole",
+    "Film & Branded Content",
+    "Brand Integration"
+   ],
+   "confidence": "High",
+   "color": "#c05ad0"
+  },
+  {
+   "id": "project::Dunkin x VMAs \u2013 Megan Stalter stunt",
+   "label": "Dunkin x VMAs \u2013 Megan Stalter stunt",
+   "type": "project",
+   "company": "Paramount",
+   "division": "MTV / Brand Studio",
+   "tags": [
+    "Film & Branded Content",
+    "Social & Creator"
+   ],
+   "confidence": "High",
+   "color": "#c05ad0"
+  },
+  {
+   "id": "project::Bacardi x VMAs",
+   "label": "Bacardi x VMAs",
+   "type": "project",
+   "company": "Paramount",
+   "division": "MTV / Brand Studio",
+   "tags": [
+    "Media & Sponsorship",
+    "Live & Tentpole"
+   ],
+   "confidence": "High",
+   "color": "#c05ad0"
+  },
+  {
+   "id": "project::Burger King x VMAs",
+   "label": "Burger King x VMAs",
+   "type": "project",
+   "company": "Paramount",
+   "division": "MTV / Brand Studio",
+   "tags": [
+    "Trailer & Spot",
+    "Design & Identity",
+    "Editorial & Post"
+   ],
+   "confidence": "High",
+   "color": "#c05ad0"
+  },
+  {
+   "id": "project::Red Bull x VMAs / MrBeast activation",
+   "label": "Red Bull x VMAs / MrBeast activation",
+   "type": "project",
+   "company": "Paramount",
+   "division": "MTV / Brand Studio",
+   "tags": [
+    "Experiential & Events",
+    "Social & Creator",
+    "Film & Branded Content"
+   ],
+   "confidence": "Medium",
+   "color": "#c05ad0"
+  },
+  {
+   "id": "project::Paramount Ads Manager Agency Partner Program",
+   "label": "Paramount Ads Manager Agency Partner Program",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Advertising",
+   "tags": [
+    "Performance & Commerce",
+    "Creative Development"
+   ],
+   "confidence": "High",
+   "color": "#5ad0a8"
+  },
+  {
+   "id": "project::Performance Multiplier with Taboola",
+   "label": "Performance Multiplier with Taboola",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Advertising",
+   "tags": [
+    "Performance & Commerce"
+   ],
+   "confidence": "High",
+   "color": "#5ad0a8"
+  },
+  {
+   "id": "project::Dynamic fixed ad units with Omnicom Media",
+   "label": "Dynamic fixed ad units with Omnicom Media",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Advertising",
+   "tags": [
+    "Performance & Commerce",
+    "Media & Sponsorship"
+   ],
+   "confidence": "High",
+   "color": "#5ad0a8"
+  },
+  {
+   "id": "project::Find Your Mountain",
+   "label": "Find Your Mountain",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "tags": [
+    "Brand Campaign",
+    "Film & Branded Content"
+   ],
+   "confidence": "High",
+   "color": "#4a9fe0"
+  },
+  {
+   "id": "project::Nobody Watches Like U.S.",
+   "label": "Nobody Watches Like U.S.",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Sports",
+   "tags": [
+    "Film & Branded Content",
+    "Sports",
+    "Brand Campaign"
+   ],
+   "confidence": "High",
+   "color": "#5ad0d0"
+  },
+  {
+   "id": "project::Yellowjackets FYC",
+   "label": "Yellowjackets FYC",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "tags": [
+    "Editorial & Post",
+    "Design & Identity"
+   ],
+   "confidence": "High",
+   "color": "#4a9fe0"
+  },
+  {
+   "id": "project::A Mountain of Entertainment \u2013 extended platform",
+   "label": "A Mountain of Entertainment \u2013 extended platform",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "tags": [
+    "Brand Campaign",
+    "Motion & VFX",
+    "Film & Branded Content",
+    "Social & Creator"
+   ],
+   "confidence": "High",
+   "color": "#4a9fe0"
+  },
+  {
+   "id": "project::Killer Classics \u2013 Halloween stunt",
+   "label": "Killer Classics \u2013 Halloween stunt",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Other",
+   "tags": [
+    "Motion & VFX",
+    "Trailer & Spot",
+    "Audio"
+   ],
+   "confidence": "High",
+   "color": "#8a8f9a"
+  },
+  {
+   "id": "project::Star Trek: Strange New Worlds \u2013 Worlds Collide",
+   "label": "Star Trek: Strange New Worlds \u2013 Worlds Collide",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "tags": [
+    "Title & Launch",
+    "360 / Integrated"
+   ],
+   "confidence": "High",
+   "color": "#4a9fe0"
+  },
+  {
+   "id": "project::Team Moms",
+   "label": "Team Moms",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount Sports",
+   "tags": [
+    "Film & Branded Content",
+    "Sports",
+    "Media & Sponsorship"
+   ],
+   "confidence": "Medium",
+   "color": "#5ad0d0"
+  },
+  {
+   "id": "project::Feel the Free",
+   "label": "Feel the Free",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Pluto TV",
+   "tags": [
+    "Brand Campaign",
+    "Film & Branded Content"
+   ],
+   "confidence": "Medium",
+   "color": "#e0a24a"
+  },
+  {
+   "id": "project::Dutton Ranch at SXSW",
+   "label": "Dutton Ranch at SXSW",
+   "type": "project",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "tags": [
+    "Experiential & Events",
+    "Media & Sponsorship"
+   ],
+   "confidence": "High",
+   "color": "#4a9fe0"
+  },
+  {
+   "id": "player::72andSunny",
+   "label": "72andSunny",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Agency \u2013 lead creative / sports",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Sports"
+   ]
+  },
+  {
+   "id": "player::AllCreativeMedia",
+   "label": "AllCreativeMedia",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Agency \u2013 SMB CTV / Ads Manager partner",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Advertising"
+   ]
+  },
+  {
+   "id": "player::Arcade Edit",
+   "label": "Arcade Edit",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Post / editorial",
+   "repeat": true,
+   "sig": "#7affc0",
+   "divisions": [
+    "Paramount+ / DTC"
+   ]
+  },
+  {
+   "id": "player::Artists Equity",
+   "label": "Artists Equity",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Production collaborator (verify)",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "MTV / Brand Studio"
+   ]
+  },
+  {
+   "id": "player::AutoCamp",
+   "label": "AutoCamp",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Hospitality / experiential partner",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "CBS"
+   ]
+  },
+  {
+   "id": "player::Bacardi",
+   "label": "Bacardi",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Advertiser brand",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "MTV / Brand Studio"
+   ]
+  },
+  {
+   "id": "player::Bark Bark",
+   "label": "Bark Bark",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Agency \u2013 branded content / integrated studio",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "MTV / Brand Studio"
+   ]
+  },
+  {
+   "id": "player::Barking Owl",
+   "label": "Barking Owl",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Music / audio",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Sports"
+   ]
+  },
+  {
+   "id": "player::Burger King",
+   "label": "Burger King",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Advertiser brand / retail partner",
+   "repeat": true,
+   "sig": "#ff9d4a",
+   "divisions": [
+    "MTV / Brand Studio",
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "player::Discord",
+   "label": "Discord",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Platform",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "player::Droga5",
+   "label": "Droga5",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Agency \u2013 brand platform / lead creative",
+   "repeat": true,
+   "sig": "#b06bff",
+   "divisions": [
+    "Paramount+ / DTC"
+   ]
+  },
+  {
+   "id": "player::Dunkin",
+   "label": "Dunkin",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Advertiser brand",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "MTV / Brand Studio"
+   ]
+  },
+  {
+   "id": "player::ESPN",
+   "label": "ESPN",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Media partner",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "player::Fairmont Austin",
+   "label": "Fairmont Austin",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Hospitality / experiential partner",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount+ / DTC"
+   ]
+  },
+  {
+   "id": "player::Flighthouse Media",
+   "label": "Flighthouse Media",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Platform-native social",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "player::Gilead",
+   "label": "Gilead",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Sponsor",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "BET"
+   ]
+  },
+  {
+   "id": "player::Gravy Films",
+   "label": "Gravy Films",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Production \u2013 live-action",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "MTV / Brand Studio"
+   ]
+  },
+  {
+   "id": "player::Heard City",
+   "label": "Heard City",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Music / audio / sound",
+   "repeat": true,
+   "sig": "#6bd0ff",
+   "divisions": [
+    "Paramount+ / DTC"
+   ]
+  },
+  {
+   "id": "player::Hilton Honors",
+   "label": "Hilton Honors",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Loyalty partner",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "CBS"
+   ]
+  },
+  {
+   "id": "player::Human",
+   "label": "Human",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Post / design specialist",
+   "repeat": true,
+   "sig": "#a0e060",
+   "divisions": [
+    "Paramount+ / DTC"
+   ]
+  },
+  {
+   "id": "player::ITV America",
+   "label": "ITV America",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Production company",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Sports"
+   ]
+  },
+  {
+   "id": "player::Iconic",
+   "label": "Iconic",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Post / editorial",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Sports"
+   ]
+  },
+  {
+   "id": "player::Jesse Collins Entertainment",
+   "label": "Jesse Collins Entertainment",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Production \u2013 live tentpole",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "BET"
+   ]
+  },
+  {
+   "id": "player::Kim Kardashian Productions",
+   "label": "Kim Kardashian Productions",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Celebrity production company",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Sports"
+   ]
+  },
+  {
+   "id": "player::Liquid Death",
+   "label": "Liquid Death",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Brand / creative engine",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "player::Midnight Oil (Imagine Group)",
+   "label": "Midnight Oil (Imagine Group)",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "OOH / print / design",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "player::New Children's Museum",
+   "label": "New Children's Museum",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Venue / community partner",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Nickelodeon"
+   ]
+  },
+  {
+   "id": "player::New Path Digital",
+   "label": "New Path Digital",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Agency \u2013 SMB CTV / Ads Manager partner",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Advertising"
+   ]
+  },
+  {
+   "id": "player::O Positive",
+   "label": "O Positive",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Production \u2013 live-action",
+   "repeat": true,
+   "sig": "#5ad0ff",
+   "divisions": [
+    "Paramount+ / DTC",
+    "Pluto TV"
+   ]
+  },
+  {
+   "id": "player::Omnicom Media",
+   "label": "Omnicom Media",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Agency / media product partner",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Advertising"
+   ]
+  },
+  {
+   "id": "player::Once Upon a Time LA",
+   "label": "Once Upon a Time LA",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Agency \u2013 entertainment design / social",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "player::P&G",
+   "label": "P&G",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Sponsor",
+   "repeat": true,
+   "sig": "#8fd0e0",
+   "divisions": [
+    "BET"
+   ]
+  },
+  {
+   "id": "player::Parliament",
+   "label": "Parliament",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Production / post specialist",
+   "repeat": true,
+   "sig": "#e0a0ff",
+   "divisions": [
+    "Paramount+ / DTC"
+   ]
+  },
+  {
+   "id": "player::Rare Medium",
+   "label": "Rare Medium",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Design / production specialist",
+   "repeat": true,
+   "sig": "#d0ff6b",
+   "divisions": [
+    "Paramount+ / DTC"
+   ]
+  },
+  {
+   "id": "player::Red Bull",
+   "label": "Red Bull",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Advertiser brand",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "MTV / Brand Studio"
+   ]
+  },
+  {
+   "id": "player::Reddit",
+   "label": "Reddit",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Platform / interactive media",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "player::Smuggler",
+   "label": "Smuggler",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Production company (dir. Tom Hooper)",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Sports"
+   ]
+  },
+  {
+   "id": "player::Soundtree",
+   "label": "Soundtree",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Music",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Sports"
+   ]
+  },
+  {
+   "id": "player::Spark Foundry / Publicis",
+   "label": "Spark Foundry / Publicis",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Agency \u2013 media / platform activation",
+   "repeat": true,
+   "sig": "#ff7ab0",
+   "divisions": [
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "player::Stink Films / Traktor",
+   "label": "Stink Films / Traktor",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Production company / director collective",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount+ / DTC"
+   ]
+  },
+  {
+   "id": "player::TCO London",
+   "label": "TCO London",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Agency \u2013 editorial / FYC",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount+ / DTC"
+   ]
+  },
+  {
+   "id": "player::Taboola",
+   "label": "Taboola",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Ad-tech partner",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Advertising"
+   ]
+  },
+  {
+   "id": "player::Those Beyond",
+   "label": "Those Beyond",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Interactive / games",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "player::Titmouse",
+   "label": "Titmouse",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Animation",
+   "repeat": true,
+   "sig": "#ff6b6b",
+   "divisions": [
+    "Paramount+ / DTC"
+   ]
+  },
+  {
+   "id": "player::Trafik",
+   "label": "Trafik",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "VFX & color",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Sports"
+   ]
+  },
+  {
+   "id": "player::Versus",
+   "label": "Versus",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Home team \u2013 creative/production/post",
+   "repeat": true,
+   "sig": "#ffd24a",
+   "divisions": [
+    "Nickelodeon",
+    "Paramount+ / DTC",
+    "Pluto TV"
+   ]
+  },
+  {
+   "id": "player::Workshop Creative",
+   "label": "Workshop Creative",
+   "type": "player",
+   "company": "Paramount",
+   "ptype": "Agency \u2013 theatrical AV / digital",
+   "repeat": false,
+   "sig": null,
+   "divisions": [
+    "Paramount Pictures"
+   ]
+  },
+  {
+   "id": "person::Ariana Ringstrom",
+   "label": "Ariana Ringstrom",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "Manager, Production Project Management, P+",
+   "role": "Scoping / vendor coordination",
+   "confidence": "Medium",
+   "route": "Named in Versus contact list",
+   "score": 85
+  },
+  {
+   "id": "person::Becca Schader",
+   "label": "Becca Schader",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "SVP, Creative Marketing, Paramount+",
+   "role": "Creative budget owner / likely DM",
+   "confidence": "High",
+   "route": "No internal contact evidence",
+   "score": 81
+  },
+  {
+   "id": "person::Cindy Holland",
+   "label": "Cindy Holland",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "Chair, Direct-to-Consumer",
+   "role": "Executive sponsor / likely DM",
+   "confidence": "High",
+   "route": "No direct route",
+   "score": null
+  },
+  {
+   "id": "person::Connie Orlando",
+   "label": "Connie Orlando",
+   "type": "person",
+   "company": "Paramount",
+   "division": "BET",
+   "title": "Internal executive producer, BET",
+   "role": "Confirmed stakeholder",
+   "confidence": "High",
+   "route": "Named in public project credits",
+   "score": null
+  },
+  {
+   "id": "person::Dara Driscoll",
+   "label": "Dara Driscoll",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "Campaign Project Manager, Paramount+",
+   "role": "Scoping / vendor coordination",
+   "confidence": "Medium",
+   "route": "Named in Versus contact list",
+   "score": 85
+  },
+  {
+   "id": "person::Dario Spina",
+   "label": "Dario Spina",
+   "type": "person",
+   "company": "Paramount",
+   "division": "MTV / Brand Studio",
+   "title": "CMO, Paramount Brand Studio",
+   "role": "Senior sponsor / likely DM",
+   "confidence": "Medium",
+   "route": "No direct warm evidence",
+   "score": 76
+  },
+  {
+   "id": "person::David Ellison",
+   "label": "David Ellison",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Enterprise",
+   "title": "Chairman & CEO",
+   "role": "Executive sponsor / likely DM",
+   "confidence": "High",
+   "route": "No route identified",
+   "score": null
+  },
+  {
+   "id": "person::Domenic DiMeglio",
+   "label": "Domenic DiMeglio",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "EVP, CMO & Chief Data Officer, Streaming",
+   "role": "Senior budget owner / likely DM",
+   "confidence": "Medium",
+   "route": "Senior route; no warm evidence",
+   "score": 74
+  },
+  {
+   "id": "person::Emmanuelle Leboeuf",
+   "label": "Emmanuelle Leboeuf",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "Creative Director, Paramount+",
+   "role": "Day-to-day creative buyer / confirmed stakeholder",
+   "confidence": "High",
+   "route": "Named in Versus contact list",
+   "score": 91
+  },
+  {
+   "id": "person::Eve Seiter",
+   "label": "Eve Seiter",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "Senior Campaign Manager, Paramount",
+   "role": "Operational recommender / confirmed stakeholder",
+   "confidence": "Medium",
+   "route": "Named in Versus contact list",
+   "score": 85
+  },
+  {
+   "id": "person::George Cheeks",
+   "label": "George Cheeks",
+   "type": "person",
+   "company": "Paramount",
+   "division": "CBS",
+   "title": "Chair, TV Media",
+   "role": "Executive sponsor / likely DM",
+   "confidence": "High",
+   "route": "No route identified",
+   "score": null
+  },
+  {
+   "id": "person::Jay Askinasi",
+   "label": "Jay Askinasi",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount Advertising",
+   "title": "Chief Revenue Officer",
+   "role": "Exec sponsor (Brand Studio/Ads) / likely DM",
+   "confidence": "High",
+   "route": "No direct route",
+   "score": null
+  },
+  {
+   "id": "person::Jesse Sisgold",
+   "label": "Jesse Sisgold",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount Sports",
+   "title": "Leader, Paramount Sports Entertainment",
+   "role": "Emerging budget owner / likely DM",
+   "confidence": "Medium",
+   "route": "No direct route",
+   "score": 73
+  },
+  {
+   "id": "person::Josh Goldstine",
+   "label": "Josh Goldstine",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount Pictures",
+   "title": "President, Global Marketing & Distribution",
+   "role": "Executive budget owner / likely DM",
+   "confidence": "Medium",
+   "route": "No direct route",
+   "score": 69
+  },
+  {
+   "id": "person::Josh Silverman",
+   "label": "Josh Silverman",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Other",
+   "title": "President, Global Products & Experiences",
+   "role": "Executive sponsor / likely DM",
+   "confidence": "High",
+   "route": "No direct route",
+   "score": 67
+  },
+  {
+   "id": "person::Katherine Allen",
+   "label": "Katherine Allen",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "Awards marketing (Yellowjackets FYC)",
+   "role": "Confirmed stakeholder",
+   "confidence": "Medium",
+   "route": "Public project credit",
+   "score": null
+  },
+  {
+   "id": "person::Katherine Kelly",
+   "label": "Katherine Kelly",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Pluto TV",
+   "title": "Senior Director, Campaign Management, Pluto TV",
+   "role": "Active-account route / likely DM",
+   "confidence": "Medium",
+   "route": "Current Versus work in same team",
+   "score": 96
+  },
+  {
+   "id": "person::Kelly Dunne",
+   "label": "Kelly Dunne",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount Sports",
+   "title": "EVP, CBS Sports Marketing",
+   "role": "Sports budget owner / confirmed stakeholder",
+   "confidence": "High",
+   "route": "Campaign route; no warm evidence",
+   "score": 81
+  },
+  {
+   "id": "person::Laura Kane",
+   "label": "Laura Kane",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "Senior Creative Director, Paramount+",
+   "role": "Day-to-day creative buyer / likely DM",
+   "confidence": "Medium",
+   "route": "Named in Versus contact list",
+   "score": 91
+  },
+  {
+   "id": "person::Liza Burnett Fefferman",
+   "label": "Liza Burnett Fefferman",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "Awards/comms marketing (Yellowjackets FYC)",
+   "role": "Confirmed stakeholder",
+   "confidence": "Medium",
+   "route": "Public project credit",
+   "score": null
+  },
+  {
+   "id": "person::Matt Hernandez",
+   "label": "Matt Hernandez",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "SVP, Head of Design, Paramount Streaming",
+   "role": "Senior creative buyer / likely DM",
+   "confidence": "High",
+   "route": "Named in Versus contact list",
+   "score": 93
+  },
+  {
+   "id": "person::Matthew Newcomb",
+   "label": "Matthew Newcomb",
+   "type": "person",
+   "company": "Paramount",
+   "division": "MTV / Brand Studio",
+   "title": "SVP, Integrated Marketing & Activation",
+   "role": "Brief owner / confirmed stakeholder",
+   "confidence": "High",
+   "route": "No direct warm evidence",
+   "score": 81
+  },
+  {
+   "id": "person::Michael Benson",
+   "label": "Michael Benson",
+   "type": "person",
+   "company": "Paramount",
+   "division": "CBS",
+   "title": "President & CMO, TV Media",
+   "role": "Portfolio budget owner / confirmed commissioner",
+   "confidence": "High",
+   "route": "No direct warm evidence",
+   "score": 76
+  },
+  {
+   "id": "person::Michelle Garcia",
+   "label": "Michelle Garcia",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "EVP, Consumer Marketing, DTC",
+   "role": "Budget owner / likely DM",
+   "confidence": "High",
+   "route": "No internal contact evidence",
+   "score": 81
+  },
+  {
+   "id": "person::Rene Ridinger",
+   "label": "Rene Ridinger",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "Awards marketing (Yellowjackets FYC)",
+   "role": "Confirmed stakeholder",
+   "confidence": "Medium",
+   "route": "Public project credit",
+   "score": null
+  },
+  {
+   "id": "person::Rob Stecklow",
+   "label": "Rob Stecklow",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount Sports",
+   "title": "Senior sports/news marketing stakeholder, P+",
+   "role": "Confirmed stakeholder",
+   "confidence": "Medium",
+   "route": "Named in public project credits",
+   "score": null
+  },
+  {
+   "id": "person::Sabrina Caluori",
+   "label": "Sabrina Caluori",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Nickelodeon",
+   "title": "Senior creative executive, Nickelodeon",
+   "role": "Prior Versus stakeholder / confirmed stakeholder",
+   "confidence": "Medium",
+   "route": "Public prior Versus collaboration",
+   "score": 86
+  },
+  {
+   "id": "person::Shawn Silverman",
+   "label": "Shawn Silverman",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "SVP, Global Head of Title Marketing, P+",
+   "role": "Title budget owner / confirmed commissioner",
+   "confidence": "High",
+   "route": "No internal contact evidence",
+   "score": 81
+  },
+  {
+   "id": "person::Terry Minogue",
+   "label": "Terry Minogue",
+   "type": "person",
+   "company": "Paramount",
+   "division": "Paramount+ / DTC",
+   "title": "Paramount+ marketing leader (as credited)",
+   "role": "Named stakeholder from project evidence",
+   "confidence": "Medium",
+   "route": "Named in public project credits",
+   "score": null
+  },
+  {
+   "id": "person::Tiyale Hayes",
+   "label": "Tiyale Hayes",
+   "type": "person",
+   "company": "Paramount",
+   "division": "BET",
+   "title": "EVP, Marketing & Audience Development",
+   "role": "Portfolio budget owner / confirmed commissioner",
+   "confidence": "High",
+   "route": "No direct warm evidence",
+   "score": 75
+  }
+ ],
+ "links": [
+  {
+   "source": "company::Paramount",
+   "target": "division::Paramount Pictures",
+   "rel": "hierarchy"
+  },
+  {
+   "source": "company::Paramount",
+   "target": "division::Paramount+ / DTC",
+   "rel": "hierarchy"
+  },
+  {
+   "source": "company::Paramount",
+   "target": "division::MTV / Brand Studio",
+   "rel": "hierarchy"
+  },
+  {
+   "source": "company::Paramount",
+   "target": "division::Pluto TV",
+   "rel": "hierarchy"
+  },
+  {
+   "source": "company::Paramount",
+   "target": "division::Paramount Advertising",
+   "rel": "hierarchy"
+  },
+  {
+   "source": "company::Paramount",
+   "target": "division::CBS",
+   "rel": "hierarchy"
+  },
+  {
+   "source": "company::Paramount",
+   "target": "division::Nickelodeon",
+   "rel": "hierarchy"
+  },
+  {
+   "source": "company::Paramount",
+   "target": "division::BET",
+   "rel": "hierarchy"
+  },
+  {
+   "source": "company::Paramount",
+   "target": "division::Paramount Sports",
+   "rel": "hierarchy"
+  },
+  {
+   "source": "company::Paramount",
+   "target": "division::Other",
+   "rel": "hierarchy"
+  },
+  {
+   "source": "division::Pluto TV",
+   "target": "project::Pluto TV fall brand campaign",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Pluto TV fall brand campaign",
+   "target": "player::Versus",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Pluto TV fall brand campaign",
+   "target": "person::Katherine Kelly",
+   "rel": "credited"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "project::Paramount+ UFC opener",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Paramount+ UFC opener",
+   "target": "player::Versus",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "project::Mountain of Entertainment \u2013 rich 3D environment",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Mountain of Entertainment \u2013 rich 3D environment",
+   "target": "player::Versus",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Mountain of Entertainment \u2013 rich 3D environment",
+   "target": "player::Droga5",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Pluto TV",
+   "target": "project::Monsta \u2013 Times Square",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Monsta \u2013 Times Square",
+   "target": "player::Versus",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Nickelodeon",
+   "target": "project::SpongeBob on the Sphere \u2013 Super Bowl LVIII",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::SpongeBob on the Sphere \u2013 Super Bowl LVIII",
+   "target": "player::Versus",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::SpongeBob on the Sphere \u2013 Super Bowl LVIII",
+   "target": "person::Sabrina Caluori",
+   "rel": "credited"
+  },
+  {
+   "source": "division::Paramount Sports",
+   "target": "project::You Can Count on Sundays",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::You Can Count on Sundays",
+   "target": "person::Kelly Dunne",
+   "rel": "credited"
+  },
+  {
+   "source": "project::You Can Count on Sundays",
+   "target": "person::Michael Benson",
+   "rel": "credited"
+  },
+  {
+   "source": "project::You Can Count on Sundays",
+   "target": "person::Terry Minogue",
+   "rel": "credited"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "project::The Naked Gun \u2013 AV & digital campaign",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::The Naked Gun \u2013 AV & digital campaign",
+   "target": "player::Workshop Creative",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::The Naked Gun \u2013 AV & digital campaign",
+   "target": "person::Josh Goldstine",
+   "rel": "credited"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "project::The Naked Gun \u2013 OOH",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::The Naked Gun \u2013 OOH",
+   "target": "player::Midnight Oil (Imagine Group)",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "project::The Naked Gun x ESPN",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::The Naked Gun x ESPN",
+   "target": "player::ESPN",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "project::The Running Man x Liquid Death",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::The Running Man x Liquid Death",
+   "target": "player::Liquid Death",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "project::The Running Man \u2013 Reddit interactive pilot",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::The Running Man \u2013 Reddit interactive pilot",
+   "target": "player::Spark Foundry / Publicis",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::The Running Man \u2013 Reddit interactive pilot",
+   "target": "player::Reddit",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "project::SpongeBob Movie: Search for SquarePants \u2013 intl social",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::SpongeBob Movie: Search for SquarePants \u2013 intl social",
+   "target": "player::Once Upon a Time LA",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "project::SpongeBob Movie x Burger King",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::SpongeBob Movie x Burger King",
+   "target": "player::Burger King",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "project::Scream 7 \u2013 Discord playable experience",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Scream 7 \u2013 Discord playable experience",
+   "target": "player::Spark Foundry / Publicis",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Scream 7 \u2013 Discord playable experience",
+   "target": "player::Discord",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Scream 7 \u2013 Discord playable experience",
+   "target": "player::Those Beyond",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "project::Scream 7 \u2013 Flighthouse social",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Scream 7 \u2013 Flighthouse social",
+   "target": "player::Flighthouse Media",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "project::Scream 7 \u2013 Big Game spot",
+   "rel": "commissions"
+  },
+  {
+   "source": "division::CBS",
+   "target": "project::Tracker stays \u2013 AutoCamp & Hilton Honors",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Tracker stays \u2013 AutoCamp & Hilton Honors",
+   "target": "player::AutoCamp",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Tracker stays \u2013 AutoCamp & Hilton Honors",
+   "target": "player::Hilton Honors",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Tracker stays \u2013 AutoCamp & Hilton Honors",
+   "target": "person::Michael Benson",
+   "rel": "credited"
+  },
+  {
+   "source": "division::CBS",
+   "target": "project::NCIS Tuesdays of Honor: A Salute to Service",
+   "rel": "commissions"
+  },
+  {
+   "source": "division::BET",
+   "target": "project::BET Media House",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::BET Media House",
+   "target": "player::P&G",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::BET Media House",
+   "target": "person::Tiyale Hayes",
+   "rel": "credited"
+  },
+  {
+   "source": "division::BET",
+   "target": "project::Black + Iconic Soiree",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Black + Iconic Soiree",
+   "target": "player::Gilead",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Black + Iconic Soiree",
+   "target": "player::P&G",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Black + Iconic Soiree",
+   "target": "person::Tiyale Hayes",
+   "rel": "credited"
+  },
+  {
+   "source": "division::BET",
+   "target": "project::BET Awards 2026",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::BET Awards 2026",
+   "target": "player::Jesse Collins Entertainment",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::BET Awards 2026",
+   "target": "person::Connie Orlando",
+   "rel": "credited"
+  },
+  {
+   "source": "project::BET Awards 2026",
+   "target": "person::Tiyale Hayes",
+   "rel": "credited"
+  },
+  {
+   "source": "division::Nickelodeon",
+   "target": "project::Nickelodeon Fun-ergy Factory \u2013 Comic-Con",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Nickelodeon Fun-ergy Factory \u2013 Comic-Con",
+   "target": "player::New Children's Museum",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::MTV / Brand Studio",
+   "target": "project::2025 MTV VMAs \u2013 partner platform",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::2025 MTV VMAs \u2013 partner platform",
+   "target": "person::Dario Spina",
+   "rel": "credited"
+  },
+  {
+   "source": "project::2025 MTV VMAs \u2013 partner platform",
+   "target": "person::Matthew Newcomb",
+   "rel": "credited"
+  },
+  {
+   "source": "division::MTV / Brand Studio",
+   "target": "project::Dunkin x VMAs \u2013 Megan Stalter stunt",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Dunkin x VMAs \u2013 Megan Stalter stunt",
+   "target": "player::Dunkin",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Dunkin x VMAs \u2013 Megan Stalter stunt",
+   "target": "player::Gravy Films",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Dunkin x VMAs \u2013 Megan Stalter stunt",
+   "target": "player::Artists Equity",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::MTV / Brand Studio",
+   "target": "project::Bacardi x VMAs",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Bacardi x VMAs",
+   "target": "player::Bacardi",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Bacardi x VMAs",
+   "target": "person::Matthew Newcomb",
+   "rel": "credited"
+  },
+  {
+   "source": "division::MTV / Brand Studio",
+   "target": "project::Burger King x VMAs",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Burger King x VMAs",
+   "target": "player::Bark Bark",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Burger King x VMAs",
+   "target": "player::Burger King",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::MTV / Brand Studio",
+   "target": "project::Red Bull x VMAs / MrBeast activation",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Red Bull x VMAs / MrBeast activation",
+   "target": "player::Red Bull",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Red Bull x VMAs / MrBeast activation",
+   "target": "person::Dario Spina",
+   "rel": "credited"
+  },
+  {
+   "source": "division::Paramount Advertising",
+   "target": "project::Paramount Ads Manager Agency Partner Program",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Paramount Ads Manager Agency Partner Program",
+   "target": "player::AllCreativeMedia",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Paramount Ads Manager Agency Partner Program",
+   "target": "player::New Path Digital",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Advertising",
+   "target": "project::Performance Multiplier with Taboola",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Performance Multiplier with Taboola",
+   "target": "player::Taboola",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Advertising",
+   "target": "project::Dynamic fixed ad units with Omnicom Media",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Dynamic fixed ad units with Omnicom Media",
+   "target": "player::Omnicom Media",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "project::Find Your Mountain",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Find Your Mountain",
+   "target": "player::Droga5",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Find Your Mountain",
+   "target": "player::Stink Films / Traktor",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Find Your Mountain",
+   "target": "player::Arcade Edit",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount Sports",
+   "target": "project::Nobody Watches Like U.S.",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Nobody Watches Like U.S.",
+   "target": "player::72andSunny",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Nobody Watches Like U.S.",
+   "target": "player::Smuggler",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Nobody Watches Like U.S.",
+   "target": "player::Trafik",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Nobody Watches Like U.S.",
+   "target": "player::Iconic",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Nobody Watches Like U.S.",
+   "target": "player::Barking Owl",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Nobody Watches Like U.S.",
+   "target": "player::Soundtree",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Nobody Watches Like U.S.",
+   "target": "person::Rob Stecklow",
+   "rel": "credited"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "project::Yellowjackets FYC",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Yellowjackets FYC",
+   "target": "player::TCO London",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Yellowjackets FYC",
+   "target": "person::Liza Burnett Fefferman",
+   "rel": "credited"
+  },
+  {
+   "source": "project::Yellowjackets FYC",
+   "target": "person::Rene Ridinger",
+   "rel": "credited"
+  },
+  {
+   "source": "project::Yellowjackets FYC",
+   "target": "person::Katherine Allen",
+   "rel": "credited"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "project::A Mountain of Entertainment \u2013 extended platform",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "player::Droga5",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "player::O Positive",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "player::Arcade Edit",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "player::Human",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "player::Parliament",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "player::Titmouse",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "player::Heard City",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "player::Rare Medium",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "person::Domenic DiMeglio",
+   "rel": "credited"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "person::Terry Minogue",
+   "rel": "credited"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "person::Matt Hernandez",
+   "rel": "credited"
+  },
+  {
+   "source": "project::A Mountain of Entertainment \u2013 extended platform",
+   "target": "person::Emmanuelle Leboeuf",
+   "rel": "credited"
+  },
+  {
+   "source": "division::Other",
+   "target": "project::Killer Classics \u2013 Halloween stunt",
+   "rel": "commissions"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "project::Star Trek: Strange New Worlds \u2013 Worlds Collide",
+   "rel": "commissions"
+  },
+  {
+   "source": "division::Paramount Sports",
+   "target": "project::Team Moms",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Team Moms",
+   "target": "player::ITV America",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Team Moms",
+   "target": "player::Kim Kardashian Productions",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Team Moms",
+   "target": "person::Jesse Sisgold",
+   "rel": "credited"
+  },
+  {
+   "source": "division::Pluto TV",
+   "target": "project::Feel the Free",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Feel the Free",
+   "target": "player::O Positive",
+   "rel": "made-by"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "project::Dutton Ranch at SXSW",
+   "rel": "commissions"
+  },
+  {
+   "source": "project::Dutton Ranch at SXSW",
+   "target": "player::Fairmont Austin",
+   "rel": "made-by"
+  },
+  {
+   "source": "project::Dutton Ranch at SXSW",
+   "target": "person::Shawn Silverman",
+   "rel": "credited"
+  },
+  {
+   "source": "player::72andSunny",
+   "target": "division::Paramount Sports",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::AllCreativeMedia",
+   "target": "division::Paramount Advertising",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Arcade Edit",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Artists Equity",
+   "target": "division::MTV / Brand Studio",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::AutoCamp",
+   "target": "division::CBS",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Bacardi",
+   "target": "division::MTV / Brand Studio",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Bark Bark",
+   "target": "division::MTV / Brand Studio",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Barking Owl",
+   "target": "division::Paramount Sports",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Burger King",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Burger King",
+   "target": "division::MTV / Brand Studio",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Discord",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Droga5",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Dunkin",
+   "target": "division::MTV / Brand Studio",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::ESPN",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Fairmont Austin",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Flighthouse Media",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Gilead",
+   "target": "division::BET",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Gravy Films",
+   "target": "division::MTV / Brand Studio",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Heard City",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Hilton Honors",
+   "target": "division::CBS",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Human",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::ITV America",
+   "target": "division::Paramount Sports",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Iconic",
+   "target": "division::Paramount Sports",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Jesse Collins Entertainment",
+   "target": "division::BET",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Kim Kardashian Productions",
+   "target": "division::Paramount Sports",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Liquid Death",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Midnight Oil (Imagine Group)",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::New Children's Museum",
+   "target": "division::Nickelodeon",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::New Path Digital",
+   "target": "division::Paramount Advertising",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::O Positive",
+   "target": "division::Pluto TV",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::O Positive",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Omnicom Media",
+   "target": "division::Paramount Advertising",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Once Upon a Time LA",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::P&G",
+   "target": "division::BET",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Parliament",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Rare Medium",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Red Bull",
+   "target": "division::MTV / Brand Studio",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Reddit",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Smuggler",
+   "target": "division::Paramount Sports",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Soundtree",
+   "target": "division::Paramount Sports",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Spark Foundry / Publicis",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Stink Films / Traktor",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::TCO London",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Taboola",
+   "target": "division::Paramount Advertising",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Those Beyond",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Titmouse",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Trafik",
+   "target": "division::Paramount Sports",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Versus",
+   "target": "division::Nickelodeon",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Versus",
+   "target": "division::Pluto TV",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Versus",
+   "target": "division::Paramount+ / DTC",
+   "rel": "worked-with"
+  },
+  {
+   "source": "player::Workshop Creative",
+   "target": "division::Paramount Pictures",
+   "rel": "worked-with"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Ariana Ringstrom",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Becca Schader",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Cindy Holland",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::BET",
+   "target": "person::Connie Orlando",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Dara Driscoll",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::MTV / Brand Studio",
+   "target": "person::Dario Spina",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "company::Paramount",
+   "target": "person::David Ellison",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Domenic DiMeglio",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Emmanuelle Leboeuf",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Eve Seiter",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::CBS",
+   "target": "person::George Cheeks",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount Advertising",
+   "target": "person::Jay Askinasi",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount Sports",
+   "target": "person::Jesse Sisgold",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount Pictures",
+   "target": "person::Josh Goldstine",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Other",
+   "target": "person::Josh Silverman",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Katherine Allen",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Pluto TV",
+   "target": "person::Katherine Kelly",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount Sports",
+   "target": "person::Kelly Dunne",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Laura Kane",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Liza Burnett Fefferman",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Matt Hernandez",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::MTV / Brand Studio",
+   "target": "person::Matthew Newcomb",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::CBS",
+   "target": "person::Michael Benson",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Michelle Garcia",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Rene Ridinger",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount Sports",
+   "target": "person::Rob Stecklow",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Nickelodeon",
+   "target": "person::Sabrina Caluori",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Shawn Silverman",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::Paramount+ / DTC",
+   "target": "person::Terry Minogue",
+   "rel": "decision-maker"
+  },
+  {
+   "source": "division::BET",
+   "target": "person::Tiyale Hayes",
+   "rel": "decision-maker"
+  }
+ ]
+}
