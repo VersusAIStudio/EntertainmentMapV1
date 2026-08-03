@@ -35,6 +35,7 @@
  <button data-v="flow">&#10142; Flow / chain</button>
  <button data-v="board">&#9677; Decision-maker board</button>
  <button data-v="overlap">&#8734; Overlap / shared vendors</button>
+ <button data-v="dmvendor">&#9733; Who to beat (exec &rarr; vendor)</button>
  <span id="vsub"></span>
 </div>
 <div id="stage">
@@ -131,7 +132,33 @@
     LAB+=tlab(px,py+rr+9,pp[0],8.6,"#4a4a4a",'middle');});});
   const leg=`<g font-family="-apple-system,sans-serif"><circle cx="${padX+14}" cy="30" r="8" fill="url(#${gid[GOLD]})"/><text x="${padX+30}" y="34" font-size="12.5" fill="#555">gold bubble = a Paramount decision-maker &nbsp;·&nbsp; size &amp; number = opportunity score (who to call first)</text></g>`;
   return[s+leg+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB,`0 0 ${Wd} ${Ht}`,"each division with its decision-makers fanned out as gold bubbles — bigger = higher opportunity score"];}
- const VIEWS={orbits,flow,board,overlap};
+ // decision-maker -> vendor (from shared project credits)
+ const DMV=[["Katherine Kelly",96,"Versus","Pluto TV"],["Sabrina Caluori",86,"Versus","Nickelodeon"],
+  ["Matt Hernandez",93,"Droga5","Paramount+ / DTC"],["Matt Hernandez",93,"O Positive","Paramount+ / DTC"],["Matt Hernandez",93,"Arcade Edit","Paramount+ / DTC"],["Matt Hernandez",93,"Titmouse","Paramount+ / DTC"],["Matt Hernandez",93,"Human","Paramount+ / DTC"],
+  ["Emmanuelle Leboeuf",91,"Droga5","Paramount+ / DTC"],["Emmanuelle Leboeuf",91,"O Positive","Paramount+ / DTC"],["Emmanuelle Leboeuf",91,"Arcade Edit","Paramount+ / DTC"],
+  ["Domenic DiMeglio",74,"Parliament","Paramount+ / DTC"],["Domenic DiMeglio",74,"Heard City","Paramount+ / DTC"],["Domenic DiMeglio",74,"Rare Medium","Paramount+ / DTC"],
+  ["Shawn Silverman",81,"Fairmont Austin","Paramount+ / DTC"],["Katherine Allen",60,"TCO London","Paramount+ / DTC"],
+  ["Josh Goldstine",69,"Workshop Creative","Paramount Pictures"],["Kelly Dunne",81,"Known (lead agency)","Paramount Sports"],
+  ["Rob Stecklow",60,"72andSunny","Paramount Sports"],["Rob Stecklow",60,"Smuggler","Paramount Sports"],["Rob Stecklow",60,"Trafik","Paramount Sports"],["Rob Stecklow",60,"Iconic","Paramount Sports"],["Rob Stecklow",60,"Barking Owl","Paramount Sports"],["Rob Stecklow",60,"Soundtree","Paramount Sports"],
+  ["Jesse Sisgold",73,"ITV America","Paramount Sports"],["Jesse Sisgold",73,"Kim Kardashian Prod.","Paramount Sports"],
+  ["Michael Benson",76,"AutoCamp","CBS"],["Michael Benson",76,"Hilton Honors","CBS"],
+  ["Tiyale Hayes",75,"P&G","BET"],["Tiyale Hayes",75,"Gilead","BET"],["Tiyale Hayes",75,"Jesse Collins Ent.","BET"],["Connie Orlando",60,"Jesse Collins Ent.","BET"],
+  ["Matthew Newcomb",81,"Bacardi","MTV / Brand Studio"],["Matthew Newcomb",81,"Bark Bark","MTV / Brand Studio"],
+  ["Dario Spina",76,"Red Bull","MTV / Brand Studio"],["Dario Spina",76,"Gravy Films","MTV / Brand Studio"]];
+ function dmvendor(){const map={};DMV.forEach(e=>{(map[e[0]]=map[e[0]]||{s:e[1],v:[]});map[e[0]].v.push([e[2],e[3]]);});
+  const dms=Object.keys(map).sort((a,b)=>map[b].s-map[a].s);const cols=4,cw=308,chh=440,padX=22,padY=82;const Wd=cols*cw+padX*2,rows=Math.ceil(dms.length/cols),Ht=rows*chh+padY;
+  let s=`<rect width="${Wd}" height="${Ht}" fill="url(#gp)"/>`,N="",LAB="",L="";
+  dms.forEach((dm,i)=>{const col=i%cols,row=Math.floor(i/cols);const cx=padX+col*cw+cw/2,cy=padY+row*chh+140;const sc=map[dm].s,hr=11+(sc-60)/4;
+   const vs=map[dm].v,n=vs.length,span=Math.min(2*Math.PI*0.9,0.7+n*0.34);
+   vs.forEach((vv,j)=>{const frac=n===1?0.5:j/(n-1);const ang=Math.PI/2-span/2+span*frac;const ring=j%2;const[px,py]=P(cx,cy+10,100+ring*42,ang);const c=COL[vv[1]];
+    L+=`<line x1="${cx}" y1="${cy}" x2="${px}" y2="${py}" stroke="${c}" stroke-opacity=".4" stroke-width="1.3"/>`;
+    N+=ball(px,py,7,c,.72,`data-k="vendor" data-n="${esc(vv[0])}" data-x="incumbent for ${esc(dm)} · ${esc(vv[1])}"`,`${vv[0]} — ${vv[1]}`);
+    LAB+=tlab(px,py+16,vv[0],8.4,"#4a4a4a",'middle');});
+   N+=ball(cx,cy,hr,GOLD,.95,`data-k="person" data-n="${esc(dm)}" data-x="opportunity score ${sc}"`,`${dm} — score ${sc}`);
+   LAB+=`<text x="${cx}" y="${cy+3}" text-anchor="middle" font-size="9" fill="#5a4600" font-weight="700" pointer-events="none">${sc}</text>`+tlab(cx,cy-hr-8,dm,12,"#2a2a2a")+tlab(cx,cy-hr+4,"opportunity score "+sc,8.5,"#9a8a55","middle",true);});
+  const leg=`<g font-family="-apple-system,sans-serif"><circle cx="${padX+14}" cy="36" r="8" fill="url(#${gid[GOLD]})"/><text x="${padX+30}" y="40" font-size="12.5" fill="#555">gold = Paramount decision-maker · the vendors around it are the incumbents they use now (who Versus would beat)</text></g>`;
+  return[s+leg+L+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB,`0 0 ${Wd} ${Ht}`,"each decision-maker and the vendors they rely on today — the incumbents to displace"];}
+ const VIEWS={orbits,flow,board,overlap,dmvendor};
  const KIND={
   center:{t:"The company",d:"Paramount, the parent. Every division links back to it. The number is the total projects mapped this year (39)."},
   division:{t:"Division",d:"A part of Paramount — a network, studio or platform (BET, Pluto, Pictures…). The number inside is how many marketing projects it ran. Bigger bubble = more work."},
