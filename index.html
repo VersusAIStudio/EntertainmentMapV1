@@ -4,15 +4,17 @@
 <title>Paramount Landscape — three views</title>
 <style>
  *{box-sizing:border-box}
- body{margin:0;background:#efece4;font-family:Georgia,'Times New Roman',serif;color:#2a2a2a}
- #page{max-width:1360px;margin:0 auto;padding:22px 20px 60px}
- h1{font-size:20px;margin:0 0 2px}
- .lede{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12.5px;color:#8a8a86;margin-bottom:14px}
- #tabs{display:flex;gap:6px;margin-bottom:8px;font-family:-apple-system,sans-serif;flex-wrap:wrap}
- #tabs button{font-size:12.5px;padding:8px 15px;border:1px solid #e0ddd2;background:#fff;color:#555;border-radius:22px;cursor:pointer;font-weight:600}
- #tabs button.on{background:#2a2a2a;color:#fff;border-color:#2a2a2a}
- #vsub{font-family:-apple-system,sans-serif;font-size:12px;color:#8a8a86;align-self:center;margin-left:6px}
- svg{width:100%;height:auto;background:#f6f4ef;border-radius:12px;border:1px solid #e4e0d5;display:block}
+ body{margin:0;background:#e7e1d6;color:#26241f;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;-webkit-font-smoothing:antialiased}
+ #page{max-width:1380px;margin:0 auto;padding:30px 26px 70px}
+ .kick{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#a08b57;font-weight:700;margin-bottom:6px}
+ h1{font-size:27px;font-weight:600;letter-spacing:-.01em;margin:0 0 5px;line-height:1.1}
+ .lede{font-family:-apple-system,'Segoe UI',sans-serif;font-size:13px;line-height:1.5;color:#7c776c;margin-bottom:18px;max-width:770px}
+ #tabs{display:flex;gap:7px;margin-bottom:12px;font-family:-apple-system,sans-serif;flex-wrap:wrap;align-items:center}
+ #tabs button{font-size:12.5px;padding:9px 16px;border:1px solid #d9d3c6;background:#fbf9f4;color:#6a6459;border-radius:24px;cursor:pointer;font-weight:600;transition:.16s}
+ #tabs button:hover{border-color:#c3b48a;color:#37342d}
+ #tabs button.on{background:#2a2723;color:#f4efe4;border-color:#2a2723;box-shadow:0 4px 14px rgba(0,0,0,.16)}
+ #vsub{font-family:-apple-system,sans-serif;font-size:12px;color:#9a948a;align-self:center;margin-left:4px;font-style:italic}
+ svg{width:100%;height:auto;background:radial-gradient(circle at 50% 20%,#faf7f0,#f1ece1 80%);border-radius:16px;border:1px solid #ddd6c8;display:block;box-shadow:0 12px 44px rgba(60,50,30,.13),0 2px 6px rgba(0,0,0,.05)}
  #stage{position:relative}
  #oinfo{position:absolute;top:12px;right:12px;width:250px;background:#fff;border:1px solid #e4e2db;border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,.18);padding:15px 17px;transform:translateX(120%);transition:transform .32s cubic-bezier(.4,0,.2,1);font-family:-apple-system,sans-serif}
  #oinfo.open{transform:translateX(0)}
@@ -28,8 +30,9 @@
  #okey .tip{margin-top:7px;padding-top:7px;border-top:1px solid #eee;color:#777;font-style:italic}
 </style></head>
 <body><div id="page">
-<h1>Paramount — the marketing landscape</h1>
-<div class="lede">Who does Paramount's marketing work: 10 divisions · 39 projects · 50 vendors · decision-makers ranked by opportunity score. Switch views below.</div>
+<div class="kick">Versus &middot; Business Development</div>
+<h1>The Paramount Marketing Landscape</h1>
+<div class="lede">Where Paramount's marketing work happens and who makes it &mdash; 10 divisions, 39 projects, ~50 outside agencies, and the executives who commission the work, ranked by opportunity score. Switch views below.</div>
 <div id="tabs">
  <button data-v="orbits" class="on">&#9678; Orbits</button>
  <button data-v="flow">&#10142; Flow / chain</button>
@@ -46,7 +49,7 @@
 </div>
 <script>
 (function(){
- const DIV=[["Paramount Pictures","#b3564e"],["MTV / Brand Studio","#8f6aa6"],["Paramount+ / DTC","#5566a8"],["Pluto TV","#c69a5f"],["Nickelodeon","#b9ac68"],["BET","#7a6db2"],["Paramount Sports","#7fb8b3"],["CBS","#6d80ad"],["Paramount Advertising","#69a98f"],["Other","#a6a6a6"]];
+ const DIV=[["Paramount Pictures","#c0615a"],["MTV / Brand Studio","#9a72ab"],["Paramount+ / DTC","#5f79b8"],["Pluto TV","#cf9a55"],["Nickelodeon","#b8a24f"],["BET","#8272bd"],["Paramount Sports","#5fb0aa"],["CBS","#6d84c0"],["Paramount Advertising","#5fa78c"],["Other","#a7a49b"]];
  const COL={};DIV.forEach(d=>COL[d[0]]=d[1]);
  const PROJ={"Paramount Pictures":[["Naked Gun AV","H",["Workshop Creative"]],["Naked Gun OOH","H",["Midnight Oil"]],["Naked Gun x ESPN","M",["ESPN"]],["Running Man x Liquid Death","H",["Liquid Death"]],["Running Man Reddit","H",["Spark Foundry","Reddit"]],["SpongeBob intl","H",["Once Upon a Time LA"]],["SpongeBob x BK","M",["Burger King"]],["Scream 7 Discord","H",["Spark Foundry","Those Beyond","Discord"]],["Scream 7 Flighthouse","M",["Flighthouse"]],["Scream 7 Big Game","M",["MOCEAN*"]]],
   "MTV / Brand Studio":[["VMAs platform","H",["multiple"]],["Dunkin x VMAs","H",["Gravy Films","Artists Equity"]],["Bacardi x VMAs","H",["Bacardi"]],["Burger King x VMAs","H",["Bark Bark","Burger King"]],["Red Bull x VMAs","M",["Red Bull"]]],
@@ -62,8 +65,8 @@
  const svg=document.getElementById("v"),GOLD="#e0a800";
  function mix(hex,t){const n=parseInt(hex.slice(1),16);let r=n>>16&255,g=n>>8&255,b=n&255;return `rgb(${Math.round(r+(255-r)*t)},${Math.round(g+(255-g)*t)},${Math.round(b+(255-b)*t)})`;}
  function shade(hex,f){const n=parseInt(hex.slice(1),16);return `rgb(${Math.round((n>>16&255)*f)},${Math.round((n>>8&255)*f)},${Math.round((n&255)*f)})`;}
- const gid={};let gdefs="";[...DIV.map(d=>d[1]),GOLD,"#242424"].forEach((c,i)=>{gid[c]="gr"+i;gdefs+=`<radialGradient id="gr${i}" cx="0.35" cy="0.3" r="0.85"><stop offset="0%" stop-color="${mix(c,0.55)}"/><stop offset="55%" stop-color="${c}"/><stop offset="100%" stop-color="${shade(c,0.8)}"/></radialGradient>`;});
- const DEFS=`<defs>${gdefs}<pattern id="gp" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#ded9cd"/></pattern><filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="3" stdDeviation="3.4" flood-color="#000" flood-opacity="0.22"/></filter></defs>`;
+ const gid={};let gdefs="";[...DIV.map(d=>d[1]),GOLD,"#242424"].forEach((c,i)=>{gid[c]="gr"+i;gdefs+=`<radialGradient id="gr${i}" cx="0.32" cy="0.26" r="0.92"><stop offset="0%" stop-color="${mix(c,0.78)}"/><stop offset="18%" stop-color="${mix(c,0.30)}"/><stop offset="66%" stop-color="${c}"/><stop offset="100%" stop-color="${shade(c,0.66)}"/></radialGradient>`;});
+ const DEFS=`<defs>${gdefs}<pattern id="gp" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#e0dacb"/></pattern><filter id="soft" x="-70%" y="-70%" width="240%" height="240%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#3a2f18" flood-opacity="0.18"/></filter></defs>`;
  function ball(x,y,r,c,op,attrs,title){return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="url(#${gid[c]})" fill-opacity="${op==null?1:op}" filter="url(#soft)" ${attrs||''}>${title?`<title>${title}</title>`:''}</circle>`;}
  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
  function tlab(x,y,t,s,f,anc,it){return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anc||'middle'}" font-size="${s}" ${it?'font-style="italic" ':''}fill="${f}" paint-order="stroke" stroke="#f6f4ef" stroke-width="2.8" stroke-linejoin="round">${t}</text>`;}
@@ -117,7 +120,7 @@
   vList.forEach(v=>{const c=COL[vSeen[v].div];N+=ball(xV,vy[v],5.5,c,.72);LAB+=tlab(xV+10,vy[v]+3,v,9,"#555",'start');});
   const xE=1130;let ey=70;peopleFlat.forEach(pp=>{const rr=4.5+(pp.s-60)/7;N+=ball(xE,ey,rr,GOLD,.9)+`<title>${pp.n} — ${pp.s}</title>`;LAB+=tlab(xE+rr+5,ey-2,pp.n,9,"#333",'start')+tlab(xE+rr+5,ey+8,pp.s+" · "+pp.div.replace(' / ',' '),8,"#9a8a55",'start',true);ey+=34;});
   const heads=`<g font-family="-apple-system,sans-serif" font-weight="700" fill="#999" font-size="11"><text x="${xD}" y="40" text-anchor="middle">DIVISION</text><text x="${xP}" y="40" text-anchor="middle">PROJECT</text><text x="${xV}" y="40" text-anchor="middle">VENDOR</text><text x="${xE}" y="40" text-anchor="middle">DECISION-MAKERS</text></g>`;
-  return[`<rect width="1320" height="1320" fill="#f6f4ef"/>`+heads+L+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB,"0 0 1320 1320","who commissioned each project (left) and who built it (right) · gold column = decision-makers by score"];}
+  return[`<rect width="1320" height="1320" fill="url(#gp)"/>`+heads+L+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB,"0 0 1320 1320","who commissioned each project (left) and who built it (right) · gold column = decision-makers by score"];}
  // ---------- BOARD (people fanned wide) ----------
  function board(){const cols=5,cw=326,ch=680,padX=24,padY=76;const Wd=cols*cw+padX*2,Ht=2*ch+padY;let s=`<rect width="${Wd}" height="${Ht}" fill="url(#gp)"/>`;let N="",LAB="";
   DIV.forEach((d,i)=>{const nm=d[0],c=d[1],col=i%cols,row=Math.floor(i/cols);const cx=padX+col*cw+cw/2,cy=padY+row*ch+150;const np=PROJ[nm].length;const dr=20+np*1.4;
