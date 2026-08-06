@@ -1,191 +1,242 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Paramount Landscape — three views</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Paramount Universe</title>
 <style>
- *{box-sizing:border-box}
- body{margin:0;background:#e7e1d6;color:#26241f;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;-webkit-font-smoothing:antialiased}
- #page{max-width:1380px;margin:0 auto;padding:30px 26px 70px}
- .kick{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#a08b57;font-weight:700;margin-bottom:6px}
- h1{font-size:27px;font-weight:600;letter-spacing:-.01em;margin:0 0 5px;line-height:1.1}
- .lede{font-family:-apple-system,'Segoe UI',sans-serif;font-size:13px;line-height:1.5;color:#7c776c;margin-bottom:18px;max-width:770px}
- #tabs{display:flex;gap:7px;margin-bottom:12px;font-family:-apple-system,sans-serif;flex-wrap:wrap;align-items:center}
- #tabs button{font-size:12.5px;padding:9px 16px;border:1px solid #d9d3c6;background:#fbf9f4;color:#6a6459;border-radius:24px;cursor:pointer;font-weight:600;transition:.16s}
- #tabs button:hover{border-color:#c3b48a;color:#37342d}
- #tabs button.on{background:#2a2723;color:#f4efe4;border-color:#2a2723;box-shadow:0 4px 14px rgba(0,0,0,.16)}
- #vsub{font-family:-apple-system,sans-serif;font-size:12px;color:#9a948a;align-self:center;margin-left:4px;font-style:italic}
- svg{width:100%;height:auto;background:radial-gradient(circle at 50% 20%,#faf7f0,#f1ece1 80%);border-radius:16px;border:1px solid #ddd6c8;display:block;box-shadow:0 12px 44px rgba(60,50,30,.13),0 2px 6px rgba(0,0,0,.05)}
- #stage{position:relative}
- #oinfo{position:absolute;top:12px;right:12px;width:250px;background:#fff;border:1px solid #e4e2db;border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,.18);padding:15px 17px;transform:translateX(120%);transition:transform .32s cubic-bezier(.4,0,.2,1);font-family:-apple-system,sans-serif}
- #oinfo.open{transform:translateX(0)}
- #oinfo .ik{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#b08a00;font-weight:700}
- #oinfo .iname{font-size:16px;font-weight:700;margin:2px 0;font-family:Georgia,serif}
- #oinfo .ix{font-size:11.5px;color:#777;margin-bottom:8px}
- #oinfo p{font-size:12.5px;line-height:1.5;color:#333;margin:0}
- #oclose{position:absolute;right:12px;top:8px;border:none;background:none;font-size:20px;color:#aaa;cursor:pointer;line-height:1}
- #okey{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);border:1px solid #e4e2db;border-radius:10px;padding:10px 12px;font-family:-apple-system,sans-serif;font-size:11px;max-width:210px}
- #okey h4{margin:0 0 6px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#999}
- #okey .kr{display:flex;align-items:center;gap:8px;margin:4px 0;color:#444}
- #okey .kd{width:12px;height:12px;border-radius:50%;flex:none}
- #okey .tip{margin-top:7px;padding-top:7px;border-top:1px solid #eee;color:#777;font-style:italic}
-</style></head>
-<body><div id="page">
-<div class="kick">Versus &middot; Business Development</div>
-<h1>The Paramount Marketing Landscape</h1>
-<div class="lede">Where Paramount's marketing work happens and who makes it &mdash; 10 divisions, 39 projects, ~50 outside agencies, and the executives who commission the work, ranked by opportunity score. Switch views below.</div>
-<div id="tabs">
- <button data-v="orbits" class="on">&#9678; Orbits</button>
- <button data-v="flow">&#10142; Flow / chain</button>
- <button data-v="board">&#9677; Decision-maker board</button>
- <button data-v="overlap">&#8734; Overlap / shared vendors</button>
- <button data-v="dmvendor">&#9733; Who to beat (exec &rarr; vendor)</button>
- <span id="vsub"></span>
-</div>
-<div id="stage">
-<svg id="v" viewBox="0 0 1120 1000"></svg>
-<div id="okey"></div>
-<div id="oinfo"></div>
-</div>
+:root{
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,sans-serif;
+  --paper:#e7e1d6;--ink:#26241f;--ink2:#7c776c;--gold:#a08b57;--goldsoft:#c3b48a;
+  --card:#faf7f0;--line:#d9d3c6;--rim:rgba(0,0,0,.14);
+  --beat:#c0615a;--partner:#5f79b8;--versus:#8272bd;--open:#b08a00;
+  --shadow:0 2px 8px rgba(58,47,24,.10),0 14px 30px rgba(58,47,24,.10);
+}
+:root[data-theme="dark"]{--paper:#211f1a;--ink:#efe9dd;--ink2:#a49d8c;--card:#2a2723;--line:#3a362e;--goldsoft:#8a7a4f;--rim:rgba(0,0,0,.4);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1500px;margin:0 auto;padding:24px 22px 40px}
+.kick{font-family:var(--sans);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+h1{font-size:27px;font-weight:600;letter-spacing:-.01em;margin:0 0 5px}
+.lede{font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--ink2);margin:0 0 14px;max-width:850px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.btns{display:flex;gap:6px;flex:none}
+.btn{font-family:var(--sans);border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:999px;min-width:34px;padding:7px 12px;font-size:12px;font-weight:600;cursor:pointer}
+.btn:hover{color:var(--ink);border-color:var(--goldsoft)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+.tab{font-family:var(--sans);font-size:12px;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink2);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.tab .cd{width:9px;height:9px;border-radius:50%}
+.tab.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.stage{display:grid;grid-template-columns:1fr 316px;gap:16px}
+.frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;touch-action:none;background-color:var(--paper);
+  background-image:radial-gradient(rgba(120,110,85,.16) 1px, transparent 1.2px);background-size:23px 23px}
+svg{display:block;width:100%;height:auto;cursor:grab}svg.drag{cursor:grabbing}
+text{font-family:var(--serif)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px;font-family:var(--sans);font-size:13px;max-height:74vh;overflow:auto}
+.panel h3{font-family:var(--serif);margin:0 0 3px;font-size:18px;font-weight:600}
+.panel .role{color:var(--ink2);font-size:12.5px;margin-bottom:12px}
+.panel .kv{display:flex;gap:8px;margin:4px 0}.panel .kv .k{color:var(--gold);min-width:74px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;font-weight:700;padding-top:2px}
+.panel .sec{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin:15px 0 6px;border-top:1px solid var(--line);padding-top:11px}
+.panel .row{padding:7px 9px;border-radius:8px;background:#f1ece1;margin-bottom:5px}
+.panel .row .pn{font-weight:600;color:var(--ink);font-family:var(--serif);font-size:14px}
+.panel .row .pm{font-size:11.5px;color:var(--ink2)}
+.pill{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;color:#fff}
+.panel .empty{color:var(--ink2);font-style:italic;text-align:center;padding-top:36px;line-height:1.6}
+.dotk{width:11px;height:11px;border-radius:50%;display:inline-block}
+.legend{font-family:var(--sans);display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:11px;font-size:12px;color:var(--ink2)}
+.legend .k{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:12.5px;padding:8px 11px;border-radius:9px;opacity:0;transition:opacity .1s;z-index:99;max-width:280px;line-height:1.5;box-shadow:0 8px 22px rgba(0,0,0,.28)}
+@media(max-width:900px){.stage{grid-template-columns:1fr}.panel{max-height:none}}
+</style>
+</head>
+<body>
+<div id="tip"></div>
+<div class="wrap">
+  <div class="topbar">
+    <div>
+      <div class="kick">Versus · Business Development</div>
+      <h1>The Paramount Universe</h1>
+      <p class="lede">Everything at once — Paramount, its networks, decision-makers, and projects as one galaxy. <b>Use the tabs to fly into a network</b>, click any bead for its full record on the right. Networks show a count; the more it holds, the bigger it is.</p>
+    </div>
+    <div class="btns"><button class="btn" id="zin">+</button><button class="btn" id="zout">–</button><button class="btn" id="themeBtn">◐</button></div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div class="stage">
+    <div class="frame"><svg id="mm" viewBox="0 0 2000 2000" role="img" aria-label="Paramount universe"></svg></div>
+    <div class="panel" id="panel"><div class="empty">Click any bead — a network, a decision-maker, or a project — to see everything about it here.</div></div>
+  </div>
+  <div class="legend">
+    <span class="k"><span class="dotk" style="background:var(--beat)"></span>Competitor — we’d beat them</span>
+    <span class="k"><span class="dotk" style="background:var(--partner)"></span>Big agency — could hire Versus</span>
+    <span class="k"><span class="dotk" style="background:var(--versus)"></span>Versus — we already do this</span>
+    <span class="k"><span class="dotk" style="background:transparent;border:2px dashed var(--open)"></span>Up for grabs — no agency yet</span>
+  </div>
 </div>
 <script>
-(function(){
- const DIV=[["Paramount Pictures","#c0615a"],["MTV / Brand Studio","#9a72ab"],["Paramount+ / DTC","#5f79b8"],["Pluto TV","#cf9a55"],["Nickelodeon","#b8a24f"],["BET","#8272bd"],["Paramount Sports","#5fb0aa"],["CBS","#6d84c0"],["Paramount Advertising","#5fa78c"],["Other","#a7a49b"]];
- const COL={};DIV.forEach(d=>COL[d[0]]=d[1]);
- const PROJ={"Paramount Pictures":[["Naked Gun AV","H",["Workshop Creative"]],["Naked Gun OOH","H",["Midnight Oil"]],["Naked Gun x ESPN","M",["ESPN"]],["Running Man x Liquid Death","H",["Liquid Death"]],["Running Man Reddit","H",["Spark Foundry","Reddit"]],["SpongeBob intl","H",["Once Upon a Time LA"]],["SpongeBob x BK","M",["Burger King"]],["Scream 7 Discord","H",["Spark Foundry","Those Beyond","Discord"]],["Scream 7 Flighthouse","M",["Flighthouse"]],["Scream 7 Big Game","M",["MOCEAN*"]]],
-  "MTV / Brand Studio":[["VMAs platform","H",["multiple"]],["Dunkin x VMAs","H",["Gravy Films","Artists Equity"]],["Bacardi x VMAs","H",["Bacardi"]],["Burger King x VMAs","H",["Bark Bark","Burger King"]],["Red Bull x VMAs","M",["Red Bull"]]],
-  "Paramount+ / DTC":[["UFC opener","H",["Versus"]],["Mountain 3D","H",["Versus","Droga5"]],["Find Your Mountain","H",["Droga5","Stink/Traktor","Arcade Edit"]],["Mountain extended","H",["Droga5","O Positive","Arcade Edit","Human","Parliament","Titmouse","Heard City","Rare Medium","AGENC"]],["Yellowjackets FYC","H",["TCO London"]],["Star Trek","H",["internal"]],["Dutton SXSW","H",["Fairmont Austin"]]],
-  "Pluto TV":[["Pluto fall","H",["Versus"]],["Monsta Times Sq","H",["Versus"]],["Feel the Free","M",["O Positive"]]],
-  "Nickelodeon":[["On the Sphere","H",["Versus"]],["Fun-ergy Factory","H",["New Children's Museum"]]],
-  "BET":[["BET Media House","H",["P&G"]],["Black + Iconic Soiree","H",["Gilead","P&G"]],["BET Awards 2026","H",["Jesse Collins Ent."]]],
-  "Paramount Sports":[["Count on Sundays","H",["Known"]],["Nobody Watches Like U.S.","H",["72andSunny","Smuggler","Trafik","Iconic","Barking Owl","Soundtree"]],["Team Moms","M",["ITV America","Kim Kardashian Prod."]]],
-  "CBS":[["Tracker stays","H",["AutoCamp","Hilton Honors"]],["NCIS Tuesdays of Honor","H",["internal"]]],
-  "Paramount Advertising":[["Ads Manager Partners","H",["AllCreativeMedia","New Path Digital"]],["Taboola Multiplier","H",["Taboola"]],["Omnicom units","H",["Omnicom Media"]]],
-  "Other":[["Killer Classics","H",["internal"]]]};
- const PPL={"Paramount Pictures":[["Josh Goldstine",69]],"MTV / Brand Studio":[["Matthew Newcomb",81],["Dario Spina",76]],"Paramount+ / DTC":[["Matt Hernandez",93],["Emmanuelle Leboeuf",91],["Laura Kane",91],["Eve Seiter",85],["Dara Driscoll",85],["Ariana Ringstrom",85],["Shawn Silverman",81],["Becca Schader",81],["Michelle Garcia",81],["Domenic DiMeglio",74]],"Pluto TV":[["Katherine Kelly",96]],"Nickelodeon":[["Sabrina Caluori",86]],"BET":[["Tiyale Hayes",75],["Connie Orlando",60]],"Paramount Sports":[["Kelly Dunne",81],["Jesse Sisgold",73]],"CBS":[["Michael Benson",76],["George Cheeks",60]],"Paramount Advertising":[["Jay Askinasi",60]],"Other":[["Josh Silverman",67]]};
- const svg=document.getElementById("v"),GOLD="#e0a800";
- function mix(hex,t){const n=parseInt(hex.slice(1),16);let r=n>>16&255,g=n>>8&255,b=n&255;return `rgb(${Math.round(r+(255-r)*t)},${Math.round(g+(255-g)*t)},${Math.round(b+(255-b)*t)})`;}
- function shade(hex,f){const n=parseInt(hex.slice(1),16);return `rgb(${Math.round((n>>16&255)*f)},${Math.round((n>>8&255)*f)},${Math.round((n&255)*f)})`;}
- const gid={};let gdefs="";[...DIV.map(d=>d[1]),GOLD,"#242424"].forEach((c,i)=>{gid[c]="gr"+i;gdefs+=`<radialGradient id="gr${i}" cx="0.32" cy="0.26" r="0.92"><stop offset="0%" stop-color="${mix(c,0.78)}"/><stop offset="18%" stop-color="${mix(c,0.30)}"/><stop offset="66%" stop-color="${c}"/><stop offset="100%" stop-color="${shade(c,0.66)}"/></radialGradient>`;});
- const DEFS=`<defs>${gdefs}<pattern id="gp" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#e0dacb"/></pattern><filter id="soft" x="-70%" y="-70%" width="240%" height="240%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#3a2f18" flood-opacity="0.18"/></filter></defs>`;
- function ball(x,y,r,c,op,attrs,title){return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="url(#${gid[c]})" fill-opacity="${op==null?1:op}" filter="url(#soft)" ${attrs||''}>${title?`<title>${title}</title>`:''}</circle>`;}
- function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
- function tlab(x,y,t,s,f,anc,it){return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anc||'middle'}" font-size="${s}" ${it?'font-style="italic" ':''}fill="${f}" paint-order="stroke" stroke="#f6f4ef" stroke-width="2.8" stroke-linejoin="round">${t}</text>`;}
- const P=(cx,cy,r,a)=>[cx+r*Math.cos(a),cy+r*Math.sin(a)];
- // ---------- ORBITS ----------
- function orbits(){const cx=560,cy=500,r1=118,r2=205,r3=305,r4=402;let s=`<rect width="1120" height="1000" fill="url(#gp)"/>`;
-  [r1,r2,r3,r4].forEach(r=>s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e2ded1" stroke-dasharray="2 4"/>`);
-  const W=2*Math.PI/DIV.length;let L="",N="",LAB="";
-  DIV.forEach((d,i)=>{const nm=d[0],c=d[1],ac=-Math.PI/2+i*W;const[dx,dy]=P(cx,cy,r2,ac);
-   L+=`<line x1="${cx}" y1="${cy}" x2="${dx}" y2="${dy}" stroke="${c}" stroke-opacity=".4"/>`;
-   (PPL[nm]||[]).forEach((pp,j,arr)=>{const a=ac-W*0.34+W*0.68*(arr.length>1?j/(arr.length-1):0.5);const[x,y]=P(cx,cy,r1,a);N+=ball(x,y,4+(pp[1]-60)/8,GOLD,.92,`data-k="person" data-n="${esc(pp[0])}" data-x="opportunity score ${pp[1]} · ${esc(nm)}"`,`${pp[0]} — score ${pp[1]}`);});
-   const pr=PROJ[nm],np=pr.length;
-   pr.forEach((p,j)=>{const a=ac-W*0.42+W*0.84*(np>1?j/(np-1):0.5);const[px,py]=P(cx,cy,r3,a);L+=`<line x1="${dx}" y1="${dy}" x2="${px}" y2="${py}" stroke="${c}" stroke-opacity=".22"/>`;
-    N+=ball(px,py,6,c,p[1]==='H'?.9:.5,`data-k="project" data-n="${esc(p[0])}" data-x="${p[1]==='H'?'High':'Medium'} confidence · ${esc(nm)} · vendors: ${esc(p[2].join(', ')||'n/a')}"`,`${p[0]}`);
-    p[2].forEach((v,k)=>{const va=a-0.05+0.1*(p[2].length>1?k/(p[2].length-1):0.5);const[vx,vy]=P(cx,cy,r4+(k%2)*16,va);L+=`<line x1="${px}" y1="${py}" x2="${vx}" y2="${vy}" stroke="${c}" stroke-opacity=".15"/>`;N+=ball(vx,vy,5,c,.65,`data-k="vendor" data-n="${esc(v)}" data-x="worked on ${esc(p[0])} (${esc(nm)})"`,`${v}`);});});
-   N+=ball(dx,dy,10+np*1.6,c,.9,`data-k="division" data-n="${esc(nm)}" data-x="${np} projects this year"`,`${nm} — ${np} projects`);LAB+=`<text x="${dx}" y="${dy+3}" text-anchor="middle" font-size="9.5" fill="#fff" font-weight="700" pointer-events="none">${np}</text>`;
-   const[lx,ly]=P(cx,cy,r4+34,ac);LAB+=tlab(lx,ly,nm.replace(' / ',' '),11,shade(c,.7),Math.cos(ac)<-.2?'end':(Math.cos(ac)>.2?'start':'middle'));});
-  s+=L+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB;
-  s+=`<g font-family="-apple-system,sans-serif" font-size="9" fill="#b0aa9a" text-anchor="middle" pointer-events="none"><text x="${cx}" y="${cy-r1+11}">decision-makers</text><text x="${cx}" y="${cy-r2+11}">divisions</text><text x="${cx}" y="${cy-r3+11}">projects</text><text x="${cx}" y="${cy-r4+11}">vendors</text></g>`;
-  s+=ball(cx,cy,36,"#242424",1,`data-k="center" data-n="Paramount" data-x="39 projects mapped"`)+`<text x="${cx}" y="${cy+1}" text-anchor="middle" font-size="11" fill="#fff" font-weight="700" pointer-events="none">Paramount</text>`;
-  return[s,"0 0 1120 1000","click any bubble to learn what it is · gold = decision-makers (size = opportunity score)"];}
- // ---------- OVERLAP (shared vendors across divisions) ----------
- function overlap(){const cx=560,cy=470,R=300;
-  const vDiv={};DIV.forEach(d=>PROJ[d[0]].forEach(p=>p[2].forEach(v=>{if(['internal','multiple'].includes(v))return;(vDiv[v]=vDiv[v]||new Set()).add(d[0]);})));
-  const shared=Object.keys(vDiv).filter(v=>vDiv[v].size>1).map(v=>({v,divs:[...vDiv[v]]}));
-  const hub={};DIV.forEach((d,i)=>{const a=-Math.PI/2+i/DIV.length*2*Math.PI;hub[d[0]]={a,x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)};});
-  let s=`<rect width="1120" height="960" fill="url(#gp)"/>`,L="",N="",LAB="";
-  DIV.forEach(d=>{const c=d[1],np=PROJ[d[0]].length,h=hub[d[0]];N+=ball(h.x,h.y,13+np*2,c,.88,`data-k="division" data-n="${esc(d[0])}" data-x="${np} projects"`,`${d[0]}`);
-   LAB+=`<text x="${h.x}" y="${h.y+3}" text-anchor="middle" font-size="10" fill="#fff" font-weight="700" pointer-events="none">${np}</text>`+tlab(h.x,h.y-16-np*2,d[0].replace(' / ',' '),11,shade(c,.65),'middle');});
-  shared.forEach(sh=>{const angs=sh.divs.map(d=>hub[d].a);const ma=Math.atan2(angs.reduce((a,x)=>a+Math.sin(x),0),angs.reduce((a,x)=>a+Math.cos(x),0));
-   const rr=110+sh.divs.length*8;const bx=cx+rr*Math.cos(ma),by=cy+rr*Math.sin(ma);
-   sh.divs.forEach(d=>{L+=`<path d="M${bx},${by} Q${(bx+hub[d].x)/2-(hub[d].y-by)*0.12},${(by+hub[d].y)/2+(hub[d].x-bx)*0.12} ${hub[d].x},${hub[d].y}" fill="none" stroke="${COL[d]}" stroke-opacity=".7" stroke-width="2.2"/>`;});
-   // blended bubble: overlap the divisions' colours
-   sh.divs.forEach((d,i)=>{const off=(i-(sh.divs.length-1)/2)*10;N+=ball(bx+off,by,13,COL[d],.72,`data-k="overlap" data-n="${esc(sh.v)}" data-x="works across ${sh.divs.length} divisions: ${esc(sh.divs.map(x=>x.replace(' / ',' ')).join(', '))}"`,`${sh.v} — ${sh.divs.join(', ')}`);});
-   LAB+=`<line x1="${bx}" y1="${by-14}" x2="${bx}" y2="${by-24}" stroke="#999"/>`+tlab(bx,by-28,sh.v,12,"#2a2a2a")+tlab(bx,by-17,"shared vendor · "+sh.divs.length+" divisions",8.5,"#9a8a55","middle",true);});
-  s+=L+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB;
-  s+=`<g font-family="-apple-system,sans-serif"><text x="30" y="44" font-size="13" font-weight="700" fill="#444">Vendors that work across more than one division</text><text x="30" y="62" font-size="11.5" fill="#888">Every other vendor is exclusive to a single division — these ${shared.length} are the bridges (where the overlap is).</text></g>`;
-  return[s,"0 0 1120 960","only vendors shared by 2+ divisions · the split bubble shows which divisions overlap · everyone else is siloed"];}
- // ---------- FLOW ----------
- function flow(){const projList=[];DIV.forEach(d=>PROJ[d[0]].forEach(p=>projList.push({div:d[0],n:p[0],c:p[1],v:p[2]})));
-  const vSeen={},vList=[];projList.forEach(p=>p.v.forEach(v=>{if(!vSeen[v]){vSeen[v]={div:p.div};vList.push(v);}}));
-  const peopleFlat=[];DIV.forEach(d=>(PPL[d[0]]||[]).forEach(pp=>peopleFlat.push({n:pp[0],s:pp[1],div:d[0]})));peopleFlat.sort((a,b)=>b.s-a.s);
-  const xD=170,xP=560,xV=940,top=70,pgap=1180/projList.length,vgap=1180/vList.length;
-  const py={};projList.forEach((p,i)=>py[p.n]=top+i*pgap+pgap/2);const vy={};vList.forEach((v,i)=>vy[v]=top+i*vgap+vgap/2);
-  const dy={};DIV.forEach(d=>{const ys=projList.filter(p=>p.div===d[0]).map(p=>py[p.n]);dy[d[0]]=ys.reduce((a,b)=>a+b,0)/ys.length;});
-  const arc=(x1,y1,x2,y2)=>{const mx=(x1+x2)/2;return `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;};
-  let L="",N="",LAB="";
-  projList.forEach(p=>{const c=COL[p.div];L+=`<path d="${arc(xD+10,dy[p.div],xP-8,py[p.n])}" fill="none" stroke="${c}" stroke-opacity=".3"/>`;p.v.forEach(v=>{if(vy[v]!=null)L+=`<path d="${arc(xP+8,py[p.n],xV-6,vy[v])}" fill="none" stroke="${c}" stroke-opacity=".2"/>`;});});
-  DIV.forEach(d=>{const c=d[1],n=PROJ[d[0]].length;N+=ball(xD,dy[d[0]],7+n*1.5,c,.9);LAB+=tlab(xD-16,dy[d[0]]+3,d[0].replace(' / ',' '),11,shade(c,.7),'end')+`<text x="${xD}" y="${dy[d[0]]+3}" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">${n}</text>`;});
-  projList.forEach(p=>{const c=COL[p.div];N+=ball(xP,py[p.n],6.5,c,p.c==='H'?.9:.5);LAB+=tlab(xP+12,py[p.n]+3,p.n,9,"#3a3a3a",'start');});
-  vList.forEach(v=>{const c=COL[vSeen[v].div];N+=ball(xV,vy[v],5.5,c,.72);LAB+=tlab(xV+10,vy[v]+3,v,9,"#555",'start');});
-  const xE=1130;let ey=70;peopleFlat.forEach(pp=>{const rr=4.5+(pp.s-60)/7;N+=ball(xE,ey,rr,GOLD,.9)+`<title>${pp.n} — ${pp.s}</title>`;LAB+=tlab(xE+rr+5,ey-2,pp.n,9,"#333",'start')+tlab(xE+rr+5,ey+8,pp.s+" · "+pp.div.replace(' / ',' '),8,"#9a8a55",'start',true);ey+=34;});
-  const heads=`<g font-family="-apple-system,sans-serif" font-weight="700" fill="#999" font-size="11"><text x="${xD}" y="40" text-anchor="middle">DIVISION</text><text x="${xP}" y="40" text-anchor="middle">PROJECT</text><text x="${xV}" y="40" text-anchor="middle">VENDOR</text><text x="${xE}" y="40" text-anchor="middle">DECISION-MAKERS</text></g>`;
-  return[`<rect width="1320" height="1320" fill="url(#gp)"/>`+heads+L+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB,"0 0 1320 1320","who commissioned each project (left) and who built it (right) · gold column = decision-makers by score"];}
- // ---------- BOARD (people fanned wide) ----------
- function board(){const cols=5,cw=326,ch=680,padX=24,padY=76;const Wd=cols*cw+padX*2,Ht=2*ch+padY;let s=`<rect width="${Wd}" height="${Ht}" fill="url(#gp)"/>`;let N="",LAB="";
-  DIV.forEach((d,i)=>{const nm=d[0],c=d[1],col=i%cols,row=Math.floor(i/cols);const cx=padX+col*cw+cw/2,cy=padY+row*ch+150;const np=PROJ[nm].length;const dr=20+np*1.4;
-   N+=ball(cx,cy,dr,c,.9);LAB+=`<text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">${np}</text>`;
-   LAB+=tlab(cx,cy-dr-9,nm.replace(' / ',' '),12.5,shade(c,.6),'middle')+tlab(cx,cy-dr+4,np+" projects",9,"#9a9a92",'middle',true);
-   const ppl=(PPL[nm]||[]).slice().sort((a,b)=>b[1]-a[1]);const n=ppl.length;
-   const span=Math.min(2*Math.PI*0.92, 0.7+n*0.34);        // wider fan as count grows
-   ppl.forEach((pp,j)=>{const frac=n===1?0.5:j/(n-1);const ang=Math.PI/2 - span/2 + span*frac;const ring=j%2;const rad=118+ring*44;
-    const[px,py]=P(cx,cy+14,rad,ang);const rr=6.5+(pp[1]-60)/6;
-    N+=ball(px,py,rr,GOLD,.92)+`<title>${pp[0]} — score ${pp[1]}</title>`;
-    LAB+=`<text x="${px}" y="${py+2.6}" text-anchor="middle" font-size="8" fill="#5a4600" font-weight="700">${pp[1]}</text>`;
-    LAB+=tlab(px,py+rr+9,pp[0],8.6,"#4a4a4a",'middle');});});
-  const leg=`<g font-family="-apple-system,sans-serif"><circle cx="${padX+14}" cy="30" r="8" fill="url(#${gid[GOLD]})"/><text x="${padX+30}" y="34" font-size="12.5" fill="#555">gold bubble = a Paramount decision-maker &nbsp;·&nbsp; size &amp; number = opportunity score (who to call first)</text></g>`;
-  return[s+leg+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB,`0 0 ${Wd} ${Ht}`,"each division with its decision-makers fanned out as gold bubbles — bigger = higher opportunity score"];}
- // decision-maker -> vendor (from shared project credits)
- const DMV=[["Katherine Kelly",96,"Versus","Pluto TV"],["Sabrina Caluori",86,"Versus","Nickelodeon"],
-  ["Matt Hernandez",93,"Droga5","Paramount+ / DTC"],["Matt Hernandez",93,"O Positive","Paramount+ / DTC"],["Matt Hernandez",93,"Arcade Edit","Paramount+ / DTC"],["Matt Hernandez",93,"Titmouse","Paramount+ / DTC"],["Matt Hernandez",93,"Human","Paramount+ / DTC"],
-  ["Emmanuelle Leboeuf",91,"Droga5","Paramount+ / DTC"],["Emmanuelle Leboeuf",91,"O Positive","Paramount+ / DTC"],["Emmanuelle Leboeuf",91,"Arcade Edit","Paramount+ / DTC"],
-  ["Domenic DiMeglio",74,"Parliament","Paramount+ / DTC"],["Domenic DiMeglio",74,"Heard City","Paramount+ / DTC"],["Domenic DiMeglio",74,"Rare Medium","Paramount+ / DTC"],
-  ["Shawn Silverman",81,"Fairmont Austin","Paramount+ / DTC"],["Katherine Allen",60,"TCO London","Paramount+ / DTC"],
-  ["Josh Goldstine",69,"Workshop Creative","Paramount Pictures"],["Kelly Dunne",81,"Known (lead agency)","Paramount Sports"],
-  ["Rob Stecklow",60,"72andSunny","Paramount Sports"],["Rob Stecklow",60,"Smuggler","Paramount Sports"],["Rob Stecklow",60,"Trafik","Paramount Sports"],["Rob Stecklow",60,"Iconic","Paramount Sports"],["Rob Stecklow",60,"Barking Owl","Paramount Sports"],["Rob Stecklow",60,"Soundtree","Paramount Sports"],
-  ["Jesse Sisgold",73,"ITV America","Paramount Sports"],["Jesse Sisgold",73,"Kim Kardashian Prod.","Paramount Sports"],
-  ["Michael Benson",76,"AutoCamp","CBS"],["Michael Benson",76,"Hilton Honors","CBS"],
-  ["Tiyale Hayes",75,"P&G","BET"],["Tiyale Hayes",75,"Gilead","BET"],["Tiyale Hayes",75,"Jesse Collins Ent.","BET"],["Connie Orlando",60,"Jesse Collins Ent.","BET"],
-  ["Matthew Newcomb",81,"Bacardi","MTV / Brand Studio"],["Matthew Newcomb",81,"Bark Bark","MTV / Brand Studio"],
-  ["Dario Spina",76,"Red Bull","MTV / Brand Studio"],["Dario Spina",76,"Gravy Films","MTV / Brand Studio"]];
- function dmvendor(){const map={};DMV.forEach(e=>{(map[e[0]]=map[e[0]]||{s:e[1],v:[]});map[e[0]].v.push([e[2],e[3]]);});
-  const dms=Object.keys(map).sort((a,b)=>map[b].s-map[a].s);const cols=4,cw=308,chh=440,padX=22,padY=82;const Wd=cols*cw+padX*2,rows=Math.ceil(dms.length/cols),Ht=rows*chh+padY;
-  let s=`<rect width="${Wd}" height="${Ht}" fill="url(#gp)"/>`,N="",LAB="",L="";
-  dms.forEach((dm,i)=>{const col=i%cols,row=Math.floor(i/cols);const cx=padX+col*cw+cw/2,cy=padY+row*chh+140;const sc=map[dm].s,hr=11+(sc-60)/4;
-   const vs=map[dm].v,n=vs.length,span=Math.min(2*Math.PI*0.9,0.7+n*0.34);
-   vs.forEach((vv,j)=>{const frac=n===1?0.5:j/(n-1);const ang=Math.PI/2-span/2+span*frac;const ring=j%2;const[px,py]=P(cx,cy+10,100+ring*42,ang);const c=COL[vv[1]];
-    L+=`<line x1="${cx}" y1="${cy}" x2="${px}" y2="${py}" stroke="${c}" stroke-opacity=".4" stroke-width="1.3"/>`;
-    N+=ball(px,py,7,c,.72,`data-k="vendor" data-n="${esc(vv[0])}" data-x="incumbent for ${esc(dm)} · ${esc(vv[1])}"`,`${vv[0]} — ${vv[1]}`);
-    LAB+=tlab(px,py+16,vv[0],8.4,"#4a4a4a",'middle');});
-   N+=ball(cx,cy,hr,GOLD,.95,`data-k="person" data-n="${esc(dm)}" data-x="opportunity score ${sc}"`,`${dm} — score ${sc}`);
-   LAB+=`<text x="${cx}" y="${cy+3}" text-anchor="middle" font-size="9" fill="#5a4600" font-weight="700" pointer-events="none">${sc}</text>`+tlab(cx,cy-hr-8,dm,12,"#2a2a2a")+tlab(cx,cy-hr+4,"opportunity score "+sc,8.5,"#9a8a55","middle",true);});
-  const leg=`<g font-family="-apple-system,sans-serif"><circle cx="${padX+14}" cy="36" r="8" fill="url(#${gid[GOLD]})"/><text x="${padX+30}" y="40" font-size="12.5" fill="#555">gold = Paramount decision-maker · the vendors around it are the incumbents they use now (who Versus would beat)</text></g>`;
-  return[s+leg+L+`<g style="mix-blend-mode:multiply">${N}</g>`+LAB,`0 0 ${Wd} ${Ht}`,"each decision-maker and the vendors they rely on today — the incumbents to displace"];}
- const VIEWS={orbits,flow,board,overlap,dmvendor};
- const KIND={
-  center:{t:"The company",d:"Paramount, the parent. Every division links back to it. The number is the total projects mapped this year (39)."},
-  division:{t:"Division",d:"A part of Paramount — a network, studio or platform (BET, Pluto, Pictures…). The number inside is how many marketing projects it ran. Bigger bubble = more work."},
-  project:{t:"Project",d:"One marketing campaign. Its colour tells you which division owns it. A solid bubble = High confidence in the research; a faded one = Medium confidence."},
-  vendor:{t:"Vendor / agency",d:"An outside company that actually made the work — an agency, production house, post house, platform or sponsor — coloured to match the division it served."},
-  person:{t:"Decision-maker",d:"A Paramount executive who approves or commissions the work, shown in gold. Its size and number are the opportunity score: how high a priority this person is for Versus to contact first."},
-  overlap:{t:"Shared vendor (bridge)",d:"A vendor used by more than one division. The split colours show which divisions overlap. These are the strategic bridges — a way into two clients at once."}
- };
- const oinfo=document.getElementById("oinfo"),okey=document.getElementById("okey");
- okey.innerHTML=`<h4>What the bubbles mean</h4>
-  <div class="kr"><span class="kd" style="background:#242424"></span>Paramount (centre)</div>
-  <div class="kr"><span class="kd" style="background:#5566a8"></span>Division · number = # projects</div>
-  <div class="kr"><span class="kd" style="background:#8f6aa6;opacity:.55"></span>Project (faded = Medium confidence)</div>
-  <div class="kr"><span class="kd" style="background:#7fb8b3;opacity:.7"></span>Vendor / agency</div>
-  <div class="kr"><span class="kd" style="background:#e0a800"></span>Decision-maker (size = score)</div>
-  <div class="tip">Click any bubble to learn what it is.</div>`;
- function showInfo(el){const k=el.getAttribute("data-k"),n=el.getAttribute("data-n"),x=el.getAttribute("data-x")||"",info=KIND[k];if(!info)return;
-  oinfo.innerHTML=`<button id="oclose">&times;</button><div class="ik">${info.t}</div><div class="iname">${n}</div>${x?`<div class="ix">${x}</div>`:""}<p>${info.d}</p>`;
-  oinfo.classList.add("open");document.getElementById("oclose").onclick=()=>oinfo.classList.remove("open");}
- function wireInfo(v){okey.style.display=(v==="orbits")?"block":"none";oinfo.classList.remove("open");
-  svg.querySelectorAll("[data-k]").forEach(el=>{el.style.cursor="pointer";el.addEventListener("click",e=>{e.stopPropagation();showInfo(el);});});}
- svg.addEventListener("click",e=>{if(e.target.tagName==="svg"||e.target.tagName==="rect")oinfo.classList.remove("open");});
- function show(v){const[inner,vb,sub]=VIEWS[v]();svg.setAttribute("viewBox",vb);svg.innerHTML=DEFS+inner;document.getElementById("vsub").textContent=sub;document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));wireInfo(v);}
- document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>show(b.dataset.v));
- show("orbits");
-})();
-</script></body></html>
+const NS="http://www.w3.org/2000/svg";
+const tip=document.getElementById('tip');
+function show(e,h){tip.innerHTML=h;tip.style.opacity=1;mv(e);}
+function mv(e){const p=12;let x=e.clientX+p,y=e.clientY+p;if(x+tip.offsetWidth>innerWidth)x=e.clientX-tip.offsetWidth-p;if(y+tip.offsetHeight>innerHeight)y=e.clientY-tip.offsetHeight-p;tip.style.left=x+'px';tip.style.top=y+'px';}
+function hide(){tip.style.opacity=0;}
+function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+
+const BUYERS={"Michael Waldron":"SVP Design & Motion","Vincent Aricco":"SVP ECD / Global Creative","Rebecca Mall":"Pres, Brand Mktg & Franchise","Paul Southern":"EVP Consumer Products","Matthew Perreault":"SVP Preschool Creative","Domenic DiMeglio":"EVP CMO, Streaming","Matt Hernandez":"SVP Head of Design","Shawn Silverman":"SVP Title Marketing","Becca Schader":"SVP Creative Marketing","Cindy Holland":"Chair, DTC","Michelle Garcia":"EVP Growth Mktg","Tiyale Hayes":"EVP Marketing & Audience Dev","Connie Orlando":"EVP Head of Programming","Dario Spina":"CMO, Brand Studio","Matthew Newcomb":"SVP Integrated Marketing","Mike Benson":"President & CMO, TV Media","Kelly Dunne":"EVP CBS Sports Marketing","JP LoMonaco":"VP On-Air Graphics","Comedy Central lead (find)":"Marketing lead — find","Paramount Network lead (find)":"MTVE lead — find","Jay Askinasi":"Chief Revenue Officer"};
+const PLAYERS={"Studio Moross":"beat","Roger":"beat","Done+Dusted":"beat","Double Up":"beat","State Design":"beat","Silver Spoon":"beat","tamarama":"beat","Droga5":"partner","72andSunny":"partner","New Commercial Arts":"partner","Framestore":"partner","Picturemill":"beat","TCO London":"beat","Arcade Edit":"partner","DixonBaxi":"beat","O Positive":"beat","Jesse Collins":"partner","Sibling Rivalry":"beat","Bark Bark":"beat","Stuck in Motion":"beat","Gravy Films":"beat","Artists Equity":"partner","Known":"partner","Elevation":"beat","We Are Royale":"beat","loyalkaspar":"beat","Taboola":"partner","Omnicom Media":"partner","AllCreativeMedia":"partner","VERSUS":"versus"};
+const PROJ=[
+ ["Kids’ Choice Awards","Nickelodeon",["Vincent Aricco"],["Studio Moross","Done+Dusted","Double Up"],4,"Likely"],
+ ["Nickelodeon global rebrand","Nickelodeon",["Vincent Aricco"],["Roger"],3,"Likely"],
+ ["Nick Jr. preschool rebrand","Nickelodeon",["Matthew Perreault"],["Roger","State Design"],2,"Likely"],
+ ["Monster High","Nickelodeon",["Matthew Perreault"],["State Design"],2,"Likely"],
+ ["NFL on Nickelodeon","Nickelodeon",["Vincent Aricco"],["Silver Spoon"],4,"Likely"],
+ ["Nicktoons rebrand","Nickelodeon",["Vincent Aricco"],["tamarama"],2,"Likely"],
+ ["SpongeBob on the Sphere","Nickelodeon",["Michael Waldron"],["VERSUS"],4,"Confirmed"],
+ ["SpongeBob 25 experiential","Nickelodeon",["Rebecca Mall"],[],2,"Needs-human"],
+ ["Franchise marketing (TMNT)","Nickelodeon",["Rebecca Mall"],[],3,"Needs-human"],
+ ["A Mountain of Entertainment","Paramount+",["Domenic DiMeglio"],["Droga5","VERSUS","Framestore"],4,"Confirmed"],
+ ["Find Your Mountain","Paramount+",["Domenic DiMeglio"],["Droga5","Arcade Edit"],4,"Confirmed"],
+ ["Nobody Watches Like U.S.","Paramount+",["Domenic DiMeglio"],["72andSunny"],4,"Confirmed"],
+ ["Mountain film (VFX)","Paramount+",["Matt Hernandez"],["New Commercial Arts","Framestore"],4,"Confirmed"],
+ ["Star Trek: SNW titles","Paramount+",["Shawn Silverman"],["Picturemill"],2,"Confirmed"],
+ ["Yellowjackets FYC","Paramount+",["Becca Schader"],["TCO London"],1,"Likely"],
+ ["UFC on Paramount+ opener","Paramount+",["Domenic DiMeglio"],["VERSUS"],4,"Needs-human"],
+ ["Evergreen 3D brand system","Paramount+",["Matt Hernandez"],[],3,"Needs-human"],
+ ["Pluto anamorphic OOH","Pluto TV",["Michelle Garcia"],["VERSUS"],2,"Needs-human"],
+ ["Pluto ‘Feel the Free’","Pluto TV",["Michelle Garcia"],["O Positive"],3,"Likely"],
+ ["Pluto 2026 relaunch","Pluto TV",["Cindy Holland"],[],4,"Needs-human"],
+ ["BET Awards 2026","BET",["Connie Orlando"],["Jesse Collins"],4,"Likely"],
+ ["BET on-air identity","BET",["Tiyale Hayes"],["Sibling Rivalry"],3,"Likely"],
+ ["BET Media House","BET",["Tiyale Hayes"],[],3,"Confirmed"],
+ ["Burger King × VMAs","MTV / Brand Studio",["Dario Spina"],["Bark Bark","Stuck in Motion"],2,"Confirmed"],
+ ["Dunkin × VMAs","MTV / Brand Studio",["Dario Spina"],["Gravy Films","Artists Equity"],2,"Confirmed"],
+ ["VMA custom slate","MTV / Brand Studio",["Matthew Newcomb"],[],3,"Unconfirmed"],
+ ["You Can Count on Sundays","CBS Sports",["Kelly Dunne"],["Known"],3,"Confirmed"],
+ ["CBS Sports graphics","CBS Sports",["JP LoMonaco"],["Elevation"],4,"Likely"],
+ ["Tracker / NCIS experiential","CBS Entertainment",["Mike Benson"],["We Are Royale"],2,"Unconfirmed"],
+ ["Comedy Central on-air","Comedy Central",["Comedy Central lead (find)"],["loyalkaspar"],2,"Unconfirmed"],
+ ["Killer Classics","Paramount Network",["Paramount Network lead (find)"],[],2,"Likely"],
+ ["Ads Manager program","Paramount Advertising",["Jay Askinasi"],["AllCreativeMedia"],1,"Likely"],
+ ["Dynamic ad units","Paramount Advertising",["Jay Askinasi"],["Omnicom Media"],2,"Confirmed"],
+ ["Performance Multiplier","Paramount Advertising",["Jay Askinasi"],["Taboola"],1,"Confirmed"]];
+const NETS=[["Paramount+","#5fb0aa"],["Pluto TV","#8272bd"],["Nickelodeon","#cf9a55"],["BET","#c0615a"],["MTV / Brand Studio","#5fa78c"],["CBS Entertainment","#5f79b8"],["CBS Sports","#6d84c0"],["Comedy Central","#b8724a"],["Paramount Network","#8f6aa6"],["Paramount Advertising","#7fb8b3"]];
+function statusOf(p){if(p[3].length===0)return"open";if(p[3].includes("VERSUS"))return"versus";if(p[3].some(a=>PLAYERS[a]==="beat"))return"beat";return"partner";}
+const SC={beat:"#c0615a",partner:"#5f79b8",versus:"#8272bd",open:"#b08a00"};
+
+// tree
+let uid=0;const root={id:"root",name:"Paramount",depth:0,children:[]};
+NETS.forEach(([net,col])=>{const nn={id:"n"+(uid++),name:net,depth:1,color:col,net,children:[]};
+  const dms={};PROJ.filter(p=>p[1]===net).forEach(p=>p[2].forEach(b=>{(dms[b]=dms[b]||[]).push(p);}));
+  Object.keys(dms).forEach(b=>{const dn={id:"n"+(uid++),name:b,depth:2,color:col,net,children:[]};
+    dms[b].forEach(p=>dn.children.push({id:"n"+(uid++),name:p[0],depth:3,color:col,net,proj:p,status:statusOf(p)}));
+    dn.count=dn.children.length;nn.children.push(dn);});
+  nn.count=nn.children.reduce((s,d)=>s+d.children.length,0);root.children.push(nn);});
+const ALL=[];(function fl(n){ALL.push(n);(n.children||[]).forEach(fl);})(root);
+const PARENT={};(function pp(n){(n.children||[]).forEach(c=>{PARENT[c.id]=n;pp(c);});})(root);
+
+// radial layout (all shown)
+const cx=1000,cy=1000,Rn=310,Rd=560,Rp=820;
+let idx=0;const leaves=root.children.reduce((s,n)=>s+n.children.reduce((a,d)=>a+d.children.length,0),0);
+root.children.forEach(nn=>{nn.children.forEach(dn=>{dn.children.forEach(pn=>{pn._a=(-90+(idx+0.5)/leaves*360)*Math.PI/180;idx++;});
+  dn._a=dn.children.reduce((s,c)=>s+c._a,0)/dn.children.length;});
+  nn._a=nn.children.reduce((s,c)=>s+c._a,0)/nn.children.length;});
+function place(n){const r=n.depth===1?Rn:n.depth===2?Rd:Rp;n._x=n.depth===0?cx:cx+r*Math.cos(n._a);n._y=n.depth===0?cy:cy+r*Math.sin(n._a);}
+ALL.forEach(place);root._x=cx;root._y=cy;
+
+const svg=document.getElementById('mm');
+const defs=el('defs',{});
+const gg=el('radialGradient',{id:'gloss',cx:'0.34',cy:'0.28',r:'0.75'});
+gg.appendChild(el('stop',{offset:'0','stop-color':'#fff','stop-opacity':'0.55'}));gg.appendChild(el('stop',{offset:'0.5','stop-color':'#fff','stop-opacity':'0.06'}));gg.appendChild(el('stop',{offset:'1','stop-color':'#fff','stop-opacity':'0'}));defs.appendChild(gg);
+const shf=el('filter',{id:'sh',x:'-50%',y:'-50%',width:'200%',height:'200%'});shf.appendChild(el('feDropShadow',{dx:0,dy:1.5,stdDeviation:2.2,'flood-color':'#3a2f18','flood-opacity':.22}));defs.appendChild(shf);
+svg.appendChild(defs);
+const vp=el('g',{});svg.appendChild(vp);const gRing=el('g',{}),gL=el('g',{}),gN=el('g',{});vp.appendChild(gRing);vp.appendChild(gL);vp.appendChild(gN);
+[Rn,Rd,Rp].forEach(r=>gRing.appendChild(el('circle',{cx,cy,r,fill:'none',stroke:'var(--goldsoft)','stroke-opacity':.4,'stroke-width':1,'stroke-dasharray':'1 9'})));
+
+function bead(s,color,r,hollow){if(hollow){s.appendChild(el('circle',{cx:0,cy:0,r,fill:'var(--card)',stroke:color,'stroke-width':2.2,'stroke-dasharray':'3 2.5'}));}
+  else{s.appendChild(el('circle',{cx:0,cy:0,r,fill:color,stroke:'var(--rim)','stroke-width':1,filter:'url(#sh)'}));s.appendChild(el('circle',{cx:0,cy:0,r,fill:'url(#gloss)'}));}}
+
+// links
+ALL.forEach(n=>{if(n===root)return;const pa=PARENT[n.id];
+  const aa=Math.atan2(pa._y-cy,pa._x-cx),ba=Math.atan2(n._y-cy,n._x-cx);const ar=Math.hypot(pa._x-cx,pa._y-cy),br=Math.hypot(n._x-cx,n._y-cy),mr=(ar+br)/2;
+  const p1=[cx+mr*Math.cos(aa),cy+mr*Math.sin(aa)],p2=[cx+mr*Math.cos(ba),cy+mr*Math.sin(ba)];
+  n._link=el('path',{d:`M ${pa._x} ${pa._y} C ${p1[0]} ${p1[1]}, ${p2[0]} ${p2[1]}, ${n._x} ${n._y}`,fill:'none',stroke:'#8a7f5f','stroke-opacity':n.depth===3?.28:.4,'stroke-width':n.depth===1?1.6:1.1});gL.appendChild(n._link);});
+
+// nodes
+ALL.forEach(n=>{const g=el('g',{});const s=el('g',{});g.appendChild(s);n._g=g;n._s=s;
+  g.setAttribute('transform',`translate(${n._x},${n._y})`);
+  if(n.depth===0){bead(s,'#2a2723',44);const t=el('text',{x:0,y:5,'text-anchor':'middle','font-size':15,'font-weight':600,fill:'#f4efe4'});t.textContent='Paramount';s.appendChild(t);}
+  else if(n.depth===1){const r=16+Math.min(n.count,10)*1.15;n._r=r;bead(s,n.color,r);
+    const num=el('text',{x:0,y:5,'text-anchor':'middle','font-size':13,'font-weight':600,fill:'#fff'});num.textContent=n.count;s.appendChild(num);
+    n._lab=el('text',{'text-anchor':'start','font-size':15,'font-weight':600,fill:'var(--ink)'});n._lab.textContent=n.name;s.appendChild(n._lab);n._labAlways=true;}
+  else if(n.depth===2){n._r=9;bead(s,n.color,9);
+    n._lab=el('text',{'text-anchor':'start','font-size':13,'font-weight':600,fill:'var(--ink)'});n._lab.textContent=n.name;n._lab.style.display='none';s.appendChild(n._lab);}
+  else{const dc=SC[n.status];n._r=6.5;bead(s,dc,6.5,n.status==='open');
+    n._lab=el('text',{'text-anchor':'start','font-size':12,fill:'var(--ink)'});n._lab.textContent=n.name;n._lab.style.display='none';s.appendChild(n._lab);}
+  positionLabel(n);
+  g.style.cursor='pointer';
+  s.addEventListener('mouseenter',()=>{s.style.transition='transform .15s';s.style.transform='scale(1.14)';if(n._lab&&!n._labAlways)n._lab.style.display='';});
+  s.addEventListener('mouseleave',()=>{s.style.transform='';if(n._lab&&!n._labAlways&&!(focus&&n.net===focus))n._lab.style.display='none';});
+  s.addEventListener('mousemove',e=>{if(n.depth===3)show(e,`<b>${n.proj[0]}</b><br>${n.net} · ${n.proj[5]}`);else show(e,`<b>${n.name}</b><br>${n.depth===1?n.count+' projects':(BUYERS[n.name]||'')}`);});
+  s.addEventListener('mouseleave',hide);
+  s.addEventListener('click',ev=>{ev.stopPropagation();select(n);});
+  gN.appendChild(g);});
+function positionLabel(n){if(!n._lab)return;const right=n._x>=cx;const off=(n._r||10)+8;n._lab.setAttribute('x',right?off:-off);n._lab.setAttribute('y',5);n._lab.setAttribute('text-anchor',right?'start':'end');}
+
+// ---- details panel ----
+const panel=document.getElementById('panel');
+function classPill(c){const col=c==='beat'?'var(--beat)':c==='partner'?'var(--partner)':c==='versus'?'var(--versus)':'var(--open)';
+  const t=c==='beat'?'competitor':c==='partner'?'could hire us':c==='versus'?'Versus':'up for grabs';return `<span class="pill" style="background:${col}">${t}</span>`;}
+function select(n){
+  gN.querySelectorAll('circle[data-sel]').forEach(c=>c.removeAttribute('data-sel'));
+  let h='';
+  if(n.depth<=1){const isNet=n.depth===1;const ps=isNet?PROJ.filter(p=>p[1]===n.name):PROJ;
+    h=`<h3>${n.name}</h3><div class="role">${isNet?'Network':'The whole company'} · ${ps.length} projects</div>`;
+    const open=ps.filter(p=>p[3].length===0).length,beat=ps.filter(p=>p[3].some(a=>PLAYERS[a]==='beat')).length,ver=ps.filter(p=>p[3].includes('VERSUS')).length;
+    h+=`<div class="kv"><span class="k">Snapshot</span><span>${beat} competitor-held · ${open} up for grabs · ${ver} Versus</span></div>`;
+    if(isNet){h+=`<div class="sec">Decision-makers</div>`+n.children.map(d=>`<div class="row"><div class="pn">${d.name}</div><div class="pm">${BUYERS[d.name]||''} · ${d.count} project(s)</div></div>`).join('');}
+  } else if(n.depth===2){h=`<h3>${n.name}</h3><div class="role">${BUYERS[n.name]||''} · ${n.net}</div>`;
+    h+=`<div class="sec">Hands out (${n.children.length})</div>`+n.children.map(c=>{const p=c.proj;return `<div class="row"><div class="pn">${p[0]} ${classPill(c.status)}</div><div class="pm">${p[3].length?'made by '+p[3].join(', '):'no agency yet'}</div></div>`;}).join('');
+  } else {const p=n.proj;h=`<h3>${p[0]}</h3><div class="role">${p[1]} · scale ${["","Small","Medium","Large","Tentpole"][p[4]]} · ${p[5]}</div>`;
+    h+=`<div class="kv"><span class="k">Status</span><span>${classPill(n.status)}</span></div>`;
+    h+=`<div class="sec">Handed out by</div>`+p[2].map(b=>`<div class="row"><div class="pn">${b}</div><div class="pm">${BUYERS[b]||''}</div></div>`).join('');
+    h+=`<div class="sec">Done by</div>`+(p[3].length?p[3].map(v=>`<div class="row"><div class="pn">${v}</div><div class="pm">${PLAYERS[v]==='partner'?'big agency — could hire Versus':PLAYERS[v]==='versus'?'Versus — we do this':'competitor — we’d beat them'}</div></div>`).join(''):`<div class="row" style="border:1px dashed var(--open)"><div class="pn" style="color:var(--open)">No agency yet — up for grabs</div><div class="pm">The easiest to win.</div></div>`);}
+  panel.innerHTML=h;
+}
+
+// ---- tabs (All + each network) ----
+let focus=null;
+const tabs=document.getElementById('tabs');
+function mkTab(label,color,net){const t=document.createElement('span');t.className='tab'+(net===focus?' on':'');
+  t.innerHTML=(color?`<span class="cd" style="background:${color}"></span>`:'')+label;
+  t.onclick=()=>{focus=net;[...tabs.children].forEach(c=>c.classList.remove('on'));t.classList.add('on');applyFocus();};tabs.appendChild(t);}
+mkTab('★ All',null,null);
+NETS.forEach(([net,col])=>mkTab(net,col,net));
+function applyFocus(){
+  ALL.forEach(n=>{const inN=!focus||n.net===focus||n.depth===0;
+    n._g.style.opacity=inN?1:0.12;n._g.style.pointerEvents=inN?'auto':'none';
+    if(n._link)n._link.style.opacity=inN?'':0.05;
+    if(n._lab&&!n._labAlways)n._lab.style.display=(focus&&n.net===focus)?'':'none';});
+  gRing.style.opacity=focus?0.25:1;
+  if(focus){const ns=ALL.filter(n=>n.net===focus);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+    ns.forEach(n=>{x0=Math.min(x0,n._x-40);y0=Math.min(y0,n._y-40);x1=Math.max(x1,n._x+120);y1=Math.max(y1,n._y+40);});
+    x0=Math.min(x0,cx-60);y0=Math.min(y0,cy-60);x1=Math.max(x1,cx+60);y1=Math.max(y1,cy+60);
+    const bw=x1-x0,bh=y1-y0,ss=Math.min(2000/bw,2000/bh,2.4),bx=(x0+x1)/2,by=(y0+y1)/2;
+    animateTo(ss,1000-bx*ss,1000-by*ss);
+  } else animateTo(1,0,0);
+}
+
+// ---- pan/zoom ----
+let sc=1,tx=0,ty=0,drag=false,lx,ly,rafp=null;
+function apply(){vp.setAttribute('transform',`translate(${tx},${ty}) scale(${sc})`);}
+function animateTo(ns,nx,ny){if(rafp)cancelAnimationFrame(rafp);const s0=sc,x0=tx,y0=ty,t0=performance.now();
+  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  (function fr(now){const k=Math.min(1,(now-t0)/500),e=ease(k);sc=s0+(ns-s0)*e;tx=x0+(nx-x0)*e;ty=y0+(ny-y0)*e;apply();if(k<1)rafp=requestAnimationFrame(fr);})(performance.now());}
+apply();
+svg.addEventListener('wheel',e=>{e.preventDefault();const r=svg.getBoundingClientRect();const k=2000/r.width;const mx=(e.clientX-r.left)*k,my=(e.clientY-r.top)*k;const fc=e.deltaY<0?1.12:1/1.12;const ns=Math.max(0.4,Math.min(4,sc*fc));tx=mx-(mx-tx)*(ns/sc);ty=my-(my-ty)*(ns/sc);sc=ns;apply();},{passive:false});
+svg.addEventListener('mousedown',e=>{drag=true;svg.classList.add('drag');lx=e.clientX;ly=e.clientY;});
+window.addEventListener('mousemove',e=>{if(!drag)return;const r=svg.getBoundingClientRect();const k=2000/r.width;tx+=(e.clientX-lx)*k;ty+=(e.clientY-ly)*k;lx=e.clientX;ly=e.clientY;apply();});
+window.addEventListener('mouseup',()=>{drag=false;svg.classList.remove('drag');});
+document.getElementById('zin').onclick=()=>{sc=Math.min(4,sc*1.2);apply();};
+document.getElementById('zout').onclick=()=>{sc=Math.max(0.4,sc/1.2);apply();};
+document.getElementById('themeBtn').onclick=()=>{const r=document.documentElement,c=r.getAttribute('data-theme');const dark=c?c==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.setAttribute('data-theme',dark?'light':'dark');};
+</script>
+</body>
+</html>
