@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Paramount Universe</title>
+<style>
+:root{
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,sans-serif;
+  --paper:#e7e1d6;--ink:#26241f;--ink2:#7c776c;--gold:#a08b57;--goldsoft:#c3b48a;
+  --card:#faf7f0;--line:#d9d3c6;--rim:rgba(0,0,0,.14);
+  --beat:#c0615a;--partner:#5f79b8;--versus:#8272bd;--open:#b08a00;
+  --shadow:0 2px 8px rgba(58,47,24,.10),0 14px 30px rgba(58,47,24,.10);
+}
+:root[data-theme="dark"]{--paper:#211f1a;--ink:#efe9dd;--ink2:#a49d8c;--card:#2a2723;--line:#3a362e;--goldsoft:#8a7a4f;--rim:rgba(0,0,0,.4);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1500px;margin:0 auto;padding:24px 22px 40px}
+.kick{font-family:var(--sans);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+h1{font-size:27px;font-weight:600;letter-spacing:-.01em;margin:0 0 5px}
+.lede{font-family:var(--sans);font-size:13px;line-height:1.5;color:var(--ink2);margin:0 0 14px;max-width:850px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.btns{display:flex;gap:6px;flex:none}
+.btn{font-family:var(--sans);border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:999px;min-width:34px;padding:7px 12px;font-size:12px;font-weight:600;cursor:pointer}
+.btn:hover{color:var(--ink);border-color:var(--goldsoft)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+.tab{font-family:var(--sans);font-size:12px;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink2);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.tab .cd{width:9px;height:9px;border-radius:50%}
+.tab.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.stage{display:grid;grid-template-columns:1fr 316px;gap:16px}
+.frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;touch-action:none;background-color:var(--paper);
+  background-image:radial-gradient(rgba(120,110,85,.16) 1px, transparent 1.2px);background-size:23px 23px}
+svg{display:block;width:100%;height:auto;cursor:grab}svg.drag{cursor:grabbing}
+text{font-family:var(--serif)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px;font-family:var(--sans);font-size:13px;max-height:74vh;overflow:auto}
+.panel h3{font-family:var(--serif);margin:0 0 3px;font-size:18px;font-weight:600}
+.panel .role{color:var(--ink2);font-size:12.5px;margin-bottom:12px}
+.panel .kv{display:flex;gap:8px;margin:4px 0}.panel .kv .k{color:var(--gold);min-width:74px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;font-weight:700;padding-top:2px}
+.panel .sec{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin:15px 0 6px;border-top:1px solid var(--line);padding-top:11px}
+.panel .row{padding:7px 9px;border-radius:8px;background:#f1ece1;margin-bottom:5px}
+.panel .row .pn{font-weight:600;color:var(--ink);font-family:var(--serif);font-size:14px}
+.panel .row .pm{font-size:11.5px;color:var(--ink2)}
+.pill{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;color:#fff}
+.panel .empty{color:var(--ink2);font-style:italic;text-align:center;padding-top:36px;line-height:1.6}
+.dotk{width:11px;height:11px;border-radius:50%;display:inline-block}
+.legend{font-family:var(--sans);display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:11px;font-size:12px;color:var(--ink2)}
+.legend .k{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:12.5px;padding:8px 11px;border-radius:9px;opacity:0;transition:opacity .1s;z-index:99;max-width:280px;line-height:1.5;box-shadow:0 8px 22px rgba(0,0,0,.28)}
+@media(max-width:900px){.stage{grid-template-columns:1fr}.panel{max-height:none}}
+</style>
+</head>
+<body>
+<div id="tip"></div>
+<div class="wrap">
+  <div class="topbar">
+    <div>
+      <div class="kick">Versus · Business Development</div>
+      <h1>The Paramount Universe</h1>
+      <p class="lede">Everything at once — Paramount, its networks, decision-makers, and projects as one galaxy. <b>Use the tabs to fly into a network</b>, click any bead for its full record on the right. Networks show a count; the more it holds, the bigger it is.</p>
+    </div>
+    <div class="btns"><button class="btn" id="zin">+</button><button class="btn" id="zout">–</button><button class="btn" id="themeBtn">◐</button></div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div class="stage">
+    <div class="frame"><svg id="mm" viewBox="0 0 2000 2000" role="img" aria-label="Paramount universe"></svg></div>
+    <div class="panel" id="panel"><div class="empty">Click any bead — a network, a decision-maker, or a project — to see everything about it here.</div></div>
+  </div>
+  <div class="legend">
+    <span class="k"><span class="dotk" style="background:var(--beat)"></span>Competitor — we’d beat them</span>
+    <span class="k"><span class="dotk" style="background:var(--partner)"></span>Big agency — could hire Versus</span>
+    <span class="k"><span class="dotk" style="background:var(--versus)"></span>Versus — we already do this</span>
+    <span class="k"><span class="dotk" style="background:transparent;border:2px dashed var(--open)"></span>Up for grabs — no agency yet</span>
+  </div>
+</div>
+<script>
+const NS="http://www.w3.org/2000/svg";
+const tip=document.getElementById('tip');
+function show(e,h){tip.innerHTML=h;tip.style.opacity=1;mv(e);}
+function mv(e){const p=12;let x=e.clientX+p,y=e.clientY+p;if(x+tip.offsetWidth>innerWidth)x=e.clientX-tip.offsetWidth-p;if(y+tip.offsetHeight>innerHeight)y=e.clientY-tip.offsetHeight-p;tip.style.left=x+'px';tip.style.top=y+'px';}
+function hide(){tip.style.opacity=0;}
+function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+
+const BUYERS={"Michael Waldron":"SVP Design & Motion","Vincent Aricco":"SVP ECD / Global Creative","Rebecca Mall":"Pres, Brand Mktg & Franchise","Paul Southern":"EVP Consumer Products","Matthew Perreault":"SVP Preschool Creative","Domenic DiMeglio":"EVP CMO, Streaming","Matt Hernandez":"SVP Head of Design","Shawn Silverman":"SVP Title Marketing","Becca Schader":"SVP Creative Marketing","Cindy Holland":"Chair, DTC","Michelle Garcia":"EVP Growth Mktg","Tiyale Hayes":"EVP Marketing & Audience Dev","Connie Orlando":"EVP Head of Programming","Dario Spina":"CMO, Brand Studio","Matthew Newcomb":"SVP Integrated Marketing","Mike Benson":"President & CMO, TV Media","Kelly Dunne":"EVP CBS Sports Marketing","JP LoMonaco":"VP On-Air Graphics","Comedy Central lead (find)":"Marketing lead — find","Paramount Network lead (find)":"MTVE lead — find","Jay Askinasi":"Chief Revenue Officer"};
+const PLAYERS={"Studio Moross":"beat","Roger":"beat","Done+Dusted":"beat","Double Up":"beat","State Design":"beat","Silver Spoon":"beat","tamarama":"beat","Droga5":"partner","72andSunny":"partner","New Commercial Arts":"partner","Framestore":"partner","Picturemill":"beat","TCO London":"beat","Arcade Edit":"partner","DixonBaxi":"beat","O Positive":"beat","Jesse Collins":"partner","Sibling Rivalry":"beat","Bark Bark":"beat","Stuck in Motion":"beat","Gravy Films":"beat","Artists Equity":"partner","Known":"partner","Elevation":"beat","We Are Royale":"beat","loyalkaspar":"beat","Taboola":"partner","Omnicom Media":"partner","AllCreativeMedia":"partner","VERSUS":"versus"};
+const PROJ=[
+ ["Kids’ Choice Awards","Nickelodeon",["Vincent Aricco"],["Studio Moross","Done+Dusted","Double Up"],4,"Likely"],
+ ["Nickelodeon global rebrand","Nickelodeon",["Vincent Aricco"],["Roger"],3,"Likely"],
+ ["Nick Jr. preschool rebrand","Nickelodeon",["Matthew Perreault"],["Roger","State Design"],2,"Likely"],
+ ["Monster High","Nickelodeon",["Matthew Perreault"],["State Design"],2,"Likely"],
+ ["NFL on Nickelodeon","Nickelodeon",["Vincent Aricco"],["Silver Spoon"],4,"Likely"],
+ ["Nicktoons rebrand","Nickelodeon",["Vincent Aricco"],["tamarama"],2,"Likely"],
+ ["SpongeBob on the Sphere","Nickelodeon",["Michael Waldron"],["VERSUS"],4,"Confirmed"],
+ ["SpongeBob 25 experiential","Nickelodeon",["Rebecca Mall"],[],2,"Needs-human"],
+ ["Franchise marketing (TMNT)","Nickelodeon",["Rebecca Mall"],[],3,"Needs-human"],
+ ["A Mountain of Entertainment","Paramount+",["Domenic DiMeglio"],["Droga5","VERSUS","Framestore"],4,"Confirmed"],
+ ["Find Your Mountain","Paramount+",["Domenic DiMeglio"],["Droga5","Arcade Edit"],4,"Confirmed"],
+ ["Nobody Watches Like U.S.","Paramount+",["Domenic DiMeglio"],["72andSunny"],4,"Confirmed"],
+ ["Mountain film (VFX)","Paramount+",["Matt Hernandez"],["New Commercial Arts","Framestore"],4,"Confirmed"],
+ ["Star Trek: SNW titles","Paramount+",["Shawn Silverman"],["Picturemill"],2,"Confirmed"],
+ ["Yellowjackets FYC","Paramount+",["Becca Schader"],["TCO London"],1,"Likely"],
+ ["UFC on Paramount+ opener","Paramount+",["Domenic DiMeglio"],["VERSUS"],4,"Needs-human"],
+ ["Evergreen 3D brand system","Paramount+",["Matt Hernandez"],[],3,"Needs-human"],
+ ["Pluto anamorphic OOH","Pluto TV",["Michelle Garcia"],["VERSUS"],2,"Needs-human"],
+ ["Pluto ‘Feel the Free’","Pluto TV",["Michelle Garcia"],["O Positive"],3,"Likely"],
+ ["Pluto 2026 relaunch","Pluto TV",["Cindy Holland"],[],4,"Needs-human"],
+ ["BET Awards 2026","BET",["Connie Orlando"],["Jesse Collins"],4,"Likely"],
+ ["BET on-air identity","BET",["Tiyale Hayes"],["Sibling Rivalry"],3,"Likely"],
+ ["BET Media House","BET",["Tiyale Hayes"],[],3,"Confirmed"],
+ ["Burger King × VMAs","MTV / Brand Studio",["Dario Spina"],["Bark Bark","Stuck in Motion"],2,"Confirmed"],
+ ["Dunkin × VMAs","MTV / Brand Studio",["Dario Spina"],["Gravy Films","Artists Equity"],2,"Confirmed"],
+ ["VMA custom slate","MTV / Brand Studio",["Matthew Newcomb"],[],3,"Unconfirmed"],
+ ["You Can Count on Sundays","CBS Sports",["Kelly Dunne"],["Known"],3,"Confirmed"],
+ ["CBS Sports graphics","CBS Sports",["JP LoMonaco"],["Elevation"],4,"Likely"],
+ ["Tracker / NCIS experiential","CBS Entertainment",["Mike Benson"],["We Are Royale"],2,"Unconfirmed"],
+ ["Comedy Central on-air","Comedy Central",["Comedy Central lead (find)"],["loyalkaspar"],2,"Unconfirmed"],
+ ["Killer Classics","Paramount Network",["Paramount Network lead (find)"],[],2,"Likely"],
+ ["Ads Manager program","Paramount Advertising",["Jay Askinasi"],["AllCreativeMedia"],1,"Likely"],
+ ["Dynamic ad units","Paramount Advertising",["Jay Askinasi"],["Omnicom Media"],2,"Confirmed"],
+ ["Performance Multiplier","Paramount Advertising",["Jay Askinasi"],["Taboola"],1,"Confirmed"]];
+const NETS=[["Paramount+","#5fb0aa"],["Pluto TV","#8272bd"],["Nickelodeon","#cf9a55"],["BET","#c0615a"],["MTV / Brand Studio","#5fa78c"],["CBS Entertainment","#5f79b8"],["CBS Sports","#6d84c0"],["Comedy Central","#b8724a"],["Paramount Network","#8f6aa6"],["Paramount Advertising","#7fb8b3"]];
+function statusOf(p){if(p[3].length===0)return"open";if(p[3].includes("VERSUS"))return"versus";if(p[3].some(a=>PLAYERS[a]==="beat"))return"beat";return"partner";}
+const SC={beat:"#c0615a",partner:"#5f79b8",versus:"#8272bd",open:"#b08a00"};
+
+// tree
+let uid=0;const root={id:"root",name:"Paramount",depth:0,children:[]};
+NETS.forEach(([net,col])=>{const nn={id:"n"+(uid++),name:net,depth:1,color:col,net,children:[]};
+  const dms={};PROJ.filter(p=>p[1]===net).forEach(p=>p[2].forEach(b=>{(dms[b]=dms[b]||[]).push(p);}));
+  Object.keys(dms).forEach(b=>{const dn={id:"n"+(uid++),name:b,depth:2,color:col,net,children:[]};
+    dms[b].forEach(p=>dn.children.push({id:"n"+(uid++),name:p[0],depth:3,color:col,net,proj:p,status:statusOf(p)}));
+    dn.count=dn.children.length;nn.children.push(dn);});
+  nn.count=nn.children.reduce((s,d)=>s+d.children.length,0);root.children.push(nn);});
+const ALL=[];(function fl(n){ALL.push(n);(n.children||[]).forEach(fl);})(root);
+const PARENT={};(function pp(n){(n.children||[]).forEach(c=>{PARENT[c.id]=n;pp(c);});})(root);
+
+// radial layout (all shown)
+const cx=1000,cy=1000,Rn=310,Rd=560,Rp=820;
+let idx=0;const leaves=root.children.reduce((s,n)=>s+n.children.reduce((a,d)=>a+d.children.length,0),0);
+root.children.forEach(nn=>{nn.children.forEach(dn=>{dn.children.forEach(pn=>{pn._a=(-90+(idx+0.5)/leaves*360)*Math.PI/180;idx++;});
+  dn._a=dn.children.reduce((s,c)=>s+c._a,0)/dn.children.length;});
+  nn._a=nn.children.reduce((s,c)=>s+c._a,0)/nn.children.length;});
+function place(n){const r=n.depth===1?Rn:n.depth===2?Rd:Rp;n._x=n.depth===0?cx:cx+r*Math.cos(n._a);n._y=n.depth===0?cy:cy+r*Math.sin(n._a);}
+ALL.forEach(place);root._x=cx;root._y=cy;
+
+const svg=document.getElementById('mm');
+const defs=el('defs',{});
+const gg=el('radialGradient',{id:'gloss',cx:'0.34',cy:'0.28',r:'0.75'});
+gg.appendChild(el('stop',{offset:'0','stop-color':'#fff','stop-opacity':'0.55'}));gg.appendChild(el('stop',{offset:'0.5','stop-color':'#fff','stop-opacity':'0.06'}));gg.appendChild(el('stop',{offset:'1','stop-color':'#fff','stop-opacity':'0'}));defs.appendChild(gg);
+const shf=el('filter',{id:'sh',x:'-50%',y:'-50%',width:'200%',height:'200%'});shf.appendChild(el('feDropShadow',{dx:0,dy:1.5,stdDeviation:2.2,'flood-color':'#3a2f18','flood-opacity':.22}));defs.appendChild(shf);
+svg.appendChild(defs);
+const vp=el('g',{});svg.appendChild(vp);const gRing=el('g',{}),gL=el('g',{}),gN=el('g',{});vp.appendChild(gRing);vp.appendChild(gL);vp.appendChild(gN);
+[Rn,Rd,Rp].forEach(r=>gRing.appendChild(el('circle',{cx,cy,r,fill:'none',stroke:'var(--goldsoft)','stroke-opacity':.4,'stroke-width':1,'stroke-dasharray':'1 9'})));
+
+function bead(s,color,r,hollow){if(hollow){s.appendChild(el('circle',{cx:0,cy:0,r,fill:'var(--card)',stroke:color,'stroke-width':2.2,'stroke-dasharray':'3 2.5'}));}
+  else{s.appendChild(el('circle',{cx:0,cy:0,r,fill:color,stroke:'var(--rim)','stroke-width':1,filter:'url(#sh)'}));s.appendChild(el('circle',{cx:0,cy:0,r,fill:'url(#gloss)'}));}}
+
+// links
+ALL.forEach(n=>{if(n===root)return;const pa=PARENT[n.id];
+  const aa=Math.atan2(pa._y-cy,pa._x-cx),ba=Math.atan2(n._y-cy,n._x-cx);const ar=Math.hypot(pa._x-cx,pa._y-cy),br=Math.hypot(n._x-cx,n._y-cy),mr=(ar+br)/2;
+  const p1=[cx+mr*Math.cos(aa),cy+mr*Math.sin(aa)],p2=[cx+mr*Math.cos(ba),cy+mr*Math.sin(ba)];
+  n._link=el('path',{d:`M ${pa._x} ${pa._y} C ${p1[0]} ${p1[1]}, ${p2[0]} ${p2[1]}, ${n._x} ${n._y}`,fill:'none',stroke:'#8a7f5f','stroke-opacity':n.depth===3?.28:.4,'stroke-width':n.depth===1?1.6:1.1});gL.appendChild(n._link);});
+
+// nodes
+ALL.forEach(n=>{const g=el('g',{});const s=el('g',{});g.appendChild(s);n._g=g;n._s=s;
+  g.setAttribute('transform',`translate(${n._x},${n._y})`);
+  if(n.depth===0){bead(s,'#2a2723',44);const t=el('text',{x:0,y:5,'text-anchor':'middle','font-size':15,'font-weight':600,fill:'#f4efe4'});t.textContent='Paramount';s.appendChild(t);}
+  else if(n.depth===1){const r=16+Math.min(n.count,10)*1.15;n._r=r;bead(s,n.color,r);
+    const num=el('text',{x:0,y:5,'text-anchor':'middle','font-size':13,'font-weight':600,fill:'#fff'});num.textContent=n.count;s.appendChild(num);
+    n._lab=el('text',{'text-anchor':'start','font-size':15,'font-weight':600,fill:'var(--ink)'});n._lab.textContent=n.name;s.appendChild(n._lab);n._labAlways=true;}
+  else if(n.depth===2){n._r=9;bead(s,n.color,9);
+    n._lab=el('text',{'text-anchor':'start','font-size':13,'font-weight':600,fill:'var(--ink)'});n._lab.textContent=n.name;n._lab.style.display='none';s.appendChild(n._lab);}
+  else{const dc=SC[n.status];n._r=6.5;bead(s,dc,6.5,n.status==='open');
+    n._lab=el('text',{'text-anchor':'start','font-size':12,fill:'var(--ink)'});n._lab.textContent=n.name;n._lab.style.display='none';s.appendChild(n._lab);}
+  positionLabel(n);
+  g.style.cursor='pointer';
+  s.addEventListener('mouseenter',()=>{s.style.transition='transform .15s';s.style.transform='scale(1.14)';if(n._lab&&!n._labAlways)n._lab.style.display='';});
+  s.addEventListener('mouseleave',()=>{s.style.transform='';if(n._lab&&!n._labAlways&&!(focus&&n.net===focus))n._lab.style.display='none';});
+  s.addEventListener('mousemove',e=>{if(n.depth===3)show(e,`<b>${n.proj[0]}</b><br>${n.net} · ${n.proj[5]}`);else show(e,`<b>${n.name}</b><br>${n.depth===1?n.count+' projects':(BUYERS[n.name]||'')}`);});
+  s.addEventListener('mouseleave',hide);
+  s.addEventListener('click',ev=>{ev.stopPropagation();select(n);});
+  gN.appendChild(g);});
+function positionLabel(n){if(!n._lab)return;const right=n._x>=cx;const off=(n._r||10)+8;n._lab.setAttribute('x',right?off:-off);n._lab.setAttribute('y',5);n._lab.setAttribute('text-anchor',right?'start':'end');}
+
+// ---- details panel ----
+const panel=document.getElementById('panel');
+function classPill(c){const col=c==='beat'?'var(--beat)':c==='partner'?'var(--partner)':c==='versus'?'var(--versus)':'var(--open)';
+  const t=c==='beat'?'competitor':c==='partner'?'could hire us':c==='versus'?'Versus':'up for grabs';return `<span class="pill" style="background:${col}">${t}</span>`;}
+function select(n){
+  gN.querySelectorAll('circle[data-sel]').forEach(c=>c.removeAttribute('data-sel'));
+  let h='';
+  if(n.depth<=1){const isNet=n.depth===1;const ps=isNet?PROJ.filter(p=>p[1]===n.name):PROJ;
+    h=`<h3>${n.name}</h3><div class="role">${isNet?'Network':'The whole company'} · ${ps.length} projects</div>`;
+    const open=ps.filter(p=>p[3].length===0).length,beat=ps.filter(p=>p[3].some(a=>PLAYERS[a]==='beat')).length,ver=ps.filter(p=>p[3].includes('VERSUS')).length;
+    h+=`<div class="kv"><span class="k">Snapshot</span><span>${beat} competitor-held · ${open} up for grabs · ${ver} Versus</span></div>`;
+    if(isNet){h+=`<div class="sec">Decision-makers</div>`+n.children.map(d=>`<div class="row"><div class="pn">${d.name}</div><div class="pm">${BUYERS[d.name]||''} · ${d.count} project(s)</div></div>`).join('');}
+  } else if(n.depth===2){h=`<h3>${n.name}</h3><div class="role">${BUYERS[n.name]||''} · ${n.net}</div>`;
+    h+=`<div class="sec">Hands out (${n.children.length})</div>`+n.children.map(c=>{const p=c.proj;return `<div class="row"><div class="pn">${p[0]} ${classPill(c.status)}</div><div class="pm">${p[3].length?'made by '+p[3].join(', '):'no agency yet'}</div></div>`;}).join('');
+  } else {const p=n.proj;h=`<h3>${p[0]}</h3><div class="role">${p[1]} · scale ${["","Small","Medium","Large","Tentpole"][p[4]]} · ${p[5]}</div>`;
+    h+=`<div class="kv"><span class="k">Status</span><span>${classPill(n.status)}</span></div>`;
+    h+=`<div class="sec">Handed out by</div>`+p[2].map(b=>`<div class="row"><div class="pn">${b}</div><div class="pm">${BUYERS[b]||''}</div></div>`).join('');
+    h+=`<div class="sec">Done by</div>`+(p[3].length?p[3].map(v=>`<div class="row"><div class="pn">${v}</div><div class="pm">${PLAYERS[v]==='partner'?'big agency — could hire Versus':PLAYERS[v]==='versus'?'Versus — we do this':'competitor — we’d beat them'}</div></div>`).join(''):`<div class="row" style="border:1px dashed var(--open)"><div class="pn" style="color:var(--open)">No agency yet — up for grabs</div><div class="pm">The easiest to win.</div></div>`);}
+  panel.innerHTML=h;
+}
+
+// ---- tabs (All + each network) ----
+let focus=null;
+const tabs=document.getElementById('tabs');
+function mkTab(label,color,net){const t=document.createElement('span');t.className='tab'+(net===focus?' on':'');
+  t.innerHTML=(color?`<span class="cd" style="background:${color}"></span>`:'')+label;
+  t.onclick=()=>{focus=net;[...tabs.children].forEach(c=>c.classList.remove('on'));t.classList.add('on');applyFocus();};tabs.appendChild(t);}
+mkTab('★ All',null,null);
+NETS.forEach(([net,col])=>mkTab(net,col,net));
+function applyFocus(){
+  ALL.forEach(n=>{const inN=!focus||n.net===focus||n.depth===0;
+    n._g.style.opacity=inN?1:0.12;n._g.style.pointerEvents=inN?'auto':'none';
+    if(n._link)n._link.style.opacity=inN?'':0.05;
+    if(n._lab&&!n._labAlways)n._lab.style.display=(focus&&n.net===focus)?'':'none';});
+  gRing.style.opacity=focus?0.25:1;
+  if(focus){const ns=ALL.filter(n=>n.net===focus);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+    ns.forEach(n=>{x0=Math.min(x0,n._x-40);y0=Math.min(y0,n._y-40);x1=Math.max(x1,n._x+120);y1=Math.max(y1,n._y+40);});
+    x0=Math.min(x0,cx-60);y0=Math.min(y0,cy-60);x1=Math.max(x1,cx+60);y1=Math.max(y1,cy+60);
+    const bw=x1-x0,bh=y1-y0,ss=Math.min(2000/bw,2000/bh,2.4),bx=(x0+x1)/2,by=(y0+y1)/2;
+    animateTo(ss,1000-bx*ss,1000-by*ss);
+  } else animateTo(1,0,0);
+}
+
+// ---- pan/zoom ----
+let sc=1,tx=0,ty=0,drag=false,lx,ly,rafp=null;
+function apply(){vp.setAttribute('transform',`translate(${tx},${ty}) scale(${sc})`);}
+function animateTo(ns,nx,ny){if(rafp)cancelAnimationFrame(rafp);const s0=sc,x0=tx,y0=ty,t0=performance.now();
+  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  (function fr(now){const k=Math.min(1,(now-t0)/500),e=ease(k);sc=s0+(ns-s0)*e;tx=x0+(nx-x0)*e;ty=y0+(ny-y0)*e;apply();if(k<1)rafp=requestAnimationFrame(fr);})(performance.now());}
+apply();
+svg.addEventListener('wheel',e=>{e.preventDefault();const r=svg.getBoundingClientRect();const k=2000/r.width;const mx=(e.clientX-r.left)*k,my=(e.clientY-r.top)*k;const fc=e.deltaY<0?1.12:1/1.12;const ns=Math.max(0.4,Math.min(4,sc*fc));tx=mx-(mx-tx)*(ns/sc);ty=my-(my-ty)*(ns/sc);sc=ns;apply();},{passive:false});
+svg.addEventListener('mousedown',e=>{drag=true;svg.classList.add('drag');lx=e.clientX;ly=e.clientY;});
+window.addEventListener('mousemove',e=>{if(!drag)return;const r=svg.getBoundingClientRect();const k=2000/r.width;tx+=(e.clientX-lx)*k;ty+=(e.clientY-ly)*k;lx=e.clientX;ly=e.clientY;apply();});
+window.addEventListener('mouseup',()=>{drag=false;svg.classList.remove('drag');});
+document.getElementById('zin').onclick=()=>{sc=Math.min(4,sc*1.2);apply();};
+document.getElementById('zout').onclick=()=>{sc=Math.max(0.4,sc/1.2);apply();};
+document.getElementById('themeBtn').onclick=()=>{const r=document.documentElement,c=r.getAttribute('data-theme');const dark=c?c==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.setAttribute('data-theme',dark?'light':'dark');};
+</script>
+</body>
+</html>
